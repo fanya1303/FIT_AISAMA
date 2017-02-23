@@ -1,0 +1,58 @@
+﻿@model FIT_AISAMA.Models.Person.PersonDetailViewModel
+
+@{
+    ViewBag.Title = "PersonDetail";
+}
+<div class="col-sm-12">
+<h4>Подробная информация по сотруднику</h4>
+</div>
+<div class="col-sm-8">
+    <div class="col-md-4">
+        <div class="bold">
+            @Html.DisplayNameFor(model => model.FullName)
+        </div>
+        <div>
+            @Html.DisplayFor(model => model.FullName)
+        </div>
+        <br/>
+    
+        <div class="bold">
+            @Html.DisplayNameFor(model => model.Position)
+        </div>
+        <div>
+            @Html.DisplayFor(model => model.Position)
+        </div>
+    </div>
+    
+    @if (Model.MaterialActives.Any())
+    {
+        <div>
+        @Html.DisplayNameFor(model => model.MaterialActives)
+        
+            <table class="table table-striped table-bordered">
+                <tr>
+                    <th>Код</th>
+                    <th>Наименование</th>
+                    <th>Производитель</th>
+                    <th>Место нахождения</th>
+                    <th>Цена</th>
+                </tr>
+                @foreach (var item in Model.MaterialActives)
+                {
+                    <tr>
+                        <td>@item.Code</td>
+                        <td>@item.Name</td>
+                        <td>@item.Manufacturer</td>
+                        <td>@item.LocationPlace.LocationName</td>
+                        <td>@item.Price</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    }
+    <div class="col-sm-12">
+        @Html.ActionLink("Изменить", "EditPerson", new { id = Model.Id }) |
+        @Html.ActionLink("Вернуться к списку", "Index")
+    </div>
+</div>
+

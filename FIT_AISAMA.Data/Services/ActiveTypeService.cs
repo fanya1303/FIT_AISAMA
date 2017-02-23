@@ -1,0 +1,42 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using FIT_AISAMA.Data.Entities;
+using FIT_AISAMA.Data.Services.Interfaces;
+
+
+namespace FIT_AISAMA.Data.Services
+{
+    public class ActiveTypeService : BaseService, IActiveTypesService
+    {
+        public List<ActiveType> GetAllActiveType()
+        {
+            return dbContext.ActiveTypes.ToList();
+        }
+        public ActiveType GetActiveTypeById(int id)
+        {
+            return dbContext.ActiveTypes.FirstOrDefault(o => o.Id == id);
+        }
+        public void AddActiveType(ActiveType saveActiveType)
+        {
+            if(saveActiveType.Id==0)
+            {
+                dbContext.ActiveTypes.Add(saveActiveType);
+            }
+            else
+            {
+                var curActiveType = dbContext.ActiveTypes.Single(o => o.Id == saveActiveType.Id);
+                curActiveType.TypeName = saveActiveType.TypeName;
+                curActiveType.TypeName = saveActiveType.TypeCode;
+            }
+            dbContext.SaveChanges();
+        }
+        public void DelActiveType(ActiveType delActiveType)
+        {
+            dbContext.ActiveTypes.Remove(delActiveType);
+            dbContext.SaveChanges();
+        }
+            
+    }
+}

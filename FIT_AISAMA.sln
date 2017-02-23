@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FIT_AISAMA", "FIT_AISAMA\FIT_AISAMA.csproj", "{D69BFDD0-1707-4075-AFB8-813463CAFAE5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FIT_AISAMA.Data", "FIT_AISAMA.Data\FIT_AISAMA.Data.csproj", "{223D363C-5D42-4716-9609-90DD9E0492B2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D69BFDD0-1707-4075-AFB8-813463CAFAE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D69BFDD0-1707-4075-AFB8-813463CAFAE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D69BFDD0-1707-4075-AFB8-813463CAFAE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D69BFDD0-1707-4075-AFB8-813463CAFAE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{223D363C-5D42-4716-9609-90DD9E0492B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{223D363C-5D42-4716-9609-90DD9E0492B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{223D363C-5D42-4716-9609-90DD9E0492B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{223D363C-5D42-4716-9609-90DD9E0492B2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

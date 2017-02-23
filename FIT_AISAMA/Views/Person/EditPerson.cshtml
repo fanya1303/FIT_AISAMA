@@ -1,0 +1,36 @@
+﻿@model FIT_AISAMA.Data.Entities.Person
+
+@{
+    ViewBag.Title = "EditPerson";
+}
+<div class="col-sm-12">
+    <h4>Редактирование данных</h4>
+</div>
+<div class="col-sm-4">
+@using (Html.BeginForm("EditPerson", "Person", FormMethod.Post, new { role = "form", @class = "form-group" }))
+{
+    @Html.ValidationSummary(true)
+
+        @Html.HiddenFor(model => model.Id)
+        <div class="form-group">
+            @Html.LabelFor(model => model.FullName)
+            @Html.TextBoxFor(model => model.FullName, new { @class = "form-control", placeholder="ФИО"})
+            @Html.ValidationMessageFor(model => model.FullName)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Position)
+            @Html.TextBoxFor(model => model.Position, new { @class = "form-control", placeholder="Должность" })
+            @Html.ValidationMessageFor(model => model.Position)
+        </div>
+    <p>
+        <input type="submit" class="btn btn-success" value="Сохранить"  />
+    </p>
+    
+
+}
+</div>
+<div class="col-sm-12">
+    @Html.ActionLink("Вернуться к списку", "Index")
+</div>
+
