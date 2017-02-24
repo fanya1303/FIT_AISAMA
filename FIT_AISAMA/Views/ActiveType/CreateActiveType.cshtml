@@ -1,0 +1,35 @@
+﻿@model FIT_AISAMA.Models.ActiveType.ActiveTypeModel
+
+@{
+    ViewBag.Title = "CreateActiveType";
+}
+<div class="col-sm-12">
+    <h4>Создание нового типа</h4>
+</div>
+<div class="col-sm-4">
+@using (Html.BeginForm("CreateActiveType", "ActiveType", FormMethod.Post, new { role = "form", @class = "form-group" }))
+{
+    @Html.ValidationSummary(true)
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TypeCode)
+            @Html.TextBoxFor(model => model.TypeCode, new { @class = "form-control", placeholder = "Код" })
+            @Html.ValidationMessageFor(model => model.TypeCode)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TypeName)
+            @Html.TextBoxFor(model => model.TypeName, new{@class="form-control", placeholder="Наименование"})
+            @Html.ValidationMessageFor(model => model.TypeName)
+        </div>
+
+        <p>
+            <input class="btn btn-success" type="submit" value="Создать" />
+        </p>
+}
+</div>
+<div class="col-sm-12">
+    @Html.ActionLink("Вернуться к списку", "Index")
+</div>
+

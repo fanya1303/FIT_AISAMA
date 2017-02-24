@@ -7,7 +7,7 @@ using FIT_AISAMA.Data.Entities;
 
 namespace FIT_AISAMA.Data.Services.Interfaces
 {
-    interface IActiveTypesService
+    public interface IActiveTypesService
     {
         /// <summary>
         /// Взять все типы
@@ -20,7 +20,7 @@ namespace FIT_AISAMA.Data.Services.Interfaces
         /// <summary>
         /// Добавить или изменить запись
         /// </summary>
-        void AddActiveType(ActiveType saveActiveType);
+        void SaveActiveType(ActiveType saveActiveType);
         /// <summary>
         /// Удалить запись
         /// </summary>

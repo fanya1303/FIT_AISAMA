@@ -1,0 +1,37 @@
+﻿@model FIT_AISAMA.Models.ActiveType.ActiveTypeModel
+
+@{
+    ViewBag.Title = "EditActiveType";
+}
+<div class="col-sm-12">
+    <h4>Редактировать тип МЦ</h4>
+</div>
+
+@using (Html.BeginForm("EditActiveType", "ActiveType", FormMethod.Post, new { role = "form", @class = "form-group" }))
+{
+    @Html.ValidationSummary(true)
+
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TypeCode)
+            @Html.TextBoxFor(model => model.TypeCode, new {@class="form-control", placeholder="Код"})
+            @Html.ValidationMessageFor(model => model.TypeCode)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TypeName)
+            @Html.TextBoxFor(model => model.TypeName, new {@class = "form-control", placeholder="Наименование"})
+            @Html.ValidationMessageFor(model => model.TypeName)
+        </div>
+
+        <p>
+            <input class="btn btn-success" type="submit" value="Сохранить" />
+        </p>
+}
+
+<div class="col-sm-12">
+    @Html.ActionLink("Вернуться к списку", "Index")
+</div>
+

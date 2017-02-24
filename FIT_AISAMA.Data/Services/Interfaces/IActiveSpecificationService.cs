@@ -6,7 +6,7 @@ using FIT_AISAMA.Data.Entities;
 
 namespace FIT_AISAMA.Data.Services.Interfaces
 {
-    interface IActiveSpecificationService
+    public interface IActiveSpecificationService
     {
         List<ActiveSpecification> GetAllActiveSpecification();
         ActiveSpecification GetActiveSpecificationById(int id);

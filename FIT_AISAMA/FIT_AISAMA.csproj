@@ -125,11 +125,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ActiveTypeController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ActiveType\ActiveTypeModel.cs" />
     <Compile Include="Models\Person\PersonDetailViewModel.cs" />
     <Compile Include="Models\Person\PersonViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -323,6 +325,11 @@
     <None Include="Scripts\jquery-3.1.1.min.map" />
     <None Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Views\Person\GetCharacteristic.cshtml" />
+    <Content Include="Views\ActiveType\Index.cshtml" />
+    <Content Include="Views\ActiveType\CreateActiveType.cshtml" />
+    <Content Include="Views\ActiveType\ActiveTypeDetails.cshtml" />
+    <Content Include="Views\ActiveType\EditActiveType.cshtml" />
+    <Content Include="Views\Base\MainPage.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

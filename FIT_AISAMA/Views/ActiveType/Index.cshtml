@@ -1,0 +1,50 @@
+﻿@model IEnumerable<FIT_AISAMA.Models.ActiveType.ActiveTypeModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="col-sm-12">
+    <h2>Список типов МЦ</h2>
+</div>
+
+<div class="col-sm-12">
+    @Html.ActionLink("Создать новый тип", "CreateActiveType")
+</div>
+<div class="col-sm-6">
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TypeCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TypeName)
+        </th>
+        <th style="width: 150px;"></th>
+    </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeName)
+            </td>
+            <td class="text-center">
+                <div class="col-sm-6" style="padding-left: 0;">
+                @Html.ActionLink("Детали", "ActiveTypeDetails", new {id = item.Id})
+                </div>
+                <div class="col-sm-6" style="padding-left: 0;">
+                    @using (Html.BeginForm("DeleteActiveType", "ActiveType", FormMethod.Post))
+                    {
+                        <input type="hidden" name="Id" value="@item.Id"/>
+                        <input class="btn btn-danger btn-xs" type="submit" value="Удалить"/>
+                    }
+                </div>
+            </td>
+        </tr>
+    }
+
+</table>
+</div>

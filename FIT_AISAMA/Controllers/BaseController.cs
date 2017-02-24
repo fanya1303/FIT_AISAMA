@@ -11,5 +11,11 @@ namespace FIT_AISAMA.Controllers
     public class BaseController : Controller
     {
         public static IPersonService personService = new PersonService();
+        public static IActiveTypesService activeTypesService = new ActiveTypeService();
+
+        public ActionResult MainPage()
+        {
+            return View();
+        }
     }
 }

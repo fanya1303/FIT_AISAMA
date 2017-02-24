@@ -1,0 +1,27 @@
+﻿@model FIT_AISAMA.Models.ActiveType.ActiveTypeModel
+
+@{
+    ViewBag.Title = "ActiveTypeDetails";
+}
+<div class="col-sm-12">
+<h4>Подробная информация по типу МЦ</h4>
+</div>
+<div class="col-md-4">
+    <div class="bold">
+         @Html.DisplayNameFor(model => model.TypeCode)
+    </div>
+    <div>
+        @Html.DisplayFor(model => model.TypeCode)
+    </div>
+
+    <div class="bold">
+         @Html.DisplayNameFor(model => model.TypeName)
+    </div>
+    <div>
+        @Html.DisplayFor(model => model.TypeName)
+    </div>
+<p>
+    @Html.ActionLink("Редактировать", "EditActiveType", new { id=Model.Id }) |
+    @Html.ActionLink("Вернуться к списку", "Index")
+</p>
+</div>

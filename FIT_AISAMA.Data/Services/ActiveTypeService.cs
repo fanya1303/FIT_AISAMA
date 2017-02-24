@@ -14,13 +14,15 @@ namespace FIT_AISAMA.Data.Services
         {
             return dbContext.ActiveTypes.ToList();
         }
+
         public ActiveType GetActiveTypeById(int id)
         {
             return dbContext.ActiveTypes.FirstOrDefault(o => o.Id == id);
         }
-        public void AddActiveType(ActiveType saveActiveType)
+
+        public void SaveActiveType(ActiveType saveActiveType)
         {
-            if(saveActiveType.Id==0)
+            if (saveActiveType.Id == 0)
             {
                 dbContext.ActiveTypes.Add(saveActiveType);
             }
@@ -32,6 +34,7 @@ namespace FIT_AISAMA.Data.Services
             }
             dbContext.SaveChanges();
         }
+
         public void DelActiveType(ActiveType delActiveType)
         {
             dbContext.ActiveTypes.Remove(delActiveType);
