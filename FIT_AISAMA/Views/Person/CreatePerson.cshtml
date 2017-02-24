@@ -7,8 +7,8 @@
     <h4>Создание нового сотрудника</h4>
 </div>
 <div class="col-sm-4">
-@using (Html.BeginForm("CreatePerson", "Person", FormMethod.Post, new{role="form", @class="form-group"})) {
-    @Html.ValidationSummary(true)
+    @using (Html.BeginForm("CreatePerson", "Person", FormMethod.Post, new{role="form", @class="form-group"})) {
+        @Html.ValidationSummary(true)
 
 
         <div class="form-group">
@@ -26,10 +26,12 @@
         <p>
             <input class="btn btn-success" type="submit" value="Создать" />
         </p>
-}
+    }
 </div>
+
 
 <div class="col-sm-12">
     @Html.ActionLink("Вернуться к списку", "Index")
 </div>
+
 
