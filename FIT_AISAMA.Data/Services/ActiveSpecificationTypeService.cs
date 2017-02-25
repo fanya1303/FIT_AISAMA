@@ -10,7 +10,7 @@ namespace FIT_AISAMA.Data.Services
     public class ActiveSpecificationTypeService: BaseService, IActiveSpecificationTypeService
     {
         
-            public List<ActiveSpecificationType> GetActiveSpecificationType()
+            public List<ActiveSpecificationType> GetAllActiveSpecificationType()
             {
                 return dbContext.ActiveSpecificationTypes.ToList();
             }
@@ -29,10 +29,10 @@ namespace FIT_AISAMA.Data.Services
                 else
                 {
                     var curActiveSpecificationType = dbContext.ActiveSpecificationTypes.Single(o => o.Id == newActiveSpecificationType.Id);
-                curActiveSpecificationType.ActiveType = newActiveSpecificationType.ActiveType;
-                curActiveSpecificationType.ActiveTypeId = newActiveSpecificationType.ActiveTypeId;
-                curActiveSpecificationType.TypeName = newActiveSpecificationType.TypeName;
-            }
+                    curActiveSpecificationType.ActiveType = newActiveSpecificationType.ActiveType;
+                    curActiveSpecificationType.ActiveTypeId = newActiveSpecificationType.ActiveTypeId;
+                    curActiveSpecificationType.TypeName = newActiveSpecificationType.TypeName;
+                }
                 dbContext.SaveChanges();
             }
 

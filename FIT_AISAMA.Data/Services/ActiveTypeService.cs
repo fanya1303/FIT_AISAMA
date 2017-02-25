@@ -29,8 +29,9 @@ namespace FIT_AISAMA.Data.Services
             else
             {
                 var curActiveType = dbContext.ActiveTypes.Single(o => o.Id == saveActiveType.Id);
+                curActiveType.TypeCode = saveActiveType.TypeCode;
                 curActiveType.TypeName = saveActiveType.TypeName;
-                curActiveType.TypeName = saveActiveType.TypeCode;
+                
             }
             dbContext.SaveChanges();
         }

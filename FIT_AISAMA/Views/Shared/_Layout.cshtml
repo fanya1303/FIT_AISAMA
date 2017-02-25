@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/css", "~/Content/bootstrap.min.css", "~/Content/General.css", "~/Content/bootstrap-select.min.css")
+    @Styles.Render("~/Content/css", "~/Content/bootstrap.css", "~/Content/General.css", "~/Content/bootstrap-select.min.css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/Scripts/bootstrap-select.min.js")
@@ -27,7 +27,7 @@
                 <ul class="dropdown-menu">
                     <li>@Html.ActionLink("Сотрудники", "Index", "Person")</li>
                     <li>@Html.ActionLink("Типы МЦ", "Index", "ActiveType")</li>
-                    <li>@Html.ActionLink("Характеристики МЦ", "Index", "Person")</li>
+                    <li>@Html.ActionLink("Характеристики МЦ", "Index", "ActiveSpecificationType")</li>
                 </ul>
             </li>
         </ul>

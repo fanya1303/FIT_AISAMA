@@ -1,0 +1,37 @@
+﻿@model IEnumerable<FIT_AISAMA.Models.ActiveSpecificationType.ActiveSpecificationTypeViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="col-sm-12">
+    <h2>Список типов характеристик МЦ</h2>
+</div>
+@Html.ActionLink("Добавить новуюхарактеристику","CreateActiveSpecificationType")
+<div class="col-sm-6">
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ActiveTypeCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TypeName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ActiveTypeCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeName)
+            </td>
+            <td>
+            </td>
+        </tr>
+    }
+
+</table>
+</div>

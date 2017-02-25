@@ -125,12 +125,15 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ActiveSpecificationTypeController.cs" />
     <Compile Include="Controllers\ActiveTypeController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ActiveSpecificationType\ActiveSpecificationTypeEditModel.cs" />
+    <Compile Include="Models\ActiveSpecificationType\ActiveSpecificationTypeViewModel.cs" />
     <Compile Include="Models\ActiveType\ActiveTypeModel.cs" />
     <Compile Include="Models\Person\PersonDetailViewModel.cs" />
     <Compile Include="Models\Person\PersonViewModel.cs" />
@@ -321,6 +324,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\bootstrap-select.css.map" />
+    <None Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <None Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <None Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <None Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Scripts\bootstrap-select.js.map" />
     <None Include="Scripts\jquery-3.1.1.min.map" />
     <None Include="Scripts\jquery-3.1.1.slim.min.map" />
@@ -330,6 +338,8 @@
     <Content Include="Views\ActiveType\ActiveTypeDetails.cshtml" />
     <Content Include="Views\ActiveType\EditActiveType.cshtml" />
     <Content Include="Views\Base\MainPage.cshtml" />
+    <Content Include="Views\ActiveSpecificationType\Index.cshtml" />
+    <Content Include="Views\ActiveSpecificationType\CreateActiveSpecificationType.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
