@@ -71,5 +71,17 @@ namespace FIT_AISAMA.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public ActionResult SearchPerson(string searchPerson)
+        {
+            if (searchPerson.Length > 0)
+            {
+                ViewBag.SearchString = searchPerson;
+                var result = personService.SearchPersons(searchPerson).Select(o => new PersonViewModel(o)).ToList();
+                return View("Index", result);
+            }
+            return RedirectToAction("Index");
+        }
+
     }
 }

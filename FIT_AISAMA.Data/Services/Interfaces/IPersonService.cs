@@ -27,5 +27,10 @@ namespace FIT_AISAMA.Data.Services.Interfaces
         /// Удалить пользователя
         /// </summary>
         void DeletePerson(Person delPerson);
+
+        /// <summary>
+        /// Поиск по ФИО или Должности
+        /// </summary>
+        List<Person> SearchPersons(string search);
     }
 }

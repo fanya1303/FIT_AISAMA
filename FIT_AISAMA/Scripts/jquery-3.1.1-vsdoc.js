@@ -1895,7 +1895,7 @@
         ///     An array through which to search.
         /// </param>
         /// <param name="i" type="Number">
-        ///     The index of the array at which to begin the search. The default is 0, which will search the whole array.
+        ///     The index of the array at which to begin the search. The default is 0, which will searchPerson the whole array.
         /// </param>
         /// <returns type="Number" />
 

@@ -6,6 +6,21 @@
 <div class="col-sm-12">
     <h2>Список сотрудников</h2>
 </div>
+<div class="row col-sm-6" style="margin-bottom: 10px;">
+    @using (Html.BeginForm("SearchPerson", "Person", FormMethod.Post, new { @class = "form-inline", role="form", id = "searchForm"}))
+    {
+        <div class="form-group col-sm-12" style="padding: 0;">
+            <div class="col-sm-9">
+                <input class="form-control" style="width: 100%" type="text" value="@ViewBag.SearchString" name="searchPerson" id="searchPerson" placeholder="Введите ФИО или Должность"/>
+            </div>
+            <div class="col-sm-3" style="padding: 0;">
+               <input class="btn btn-info" type="submit" value="Найти"/>
+               <input id="cancelSearch" class="btn btn-warning" type="button" value="Отмена"/>
+            </div>
+        </div>
+    }
+</div>
+
 <div class="col-sm-12">
     @Html.ActionLink("Добавить нового пользователя", "CreatePerson")
 </div>
@@ -21,31 +36,40 @@
             <th style="width: 150px;"></th>
         </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Position)
-            </td>
-            <td class="text-center">
-                <div class="col-sm-6" style="padding-left: 0;">
-                @Html.ActionLink("Детали", "PersonDetails", new {id = item.Id})
-                </div>
-                <div class="col-sm-6" style="padding-left: 0;">
-                    @using (Html.BeginForm("DeletePerson", "Person" , FormMethod.Post))
-                    {
-                        <input type="hidden" name="Id" value="@item.Id"/>
-                        <input class="btn btn-danger btn-xs" type="submit" value="Удалить"/>
-                    }
-                </div>
-            </td>
-        </tr>
-    }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Position)
+                </td>
+                <td class="text-center">
+                    <div class="col-sm-6" style="padding-left: 0;">
+                        @Html.ActionLink("Детали", "PersonDetails", new {id = item.Id})
+                    </div>
+                    <div class="col-sm-6" style="padding-left: 0;">
+                        @using (Html.BeginForm("DeletePerson", "Person" , FormMethod.Post))
+                        {
+                            <input type="hidden" name="Id" value="@item.Id"/>
+                            <input class="btn btn-danger btn-xs" type="submit" value="Удалить"/>
+                        }
+                    </div>
+                </td>
+            </tr>
+        }
     </table>
 </div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#cancelSearch").click(function() {
+            $("#searchPerson").val("");
+            $("#searchForm").submit();
+        });
+    });
+</script>
+
         
 
 

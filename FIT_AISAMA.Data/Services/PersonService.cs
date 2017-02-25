@@ -43,5 +43,14 @@ namespace FIT_AISAMA.Data.Services
             dbContext.SaveChanges();
         }
 
+        public List<Person> SearchPersons(string search)
+        {
+            search = search.ToLower();
+            var list = dbContext.Persons.Where(o => o.FullName.ToLower().Contains(search) ||
+                                                    o.Position.ToLower().Contains(search)).ToList();
+            return list;
+
+        }
+
     }
 }
