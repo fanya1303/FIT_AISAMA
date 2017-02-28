@@ -11,7 +11,7 @@ namespace FIT_AISAMA.Controllers
 {
     public class ActiveSpecificationTypeController : BaseController
     {
-        ActiveSpecificationTypeValidator specificationTypeValidator = new ActiveSpecificationTypeValidator();
+        IActiveSpecificationTypeValidator specificationTypeValidator = new ActiveSpecificationTypeValidator();
 
         public ActionResult Index()
         {

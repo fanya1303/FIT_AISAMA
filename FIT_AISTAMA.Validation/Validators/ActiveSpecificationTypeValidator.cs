@@ -9,7 +9,7 @@ using FIT_AISTAMA.Validation.Models;
 
 namespace FIT_AISTAMA.Validation.Validators
 {
-    public class ActiveSpecificationTypeValidator
+    public class ActiveSpecificationTypeValidator : IActiveSpecificationTypeValidator
     {
         IActiveSpecificationTypeService activeSpecificationTypeService = new ActiveSpecificationTypeService();
 
