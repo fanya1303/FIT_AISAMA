@@ -1,6 +1,17 @@
 ﻿.bold {
     font-weight: bold;
 }
-.green {
-    color: #008000;
+.create-icon {
+    font-size: 13px;
+    color: #000;
+}
+.responsible-person {
+    color: #008000; 
+    font-size: 20px; 
+    text-decoration: none;
+}
+
+.set-as-responsible {
+    color: #000; 
+    font-size: 20px;
 }

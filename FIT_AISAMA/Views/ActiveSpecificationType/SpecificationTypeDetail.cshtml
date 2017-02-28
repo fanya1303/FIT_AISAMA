@@ -1,0 +1,44 @@
+﻿@model FIT_AISAMA.Models.ActiveSpecificationType.ActiveSpecificationTypeViewModel
+
+@{
+    ViewBag.Title = "SpecificationTypeDetail";
+}
+
+<div class="col-sm-12">
+<h4>Подробная информация по сотруднику</h4>
+</div>
+<div class="col-sm-8">
+    <div class="col-md-4">
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.ActiveTypeCode, new {@class="control-label"})
+        
+        
+            <p class="form-control-static">
+            @Html.DisplayFor(model => model.ActiveTypeCode)
+            </p>
+        </div>
+
+        <div class="form-group">
+
+            @Html.LabelFor(model => model.TypeName, new {@class = "control-label"})
+            <p class="form-control-static">
+            @Html.DisplayFor(model => model.TypeName)
+            </p>
+        </div>
+    </div>
+    
+    
+    <div class="col-sm-12" style="padding-top: 20px;">
+        <div class="col-sm-1" style="padding-left: 0;">
+             @using (Html.BeginForm("EditSpecificationType", "ActiveSpecificationType", FormMethod.Get))
+                  {
+                      <input type="hidden" name="Id" value="@Model.Id"/>
+                      <input type="submit" value="Изменить" class="btn btn-xs btn-warning"/>
+                  }
+        </div>
+        
+        <div class="col-sm-3">@Html.ActionLink("Вернуться к списку", "Index")</div>
+        
+    </div>
+</div>

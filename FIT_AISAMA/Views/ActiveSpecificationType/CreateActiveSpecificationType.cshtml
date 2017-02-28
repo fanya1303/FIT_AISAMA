@@ -1,4 +1,4 @@
-﻿@model FIT_AISAMA.Models.ActiveSpecificationType.ActiveSpecificationTypeEditModel
+﻿@model FIT_AISAMA.Models.ActiveSpecificationType.ActiveSpecificationTypeCreateModel
 
 @{
     ViewBag.Title = "CreateActiveSpecificationType";
@@ -12,12 +12,14 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.ActiveTypeId)
-            <select class="selectpicker" multiple name="ActiveTypeId" id="ActiveTypeId">
-                @foreach (var item in Model.ActiveTypeItems)
-                {
-                    <option value="@item.Value">@item.Text</option>
-                }
-            </select>
+            <div>
+                <select class="selectpicker" multiple name="ActiveTypeId" id="ActiveTypeId" title="Выберите типы МЦ" value="@Model.ActiveTypeId">
+                    @foreach (var item in Model.ActiveTypeItems)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
+            </div>
             @Html.ValidationMessageFor(model => model.ActiveTypeId)
         </div>
 
@@ -27,13 +29,18 @@
             @Html.ValidationMessageFor(model => model.TypeName)
         </div>
 
+    if (!string.IsNullOrEmpty(ViewBag.WarningMessage))
+    {
+        <div class="alert alert-danger">@ViewBag.WarningMessage</div>
+    }
+    
         <p>
             <input class="btn btn-success" type="submit" value="Создать" />
         </p>
 }
 </div>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div class="col-sm-12">
+    @Html.ActionLink("Вернуться к списку", "Index")
 </div>
 

@@ -15,7 +15,7 @@ namespace FIT_AISAMA.Models.ActiveSpecificationType
         [Display(Name = "Тип МЦ")]
         public string ActiveTypeCode { get; set; }
 
-        [Display(Name = "Наименование")]
+        [Display(Name = "Характеристика")]
         public string TypeName { get; set; }
 
         public ActiveSpecificationTypeViewModel(Data.Entities.ActiveSpecificationType source)

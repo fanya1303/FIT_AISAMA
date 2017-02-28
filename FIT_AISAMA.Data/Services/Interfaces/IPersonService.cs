@@ -32,5 +32,9 @@ namespace FIT_AISAMA.Data.Services.Interfaces
         /// Поиск по ФИО или Должности
         /// </summary>
         List<Person> SearchPersons(string search);
+        /// <summary>
+        /// Назначить сотрудника материально ответственным лицом и убрать всех остальных материально ответственных
+        /// </summary>
+        void SetAsReponsiblePerson(int id);
     }
 }

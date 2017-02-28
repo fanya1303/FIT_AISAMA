@@ -1,0 +1,10 @@
+D:\Minkov Project\FIT_AISAMA\FIT_AISTAMA.Validation\bin\Debug\FIT_AISTAMA.Validation.dll
+D:\Minkov Project\FIT_AISAMA\FIT_AISTAMA.Validation\bin\Debug\FIT_AISTAMA.Validation.pdb
+D:\Minkov Project\FIT_AISAMA\FIT_AISTAMA.Validation\bin\Debug\FIT_AISAMA.Data.dll
+D:\Minkov Project\FIT_AISAMA\FIT_AISTAMA.Validation\bin\Debug\EntityFramework.dll
+D:\Minkov Project\FIT_AISAMA\FIT_AISTAMA.Validation\bin\Debug\FIT_AISAMA.Data.pdb
+D:\Minkov Project\FIT_AISAMA\FIT_AISTAMA.Validation\bin\Debug\EntityFramework.xml
+D:\Minkov Project\FIT_AISAMA\FIT_AISTAMA.Validation\bin\Debug\ru\EntityFramework.resources.dll
+D:\Minkov Project\FIT_AISAMA\FIT_AISTAMA.Validation\obj\Debug\FIT_AISTAMA.Validation.csprojResolveAssemblyReference.cache
+D:\Minkov Project\FIT_AISAMA\FIT_AISTAMA.Validation\obj\Debug\FIT_AISTAMA.Validation.dll
+D:\Minkov Project\FIT_AISAMA\FIT_AISTAMA.Validation\obj\Debug\FIT_AISTAMA.Validation.pdb

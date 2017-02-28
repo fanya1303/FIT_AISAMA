@@ -8,7 +8,12 @@ using FIT_AISAMA.Data.Services.Interfaces;
 namespace FIT_AISAMA.Data.Services
 {
     public class ActiveSpecificationService: BaseService, IActiveSpecificationService
-    { 
+    {
+        public ActiveSpecificationService():base()
+        {
+            
+        }
+
         public List<ActiveSpecification> GetAllActiveSpecification()
         {
             return dbContext.ActiveSpecifications.ToList();

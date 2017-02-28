@@ -52,5 +52,22 @@ namespace FIT_AISAMA.Data.Services
 
         }
 
+        public void SetAsReponsiblePerson(int id)
+        {
+            var newResponsible = dbContext.Persons.FirstOrDefault(o => o.Id == id);
+            if (newResponsible != null)
+            {
+                //На всякий случай ищет любое количество ответственных (хотя всего возможен один), чтобы избежать случайных дублей
+                var curResponsible =
+                    dbContext.Persons.Where(o => o.ResponsiblePerson.HasValue && o.ResponsiblePerson.Value).ToList();
+                foreach (var pers in curResponsible)
+                {
+                    pers.ResponsiblePerson = false;
+                }
+                newResponsible.ResponsiblePerson = true;
+                dbContext.SaveChanges();
+            }
+        }
+
     }
 }

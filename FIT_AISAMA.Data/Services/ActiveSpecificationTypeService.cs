@@ -9,7 +9,8 @@ namespace FIT_AISAMA.Data.Services
 {
     public class ActiveSpecificationTypeService: BaseService, IActiveSpecificationTypeService
     {
-        
+            
+
             public List<ActiveSpecificationType> GetAllActiveSpecificationType()
             {
                 return dbContext.ActiveSpecificationTypes.ToList();

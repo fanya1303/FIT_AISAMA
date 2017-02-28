@@ -4,6 +4,7 @@ D:\Minkov Project\FIT_AISAMA\FIT_AISAMA\bin\Antlr3.Runtime.dll
 D:\Minkov Project\FIT_AISAMA\FIT_AISAMA\bin\EntityFramework.dll
 D:\Minkov Project\FIT_AISAMA\FIT_AISAMA\bin\EntityFramework.SqlServer.dll
 D:\Minkov Project\FIT_AISAMA\FIT_AISAMA\bin\FIT_AISAMA.Data.dll
+D:\Minkov Project\FIT_AISAMA\FIT_AISAMA\bin\FIT_AISTAMA.Validation.dll
 D:\Minkov Project\FIT_AISAMA\FIT_AISAMA\bin\Microsoft.Web.Infrastructure.dll
 D:\Minkov Project\FIT_AISAMA\FIT_AISAMA\bin\Newtonsoft.Json.dll
 D:\Minkov Project\FIT_AISAMA\FIT_AISAMA\bin\System.Net.Http.dll
@@ -20,6 +21,7 @@ D:\Minkov Project\FIT_AISAMA\FIT_AISAMA\bin\System.Web.WebPages.dll
 D:\Minkov Project\FIT_AISAMA\FIT_AISAMA\bin\System.Web.WebPages.Razor.dll
 D:\Minkov Project\FIT_AISAMA\FIT_AISAMA\bin\WebGrease.dll
 D:\Minkov Project\FIT_AISAMA\FIT_AISAMA\bin\FIT_AISAMA.Data.pdb
+D:\Minkov Project\FIT_AISAMA\FIT_AISAMA\bin\FIT_AISTAMA.Validation.pdb
 D:\Minkov Project\FIT_AISAMA\FIT_AISAMA\bin\EntityFramework.xml
 D:\Minkov Project\FIT_AISAMA\FIT_AISAMA\bin\EntityFramework.SqlServer.xml
 D:\Minkov Project\FIT_AISAMA\FIT_AISAMA\bin\Newtonsoft.Json.xml

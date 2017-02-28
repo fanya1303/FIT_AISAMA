@@ -10,18 +10,33 @@ namespace FIT_AISAMA.Controllers
 {
     public class BaseController : Controller
     {
+        public BaseController()
+        {
+            if (personService == null)
+                personService = new PersonService();
+            
+            if (activeTypesService == null)
+                activeTypesService = new ActiveTypeService();
+
+            if(activeSpecificationTypeService == null)
+                activeSpecificationTypeService = new ActiveSpecificationTypeService();
+            
+        }
+
         /// <summary>
         /// Сервис по рабте с сотрудниками
         /// </summary>
-        public static IPersonService personService = new PersonService();
+        public static IPersonService personService;
+
         /// <summary>
         /// Сервис по работе с типами МЦ
         /// </summary>
-        public static IActiveTypesService activeTypesService = new ActiveTypeService();
+        public static IActiveTypesService activeTypesService;
+
         /// <summary>
         /// Сервис по работе с типами характеристик
         /// </summary>
-        public static IActiveSpecificationTypeService activeSpecificationTypeService = new ActiveSpecificationTypeService();
+        public static IActiveSpecificationTypeService activeSpecificationTypeService;
 
         public ActionResult MainPage()
         {

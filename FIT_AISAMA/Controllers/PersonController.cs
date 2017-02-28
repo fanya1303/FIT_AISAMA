@@ -13,7 +13,9 @@ namespace FIT_AISAMA.Controllers
 
         public ActionResult Index()
         {
-            var persons = personService.GetAllPersons().Select(o => new PersonViewModel(o));
+
+            var persons = personService.GetAllPersons().Select(o => new PersonViewModel(o)).ToList();
+            
             return View(persons);
         }
 
@@ -81,6 +83,13 @@ namespace FIT_AISAMA.Controllers
                 return View("Index", result);
             }
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult SetAsResponsiblePerson(int id)
+        {
+            personService.SetAsReponsiblePerson(id);
+            return RedirectToAction("PersonDetails", new {id = id});
         }
 
     }

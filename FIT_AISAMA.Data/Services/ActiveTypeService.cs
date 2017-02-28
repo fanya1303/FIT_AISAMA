@@ -10,6 +10,7 @@ namespace FIT_AISAMA.Data.Services
 {
     public class ActiveTypeService : BaseService, IActiveTypesService
     {
+
         public List<ActiveType> GetAllActiveType()
         {
             return dbContext.ActiveTypes.ToList();

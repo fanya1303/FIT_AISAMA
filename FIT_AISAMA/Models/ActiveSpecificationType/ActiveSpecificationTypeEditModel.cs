@@ -17,13 +17,19 @@ namespace FIT_AISAMA.Models.ActiveSpecificationType
         public int Id { get; set; }
 
         [Display(Name = "Тип МЦ")]
-        public int[] ActiveTypeId { get; set; }
+        public int ActiveTypeId { get; set; }
 
         [Display(Name = "Наименвоание характеристики")]
         public string TypeName { get; set; }
 
         public List<SelectListItem> ActiveTypeItems { get; set; }
 
-
+        public ActiveSpecificationTypeEditModel(Data.Entities.ActiveSpecificationType source)
+        {
+            Id = source.Id;
+            ActiveTypeId = ActiveTypeId;
+            TypeName = source.TypeName;
+            ActiveTypeItems = new List<SelectListItem>();
+        }
     }
 }

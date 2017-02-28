@@ -7,6 +7,12 @@ namespace FIT_AISAMA.Data.Services
 {
     public class BaseService
     {
-        public static DataContext dbContext = new DataContext();
+        public BaseService()
+        {
+            if(dbContext == null)
+                dbContext = new DataContext();
+        }
+
+        public static DataContext dbContext = null;
     }
 }

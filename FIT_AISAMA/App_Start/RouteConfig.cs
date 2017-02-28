@@ -16,7 +16,13 @@ namespace FIT_AISAMA
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Person", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Base", action = "MainPage", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "PersonDefault",
+                url: "Person/{action}/{id}",
+                defaults: new { action = "Index", id = UrlParameter.Optional }
             );
         }
     }

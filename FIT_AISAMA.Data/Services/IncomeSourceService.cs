@@ -9,6 +9,7 @@ namespace FIT_AISAMA.Data.Services
 {
    public class IncomeSourceService : BaseService
     {
+
         public List<IncomeSource> GetAllIncomeSource()
         {
             return dbContext.IncomeSources.ToList();

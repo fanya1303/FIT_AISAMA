@@ -1,0 +1,43 @@
+﻿@model FIT_AISAMA.Models.ActiveSpecificationType.ActiveSpecificationTypeEditModel
+
+@{
+    ViewBag.Title = "EditSpecificationType";
+}
+
+<div class="col-sm-12">
+    <h4>Редактирование данных</h4>
+</div>
+<div class="col-sm-4">
+@using (Html.BeginForm("EditSpecificationType", "ActiveSpecificationType", FormMethod.Post, new { role = "form", @class = "form-group" }))
+{
+    @Html.ValidationSummary(true)
+
+        @Html.HiddenFor(model => model.Id)
+        <div class="form-group">
+            @Html.LabelFor(model => model.ActiveTypeId)
+            <div>
+                <select class="selectpicker" name="ActiveTypeId" id="ActiveTypeId">
+                    @foreach (var item in Model.ActiveTypeItems)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
+            </div>
+            @Html.ValidationMessageFor(model => model.ActiveTypeId)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TypeName)
+            @Html.TextBoxFor(model => model.TypeName, new { @class = "form-control", placeholder = "Наименование" })
+            @Html.ValidationMessageFor(model => model.TypeName)
+        </div>
+    <p>
+        <input type="submit" class="btn btn-success" value="Сохранить"  />
+    </p>
+    
+
+}
+</div>
+<div class="col-sm-12">
+    @Html.ActionLink("Вернуться к списку", "Index")
+</div>

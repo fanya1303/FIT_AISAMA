@@ -10,18 +10,24 @@ namespace FIT_AISAMA.Models.Person
     public class PersonDetailViewModel
     {
         public int Id { get; set; }
+
         [Display(Name = "ФИО сотрудника")]
         public string FullName { get; set; }
+
         [Display(Name = "Должность сотрудника")]
         public string Position { get; set; }
+
         [Display(Name = "Список материальных активов сотрудника")]
         public List<MaterialActive> MaterialActives { get; set; }
+
+        public bool? ResponsiblePerson { get; set; }
 
         public PersonDetailViewModel(Data.Entities.Person source)
         {
             Id = source.Id;
             FullName = source.FullName;
             Position = source.Position;
+            ResponsiblePerson = source.ResponsiblePerson;
             MaterialActives = source.MaterialActives != null
                 ? source.MaterialActives.ToList()
                 : new List<MaterialActive>();
