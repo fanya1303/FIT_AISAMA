@@ -23,7 +23,10 @@
             @Html.TextBoxFor(model => model.TypeName, new{@class="form-control", placeholder="Наименование"})
             @Html.ValidationMessageFor(model => model.TypeName)
         </div>
-
+        if (!string.IsNullOrEmpty(ViewBag.WarningMessage))
+        {
+            <div class="alert alert-danger">@ViewBag.WarningMessage</div>
+        }
         <p>
             <input class="btn btn-success" type="submit" value="Создать" />
         </p>

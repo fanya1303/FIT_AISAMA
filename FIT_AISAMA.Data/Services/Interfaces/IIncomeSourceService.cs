@@ -6,7 +6,7 @@ using FIT_AISAMA.Data.Entities;
 
 namespace FIT_AISAMA.Data.Services.Interfaces
 {
-    interface IIncomeSourceService
+    public interface IIncomeSourceService
     {
         List<IncomeSource> GetAllIncomeSource();
         IncomeSource GetSourcesById(int id);

@@ -7,7 +7,7 @@ using FIT_AISAMA.Data.Services.Interfaces;
 
 namespace FIT_AISAMA.Data.Services
 {
-   public class IncomeSourceService : BaseService
+   public class IncomeSourceService : BaseService, IIncomeSourceService
     {
 
         public List<IncomeSource> GetAllIncomeSource()

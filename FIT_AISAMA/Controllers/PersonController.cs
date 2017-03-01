@@ -14,7 +14,7 @@ namespace FIT_AISAMA.Controllers
         public ActionResult Index()
         {
 
-            var persons = personService.GetAllPersons().Select(o => new PersonViewModel(o)).ToList();
+            var persons = personService.GetAllPersons().OrderBy(o=> o.FullName).Select(o => new PersonViewModel(o)).ToList();
             
             return View(persons);
         }
@@ -60,7 +60,7 @@ namespace FIT_AISAMA.Controllers
             }
             return View(editPerson);
         }
-
+        [HttpPost]
         public ActionResult DeletePerson(int id)
         {
             var delPerson = personService.GetPersonById(id);

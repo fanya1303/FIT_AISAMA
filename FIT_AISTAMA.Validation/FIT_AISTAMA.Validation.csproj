@@ -42,8 +42,8 @@
   <ItemGroup>
     <Compile Include="Models\ValidationInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Validators\ActiveSpecificationTypeValidator.cs" />
-    <Compile Include="Validators\IActiveSpecificationTypeValidator.cs" />
+    <Compile Include="Validators\CatalogsValidator.cs" />
+    <Compile Include="Validators\Interfaces\ICatalogsValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FIT_AISAMA.Data\FIT_AISAMA.Data.csproj">

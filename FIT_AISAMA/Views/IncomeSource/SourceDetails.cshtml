@@ -1,0 +1,22 @@
+﻿@model FIT_AISAMA.Models.IncomeSource.IncomeSourceModel
+
+@{
+    ViewBag.Title = "SourceDetails";
+}
+
+<div class="col-sm-12">
+    <h2>SourceDetails</h2>
+</div>
+<div class="col-sm-8">
+<div class="col-md-4">
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Source)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Source)
+    </div>
+</fieldset>
+<p>
+    
+    @Html.ActionLink("Back to List", "Index")
+</p>

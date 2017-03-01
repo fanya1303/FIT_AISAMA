@@ -1,0 +1,34 @@
+﻿@model FIT_AISAMA.Models.LocationPlace.LocationPlaceModel
+
+@{
+    ViewBag.Title = "EditLocationPlace";
+}
+
+<h2>EditLocationPlace</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>LocationPlaceModel</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LocationName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LocationName)
+            @Html.ValidationMessageFor(model => model.LocationName)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+

@@ -9,9 +9,10 @@ using FIT_AISTAMA.Validation.Models;
 
 namespace FIT_AISTAMA.Validation.Validators
 {
-    public class ActiveSpecificationTypeValidator : IActiveSpecificationTypeValidator
+    public class CatalogsValidator : ICatalogsValidator
     {
         IActiveSpecificationTypeService activeSpecificationTypeService = new ActiveSpecificationTypeService();
+        IActiveTypesService activeTypesService = new ActiveTypeService();
 
 
         /// <summary>
@@ -26,6 +27,16 @@ namespace FIT_AISTAMA.Validation.Validators
             
             if (curSpecificationType != null)
                 return ValidationInfo.addError("Характеристика с такими значениями уже существует в системе: " + curSpecificationType.ActiveType.TypeCode);
+
+            return ValidationInfo.isValid();
+        }
+        
+        public ValidationInfo ValidateBeforeSave(ActiveType checkItem)
+        {
+            var curActiveType = activeTypesService.GetAllActiveType().FirstOrDefault(o => o.TypeCode == checkItem.TypeCode);
+
+            if (curActiveType != null)
+                return ValidationInfo.addError("Тип с таким кодом уже существует в системе. Измените или удалите существующий тип.");
 
             return ValidationInfo.isValid();
         }

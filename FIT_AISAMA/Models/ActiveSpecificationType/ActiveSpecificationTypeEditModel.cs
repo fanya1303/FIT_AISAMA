@@ -30,6 +30,16 @@ namespace FIT_AISAMA.Models.ActiveSpecificationType
             ActiveTypeId = ActiveTypeId;
             TypeName = source.TypeName;
             ActiveTypeItems = new List<SelectListItem>();
+
+            if (source.ActiveType != null)
+            {
+                ActiveTypeItems.Add(new SelectListItem
+                {
+                    Selected = true,
+                    Text = source.ActiveType.TypeCode + " (" + source.ActiveType.TypeName + ")",
+                    Value = source.ActiveTypeId.ToString()
+                });
+            }
         }
     }
 }

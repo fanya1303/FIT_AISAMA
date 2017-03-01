@@ -11,7 +11,7 @@ namespace FIT_AISAMA.Controllers
 {
     public class ActiveSpecificationTypeController : BaseController
     {
-        IActiveSpecificationTypeValidator specificationTypeValidator = new ActiveSpecificationTypeValidator();
+        ICatalogsValidator catalogsValidator = new CatalogsValidator();
 
         public ActionResult Index()
         {
@@ -65,7 +65,7 @@ namespace FIT_AISAMA.Controllers
                         ActiveTypeId = itemType,
                         TypeName = newSpecification.TypeName
                     };
-                    var validation = specificationTypeValidator.NeedSaveSpecificationType(createSpecification);
+                    var validation = catalogsValidator.NeedSaveSpecificationType(createSpecification);
                     //проверка на существование повторяющейся записи. сохранение только в случае, если такой записи нет
                     if (validation.IsValid)
                     {
@@ -104,7 +104,9 @@ namespace FIT_AISAMA.Controllers
             if (specificationType != null)
             {
                 var model = new ActiveSpecificationTypeEditModel(specificationType);
-                var activeTypes = activeTypesService.GetAllActiveType();
+                
+                //Вытаскиваем недостающие типы. Тип самого продукта добавляется при создании модели
+                var activeTypes = activeTypesService.GetAllActiveType().Where(o => o.Id != specificationType.ActiveTypeId);
 
                 foreach (var item in activeTypes)
                 {
@@ -133,7 +135,7 @@ namespace FIT_AISAMA.Controllers
 
                 //При редактировании, если пользователь сменил объект на такой, который уже существует
                 //то не сохраняем его изменения, а удаляем старый объект
-                var validation = specificationTypeValidator.NeedSaveSpecificationType(saveSpecificationType);
+                var validation = catalogsValidator.NeedSaveSpecificationType(saveSpecificationType);
                 if (validation.IsValid)
                 {
                     activeSpecificationTypeService.SaveActiveSpecificationType(saveSpecificationType);

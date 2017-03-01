@@ -6,11 +6,13 @@ using System.Web;
 using System.Web.Mvc;
 using FIT_AISAMA.Data.Entities;
 using FIT_AISAMA.Models.ActiveType;
+using FIT_AISTAMA.Validation.Validators;
 
 namespace FIT_AISAMA.Controllers
 {
     public class ActiveTypeController : BaseController
     {
+        ICatalogsValidator catalogsValidator = new CatalogsValidator();
 
         public ActionResult Index()
         {
@@ -29,13 +31,23 @@ namespace FIT_AISAMA.Controllers
         {
             if (ModelState.IsValid)
             {
-                activeTypesService.SaveActiveType(new Data.Entities.ActiveType
+                var newActive = new Data.Entities.ActiveType
                 {
-                    Id = newActiveType.Id,
                     TypeCode = newActiveType.TypeCode,
                     TypeName = newActiveType.TypeName
-                });
-                return RedirectToAction("Index");
+                };
+                var validate = catalogsValidator.ValidateBeforeSave(newActive);
+
+                if (validate.IsValid)
+                {
+                    activeTypesService.SaveActiveType(newActive);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.WarningMessage = validate.ValidationMessage;
+                }
+                
             }
             return View(newActiveType);
         }
@@ -67,14 +79,23 @@ namespace FIT_AISAMA.Controllers
         {
             if (ModelState.IsValid)
             {
-                var model = new ActiveType
+                var saveActiveType = new ActiveType
                 {
                     Id = editActiveType.Id,
                     TypeCode = editActiveType.TypeCode,
                     TypeName = editActiveType.TypeName
                 };
-                activeTypesService.SaveActiveType(model);
-                return RedirectToAction("ActiveTypeDetails", editActiveType);
+                var validate = catalogsValidator.ValidateBeforeSave(saveActiveType);
+
+                if (validate.IsValid)
+                {
+                    activeTypesService.SaveActiveType(saveActiveType);
+                    return RedirectToAction("ActiveTypeDetails", new {id = editActiveType.Id});
+                }
+                else
+                {
+                    ViewBag.WarningMessage = validate.ValidationMessage;
+                }
             }
             return View(editActiveType);
         }

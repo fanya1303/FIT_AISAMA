@@ -9,3 +9,4 @@ D:\Minkov Project\FIT_AISAMA\FIT_AISAMA.Data\bin\Debug\ru\EntityFramework.resour
 D:\Minkov Project\FIT_AISAMA\FIT_AISAMA.Data\bin\Debug\ru\EntityFramework.SqlServer.resources.dll
 D:\Minkov Project\FIT_AISAMA\FIT_AISAMA.Data\obj\Debug\FIT_AISAMA.Data.dll
 D:\Minkov Project\FIT_AISAMA\FIT_AISAMA.Data\obj\Debug\FIT_AISAMA.Data.pdb
+D:\Minkov Project\FIT_AISAMA\FIT_AISAMA.Data\obj\Debug\FIT_AISAMA.Data.csprojResolveAssemblyReference.cache

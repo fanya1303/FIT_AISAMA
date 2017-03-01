@@ -20,7 +20,7 @@ namespace FIT_AISAMA.Models.ActiveSpecificationType
         [Display(Name = "Тип МЦ")]
         public int[] ActiveTypeId { get; set; }
 
-        [Display(Name = "Наименвоание характеристики")]
+        [Display(Name = "Наименование характеристики")]
         public string TypeName { get; set; }
 
         public List<SelectListItem> ActiveTypeItems { get; set; }
