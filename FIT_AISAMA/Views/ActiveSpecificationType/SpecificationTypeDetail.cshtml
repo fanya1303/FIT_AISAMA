@@ -1,4 +1,4 @@
-﻿@model FIT_AISAMA.Models.ActiveSpecificationType.ActiveSpecificationTypeViewModel
+﻿@model FIT_AISAMA.Models.ActiveSpecificationType.ActiveSpecificationTypeModel
 
 @{
     ViewBag.Title = "SpecificationTypeDetail";
@@ -31,7 +31,7 @@
     
     <div class="col-sm-12" style="padding-top: 20px;">
         <div class="col-sm-1" style="padding-left: 0;">
-             @using (Html.BeginForm("EditSpecificationType", "ActiveSpecificationType", FormMethod.Get))
+             @using (Html.BeginForm("SaveEditSpecificationType", "ActiveSpecificationType", FormMethod.Get))
                   {
                       <input type="hidden" name="Id" value="@Model.Id"/>
                       <input type="submit" value="Изменить" class="btn btn-xs btn-warning"/>

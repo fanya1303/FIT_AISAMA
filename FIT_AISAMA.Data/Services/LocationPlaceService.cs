@@ -33,11 +33,15 @@ namespace FIT_AISAMA.Data.Services
             dbContext.SaveChanges();
         }
 
-       public void DeleteLocationPlace(LocationPlace delLocationPlace)
-        {
-            dbContext.LocationPlaces.Remove(delLocationPlace);
-            dbContext.SaveChanges();
-        }
+       public void DeleteLocationPlace(int delId)
+       {
+           var delLocationPlace = dbContext.LocationPlaces.FirstOrDefault(o => o.Id == delId);
+           if (delLocationPlace != null)
+           {
+               dbContext.LocationPlaces.Remove(delLocationPlace);
+               dbContext.SaveChanges();
+           }
+       }
         
     }
 }

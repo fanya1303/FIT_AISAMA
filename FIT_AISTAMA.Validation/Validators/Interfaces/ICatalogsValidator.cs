@@ -19,6 +19,11 @@ namespace FIT_AISTAMA.Validation.Validators
         /// </summary>
         /// <param name="checkItem"></param>
         /// <returns></returns>
-        ValidationInfo ValidateBeforeSave(ActiveType checkItem);
+        ValidationInfo ValidateActiveTypeBeforeSave(ActiveType checkItem);
+
+        /// <summary>
+        /// Валидация сотрудника перед удалением
+        /// </summary>
+        ValidationInfo ValidatePersonBeforeDelet(Person checkItem);
     }
 }

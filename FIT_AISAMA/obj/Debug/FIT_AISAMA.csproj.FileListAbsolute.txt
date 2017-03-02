@@ -52,3 +52,5 @@ D:\Minkov Project\FIT_AISAMA\FIT_AISAMA\bin\ru\System.Web.WebPages.Razor.resourc
 D:\Minkov Project\FIT_AISAMA\FIT_AISAMA\obj\Debug\FIT_AISAMA.csprojResolveAssemblyReference.cache
 D:\Minkov Project\FIT_AISAMA\FIT_AISAMA\obj\Debug\FIT_AISAMA.dll
 D:\Minkov Project\FIT_AISAMA\FIT_AISAMA\obj\Debug\FIT_AISAMA.pdb
+D:\Minkov Project\FIT_AISAMA\FIT_AISAMA\bin\FIT_AISAMA.BusinessLogic.dll
+D:\Minkov Project\FIT_AISAMA\FIT_AISAMA\bin\FIT_AISAMA.BusinessLogic.pdb

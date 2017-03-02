@@ -14,7 +14,11 @@ namespace FIT_AISAMA.Data.Entities
         public int Id { get; set; }
         public string FullName { get; set; }
         public string Position { get; set; }
+        /// <summary>
+        /// признак материальной ответственности
+        /// </summary>
         public bool? ResponsiblePerson { get; set; }
+        public bool IsDeleted { get; set; }
 
         public virtual ICollection<MaterialActive> MaterialActives { get; set; }
     }

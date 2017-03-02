@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using FIT_AISAMA.BusinessLogic.Models;
+using FIT_AISAMA.BusinessLogic.Searchers;
 using FIT_AISAMA.Data.Entities;
 using FIT_AISAMA.Models.Person;
 
@@ -14,23 +16,30 @@ namespace FIT_AISAMA.Controllers
         public ActionResult Index()
         {
 
-            var persons = personService.GetAllPersons().OrderBy(o=> o.FullName).Select(o => new PersonViewModel(o)).ToList();
+            //var model = new PersonViewModel();
             
-            return View(persons);
+            return View();
         }
 
         [HttpGet]
         public ActionResult CreatePerson()
         {
-            return View();
+            var model = new EditPersonModel();
+            return View(model);
         }
 
         [HttpPost]
-        public ActionResult CreatePerson(Person newPerson)
+        public ActionResult CreatePerson(EditPersonModel newPerson)
         {
             if (ModelState.IsValid)
             {
-                personService.SavePerson(newPerson);
+                var savePerson = new Person
+                {
+                    Id = newPerson.Id,
+                    FullName = newPerson.FullName,
+                    Position = newPerson.Position
+                };
+                personService.SavePerson(savePerson);
                 return RedirectToAction("Index");
             }
             return View(newPerson);
@@ -38,28 +47,51 @@ namespace FIT_AISAMA.Controllers
 
         public ActionResult PersonDetails(int id)
         {
-            var person = new PersonDetailViewModel(personService.GetPersonById(id));
-            return View(person);
+            var person = personService.GetPersonById(id);
+            
+            if (person != null)
+            {
+                var validation = catalogsValidator.ValidatePersonBeforeDelet(person);
+                var model = new PersonDetailViewModel(person);
+
+                model.CanDeletePerson = validation.IsValid;
+                model.DeleteMessage = validation.ValidationMessage;
+                return View(model);
+            }
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
         public ActionResult EditPerson(int id)
         {
             var person = personService.GetPersonById(id);
-            return View(person);
+            if (person != null)
+            {
+                var model = new EditPersonModel(person);
+                return View(model);
+            }
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public ActionResult EditPerson(Person editPerson)
+        public ActionResult EditPerson(EditPersonModel editPerson)
         {
             if (ModelState.IsValid)
             {
-                personService.SavePerson(editPerson);
-                var editedPerson = personService.GetPersonById(editPerson.Id);
-                return RedirectToAction("PersonDetails", editedPerson);
+                var savePerson = new Person
+                {
+                    Id = editPerson.Id,
+                    FullName = editPerson.FullName,
+                    Position = editPerson.Position,
+                    ResponsiblePerson = editPerson.ResponsiblePerson
+                };
+                personService.SavePerson(savePerson);
+                //var editedPerson = personService.GetPersonById(editPerson.Id);
+                return RedirectToAction("PersonDetails", new { id = savePerson.Id});
             }
             return View(editPerson);
         }
+
         [HttpPost]
         public ActionResult DeletePerson(int id)
         {
@@ -67,22 +99,28 @@ namespace FIT_AISAMA.Controllers
 
             if (delPerson != null)
             {
-                personService.DeletePerson(delPerson);
+                var validation = catalogsValidator.ValidatePersonBeforeDelet(delPerson);
+                if (validation.IsValid)
+                {
+                    personService.DeletePerson(delPerson.Id);
+                }
+                else
+                {
+                    return RedirectToAction("PersonDetails", new {id = id});
+                }
             }
-
             return RedirectToAction("Index");
+            
         }
 
         [HttpPost]
-        public ActionResult SearchPerson(string searchPerson)
+        public ActionResult SearchPerson(PersonSearchModel serchModel)
         {
-            if (searchPerson.Length > 0)
-            {
-                ViewBag.SearchString = searchPerson;
-                var result = personService.SearchPersons(searchPerson).Select(o => new PersonViewModel(o)).ToList();
-                return View("Index", result);
-            }
-            return RedirectToAction("Index");
+            var personList = PersonSearcher.SearchPersons(serchModel).Select(o => new PersonTableViewModel(o)).ToList();
+            
+            return PartialView("PersonTableView",personList);
+            
+            
         }
 
         [HttpPost]

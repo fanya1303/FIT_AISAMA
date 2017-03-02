@@ -24,7 +24,7 @@ namespace FIT_AISAMA.Data.Services.Interfaces
         /// <summary>
         /// Удалить место 
         /// </summary>
-        void DeleteLocationPlace(LocationPlace delLocationPlace);
+        void DeleteLocationPlace(int delId);
 
     }
 }

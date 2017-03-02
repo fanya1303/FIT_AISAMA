@@ -16,7 +16,7 @@ namespace FIT_AISAMA.Data.Services
             
         }
 
-        public IncomeSource GetSourcesById(int id)
+        public IncomeSource GetSourceById(int id)
         {
             return dbContext.IncomeSources.FirstOrDefault(o => o.Id == id);
         }

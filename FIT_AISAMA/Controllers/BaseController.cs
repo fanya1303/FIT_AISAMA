@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using FIT_AISAMA.Data.Entities;
 using FIT_AISAMA.Data.Services;
 using FIT_AISAMA.Data.Services.Interfaces;
+using FIT_AISTAMA.Validation.Validators;
 
 namespace FIT_AISAMA.Controllers
 {
@@ -22,13 +23,18 @@ namespace FIT_AISAMA.Controllers
             if(activeSpecificationTypeService == null)
                 activeSpecificationTypeService = new ActiveSpecificationTypeService();
             
-            if(incomeSourceService==null)
+            if(incomeSourceService == null)
                 incomeSourceService=new IncomeSourceService();
 
-            if (locationPlaceService== null)
+            if (locationPlaceService == null)
                 locationPlaceService = new LocationPlaceService();
+
+            if(catalogsValidator == null)
+                catalogsValidator = new CatalogsValidator();
             
         }
+
+        public static ICatalogsValidator catalogsValidator;
 
         /// <summary>
         /// Сервис по рабте с сотрудниками

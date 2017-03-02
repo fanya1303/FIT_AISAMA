@@ -11,44 +11,44 @@ namespace FIT_AISAMA.Controllers
 {
     public class LocationPlaceController : BaseController
     {
-        //
-        // GET: /LocationPlace/
 
         public ActionResult Index()
         {
             var places = locationPlaceService.GetAllLocationPlaces().Select(o => new LocationPlaceModel(o)).ToList();
             return View(places);
         }
+
         [HttpGet]
         public ActionResult CreateLocationPlace()
         {
-            return View();
+            var model = new LocationPlaceModel();
+            return View("EditLocationPlace",model);
         }
 
         [HttpPost]
-        public ActionResult CreateLocationPlace(LocationPlaceModel newLocation)
+        public ActionResult SaveLocationPlace(LocationPlaceModel newLocation)
         {
             if (ModelState.IsValid)
             {
-                var saveLocationPlace = new LocationPlace {LocationName = newLocation.LocationName};
+                var saveLocationPlace = new LocationPlace
+                {
+                    Id = newLocation.Id,
+                    LocationName = newLocation.LocationName
+                };
 
-               locationPlaceService.SaveLocationPlace(saveLocationPlace);
+                locationPlaceService.SaveLocationPlace(saveLocationPlace);
+
                 return RedirectToAction("Index");
             }
 
-            return View(newLocation);
+            return View("EditLocationPlace", newLocation);
         }
 
         [HttpPost]
         public ActionResult DeleteLocationPlace(int id)
         {
-            var delLocationPlace = locationPlaceService.GetLocationPlaceById(id);
+            locationPlaceService.DeleteLocationPlace(id);
 
-            if (delLocationPlace != null)
-            {
-                locationPlaceService.DeleteLocationPlace(delLocationPlace);
-                
-            }
             return RedirectToAction("Index");
         }
 
@@ -64,22 +64,6 @@ namespace FIT_AISAMA.Controllers
             }
 
             return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public ActionResult EditLocationPlace(LocationPlaceModel editLocPlace)
-        {
-            if (ModelState.IsValid)
-            {
-                var saveLocPlace = new LocationPlace
-                {
-                    Id = editLocPlace.Id,
-                    LocationName = editLocPlace.LocationName
-                };
-                locationPlaceService.SaveLocationPlace(saveLocPlace);
-                return RedirectToAction("Index");
-            }
-            return View(editLocPlace);
         }
     }
 }

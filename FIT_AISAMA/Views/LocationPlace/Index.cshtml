@@ -4,16 +4,16 @@
     ViewBag.Title = "Index";
 }
 
-<div class="col-sm-4">
-<h2>Место расположения</h2>
-
-
+<div class="col-sm-12">
+    <h2>Место расположения</h2>
+</div>
+<div class="col-sm-6">
 <table class="table table-bordered table-striped">
     <tr>
-        <th style="width: 260px;">
+        <th>
             @Html.DisplayNameFor(model => model.LocationName)
         </th>
-        <th></th>
+        <th style="width: 180px;"></th>
     </tr>
     <tr>
     <td>
@@ -36,21 +36,21 @@
             @Html.DisplayFor(modelItem => item.LocationName)
         </td>
         <td class="text-center">
-                    <div class="col-sm-6" style="padding: 0;">
-                        @using (Html.BeginForm("EditLocationPlace", "LocationPlace", FormMethod.Get))
-                        {
-                            <input type="hidden" name="Id" value="@item.Id"/>
-                            <input class="btn btn-warning btn-xs" type="submit" value="Изменить"/>
-                        }
-                    </div>
-                    <div class="col-sm-6" style="padding: 0;">
-                        @using (Html.BeginForm("DeleteLocationPlace", "LocationPlace", FormMethod.Post))
-                        {
-                            <input type="hidden" name="Id" value="@item.Id"/>
-                            <input class="btn btn-danger btn-xs" type="submit" value="Удалить"/>
-                        }
-                    </div>
-                </td>
+                <div class="col-sm-6" style="padding: 0;">
+                    @using (Html.BeginForm("EditLocationPlace", "LocationPlace", FormMethod.Get))
+                    {
+                        <input type="hidden" name="Id" value="@item.Id"/>
+                        <input class="btn btn-warning btn-xs" type="submit" value="Изменить"/>
+                    }
+                </div>
+                <div class="col-sm-6" style="padding: 0;">
+                    @using (Html.BeginForm("DeleteLocationPlace", "LocationPlace", FormMethod.Post))
+                    {
+                        <input type="hidden" name="Id" value="@item.Id"/>
+                        <input class="btn btn-danger btn-xs" type="submit" value="Удалить"/>
+                    }
+                </div>
+            </td>
     </tr>
 }
 

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FIT_AISAMA.Data", "FIT_AISA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FIT_AISTAMA.Validation", "FIT_AISTAMA.Validation\FIT_AISTAMA.Validation.csproj", "{5D9EBF7F-FEC5-485D-95A8-4F66ED58CFEE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FIT_AISAMA.BusinessLogic", "FIT_AISAMA.BusinessLogic\FIT_AISAMA.BusinessLogic.csproj", "{0D3F2AAB-FE7C-40FB-AC25-024CC2F48BD7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{5D9EBF7F-FEC5-485D-95A8-4F66ED58CFEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D9EBF7F-FEC5-485D-95A8-4F66ED58CFEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D9EBF7F-FEC5-485D-95A8-4F66ED58CFEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D3F2AAB-FE7C-40FB-AC25-024CC2F48BD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D3F2AAB-FE7C-40FB-AC25-024CC2F48BD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D3F2AAB-FE7C-40FB-AC25-024CC2F48BD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D3F2AAB-FE7C-40FB-AC25-024CC2F48BD7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

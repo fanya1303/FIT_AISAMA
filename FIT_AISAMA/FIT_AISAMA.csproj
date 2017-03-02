@@ -134,13 +134,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ActiveSpecificationType\ActiveSpecificationTypeModel.cs" />
     <Compile Include="Models\ActiveSpecificationType\ActiveSpecificationTypeEditModel.cs" />
     <Compile Include="Models\ActiveSpecificationType\ActiveSpecificationTypeCreateModel.cs" />
     <Compile Include="Models\ActiveSpecificationType\ActiveSpecificationTypeViewModel.cs" />
     <Compile Include="Models\ActiveType\ActiveTypeModel.cs" />
     <Compile Include="Models\IncomeSource\IncomeSourceModel.cs" />
     <Compile Include="Models\LocationPlace\LocationPlaceModel.cs" />
+    <Compile Include="Models\Person\EditPersonModel.cs" />
     <Compile Include="Models\Person\PersonDetailViewModel.cs" />
+    <Compile Include="Models\Person\PersonTableViewModel.cs" />
     <Compile Include="Models\Person\PersonViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -310,6 +313,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FIT_AISAMA.BusinessLogic\FIT_AISAMA.BusinessLogic.csproj">
+      <Project>{0D3F2AAB-FE7C-40FB-AC25-024CC2F48BD7}</Project>
+      <Name>FIT_AISAMA.BusinessLogic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FIT_AISAMA.Data\FIT_AISAMA.Data.csproj">
       <Project>{223D363C-5D42-4716-9609-90DD9E0492B2}</Project>
       <Name>FIT_AISAMA.Data</Name>
@@ -341,7 +348,6 @@
     <None Include="Scripts\bootstrap-select.js.map" />
     <None Include="Scripts\jquery-3.1.1.min.map" />
     <None Include="Scripts\jquery-3.1.1.slim.min.map" />
-    <Content Include="Views\Person\GetCharacteristic.cshtml" />
     <Content Include="Views\ActiveType\Index.cshtml" />
     <Content Include="Views\ActiveType\CreateActiveType.cshtml" />
     <Content Include="Views\ActiveType\ActiveTypeDetails.cshtml" />
@@ -352,11 +358,10 @@
     <Content Include="Views\ActiveSpecificationType\SpecificationTypeDetail.cshtml" />
     <Content Include="Views\ActiveSpecificationType\EditSpecificationType.cshtml" />
     <Content Include="Views\IncomeSource\Index.cshtml" />
-    <Content Include="Views\IncomeSource\CreateIncomeSource.cshtml" />
-    <Content Include="Views\IncomeSource\SourceDetails.cshtml" />
+    <Content Include="Views\IncomeSource\EditIncomeSource.cshtml" />
     <Content Include="Views\LocationPlace\Index.cshtml" />
-    <Content Include="Views\LocationPlace\CreateLocationPlace.cshtml" />
     <Content Include="Views\LocationPlace\EditLocationPlace.cshtml" />
+    <Content Include="Views\Person\PersonTableView.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

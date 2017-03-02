@@ -1,34 +1,30 @@
 ﻿@model FIT_AISAMA.Models.LocationPlace.LocationPlaceModel
 
 @{
-    ViewBag.Title = "EditLocationPlace";
+    ViewBag.Title = "Место расположения";
 }
-
-<h2>EditLocationPlace</h2>
-
-@using (Html.BeginForm()) {
+<div class="col-sm-12">
+    <h2>@(Model.Id == 0 ? "Создание места расположения" : "Редактирование места расположения")</h2>
+</div>
+<div class="col-sm-4">
+@using (Html.BeginForm("SaveLocationPlace","LocationPlace", FormMethod.Post, new {role= "form", @class = "form-group"})) {
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>LocationPlaceModel</legend>
 
         @Html.HiddenFor(model => model.Id)
 
-        <div class="editor-label">
+        <div class="form-group">
             @Html.LabelFor(model => model.LocationName)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.LocationName)
+            @Html.TextBoxFor(model => model.LocationName, new {@class = "form-control"})
             @Html.ValidationMessageFor(model => model.LocationName)
         </div>
 
         <p>
-            <input type="submit" value="Save" />
+            <input class="btn btn-success" type="submit" value="Сохранить" />
         </p>
-    </fieldset>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
+</div>
+<div class="col-sm-12">
+    @Html.ActionLink("Вернуться к списку", "Index")
 </div>
 

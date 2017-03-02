@@ -9,9 +9,14 @@ namespace FIT_AISAMA.Data.Services
 {
     public class PersonService : BaseService, IPersonService
     {
-        public List<Person> GetAllPersons()
+        public List<Person> GetAllPersons(bool withDeleted = false)
         {
-            return dbContext.Persons.ToList();
+            var result = dbContext.Persons.ToList();
+            if (!withDeleted)
+            {
+                result = result.Where(o => o.IsDeleted == false).ToList();
+            }
+            return result;
         }
 
         public Person GetPersonById(int id)
@@ -32,25 +37,23 @@ namespace FIT_AISAMA.Data.Services
                     var curPerson = dbContext.Persons.Single(o => o.Id == person.Id);
                     curPerson.FullName = person.FullName;
                     curPerson.Position = person.Position;
+                    curPerson.IsDeleted = person.IsDeleted;
                 }
                 dbContext.SaveChanges();
             }
         }
 
-        public void DeletePerson(Person delPerson)
+        public void DeletePerson(int delId)
         {
-            dbContext.Persons.Remove(delPerson);
-            dbContext.SaveChanges();
+            var delPerson = dbContext.Persons.FirstOrDefault(o => o.Id == delId);
+            
+            if (delPerson != null)
+            {
+                delPerson.IsDeleted = true;
+                dbContext.SaveChanges();
+            }
         }
 
-        public List<Person> SearchPersons(string search)
-        {
-            search = search.ToLower();
-            var list = dbContext.Persons.Where(o => o.FullName.ToLower().Contains(search) ||
-                                                    o.Position.ToLower().Contains(search)).ToList();
-            return list;
-
-        }
 
         public void SetAsReponsiblePerson(int id)
         {

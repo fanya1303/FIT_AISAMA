@@ -9,7 +9,7 @@ namespace FIT_AISAMA.Data.Services.Interfaces
     public interface IIncomeSourceService
     {
         List<IncomeSource> GetAllIncomeSource();
-        IncomeSource GetSourcesById(int id);
+        IncomeSource GetSourceById(int id);
         void SaveIncomeSource(IncomeSource newIncomeSource);
         void DeleteIncomeSource(IncomeSource delIncomeSource);
     }

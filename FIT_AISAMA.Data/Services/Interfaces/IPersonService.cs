@@ -11,7 +11,7 @@ namespace FIT_AISAMA.Data.Services.Interfaces
         /// <summary>
         /// Получить всех сотрудников
         /// </summary>
-        List<Person> GetAllPersons();
+        List<Person> GetAllPersons(bool withDeleted = false);
 
         /// <summary>
         /// Получить сотрудника по id
@@ -26,12 +26,8 @@ namespace FIT_AISAMA.Data.Services.Interfaces
         /// <summary>
         /// Удалить пользователя
         /// </summary>
-        void DeletePerson(Person delPerson);
+        void DeletePerson(int delId);
 
-        /// <summary>
-        /// Поиск по ФИО или Должности
-        /// </summary>
-        List<Person> SearchPersons(string search);
         /// <summary>
         /// Назначить сотрудника материально ответственным лицом и убрать всех остальных материально ответственных
         /// </summary>

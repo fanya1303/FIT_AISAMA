@@ -11,15 +11,45 @@ namespace FIT_AISAMA.Controllers
 {
     public class ActiveSpecificationTypeController : BaseController
     {
-        ICatalogsValidator catalogsValidator = new CatalogsValidator();
 
-        public ActionResult Index()
+        public ActionResult Index(int? activeTypeId)
         {
-            var list =
-                activeSpecificationTypeService.GetAllActiveSpecificationType()
-                    .Select(o => new ActiveSpecificationTypeViewModel(o))
-                    .ToList();
-            return View(list);
+            var model = new ActiveSpecificationTypeViewModel();
+            if (activeTypeId.HasValue && activeTypeId.Value != 0)
+            {
+                model.ActiveSpecificationTypeList =
+                    activeSpecificationTypeService.GetSpecificationsByActiveType(activeTypeId.Value)
+                        .Select(o => new ActiveSpecificationTypeModel(o))
+                        .ToList();
+            }
+            else
+            {
+                model.ActiveSpecificationTypeList =
+                    activeSpecificationTypeService.GetAllActiveSpecificationType()
+                        .Select(o => new ActiveSpecificationTypeModel(o))
+                        .ToList();
+            }
+
+            var activeTypeList = activeTypesService.GetAllActiveType();
+            
+            model.ActiveTypeList.Add(new SelectListItem
+            {
+                Selected = !activeTypeId.HasValue || activeTypeId.Value == 0,
+                Value = "0",
+                Text = "Показать все"
+
+            });
+            foreach (var item in activeTypeList)
+            {
+                model.ActiveTypeList.Add(new SelectListItem
+                {
+                    Selected = activeTypeId.HasValue && item.Id == activeTypeId.Value,
+                    Text = item.TypeCode + " (" + item.TypeName + ")",
+                    Value = item.Id.ToString()
+                });
+            }
+            
+            return View(model);
         }
 
         [HttpGet]
@@ -89,7 +119,7 @@ namespace FIT_AISAMA.Controllers
             var specificationType = activeSpecificationTypeService.GetActiveSpecificationTypesById(id);
             if (specificationType != null)
             {
-                var model = new ActiveSpecificationTypeViewModel(specificationType);
+                var model = new ActiveSpecificationTypeModel(specificationType);
                 return View(model);
             }
 
@@ -97,7 +127,7 @@ namespace FIT_AISAMA.Controllers
 
         }
 
-        [HttpGet]
+        [HttpPost]
         public ActionResult EditSpecificationType(int id)
         {
             var specificationType = activeSpecificationTypeService.GetActiveSpecificationTypesById(id);
@@ -122,7 +152,7 @@ namespace FIT_AISAMA.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditSpecificationType(ActiveSpecificationTypeEditModel editSpecificationType)
+        public ActionResult SaveEditSpecificationType(ActiveSpecificationTypeEditModel editSpecificationType)
         {
             if (ModelState.IsValid)
             {
@@ -149,7 +179,7 @@ namespace FIT_AISAMA.Controllers
 
                 return RedirectToAction("Index");
             }
-            return View(editSpecificationType);
+            return View("EditSpecificationType",editSpecificationType);
         }
 
         [HttpPost]

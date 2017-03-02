@@ -17,19 +17,22 @@ namespace FIT_AISAMA.Controllers
             return View(listS);
 
         }
+
         [HttpGet]
         public ActionResult CreateIncomeSource()
         {
-            return View();
+            var model = new IncomeSourceModel();
+            return View("EditIncomeSource", model);
         }
 
         [HttpPost]
-        public ActionResult CreateIncomeSource(IncomeSourceModel newIncome)
+        public ActionResult SaveIncomeSource(IncomeSourceModel newIncome)
         {
             if (ModelState.IsValid)
             {
                 var saveIncomeSource = new IncomeSource
                 {
+                    Id = newIncome.Id,
                     Source = newIncome.Source
                 };
 
@@ -37,13 +40,14 @@ namespace FIT_AISAMA.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(newIncome);
+            return View("EditIncomeSource", newIncome);
         }
+
         [HttpPost]
         public ActionResult DeleteIncomeSource(int id)
         {
             
-            var delSource = incomeSourceService.GetSourcesById(id);
+            var delSource = incomeSourceService.GetSourceById(id);
 
             if (delSource != null)
             {
@@ -53,10 +57,17 @@ namespace FIT_AISAMA.Controllers
             return RedirectToAction("Index");
             
         }
-        public ActionResult SourceDetails(int id)
+
+        [HttpPost]
+        public ActionResult EditIncomeSource(int id)
         {
-            var source = new IncomeSourceModel(incomeSourceService.GetSourcesById(id));
-            return View(source);
+            var source = incomeSourceService.GetSourceById(id);
+            if (source != null)
+            {
+                var model = new IncomeSourceModel(source);
+                return View("EditIncomeSource", model);
+            }
+            return RedirectToAction("Index");
         }
 
 

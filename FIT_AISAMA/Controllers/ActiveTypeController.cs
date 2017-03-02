@@ -12,7 +12,6 @@ namespace FIT_AISAMA.Controllers
 {
     public class ActiveTypeController : BaseController
     {
-        ICatalogsValidator catalogsValidator = new CatalogsValidator();
 
         public ActionResult Index()
         {
@@ -36,7 +35,7 @@ namespace FIT_AISAMA.Controllers
                     TypeCode = newActiveType.TypeCode,
                     TypeName = newActiveType.TypeName
                 };
-                var validate = catalogsValidator.ValidateBeforeSave(newActive);
+                var validate = catalogsValidator.ValidateActiveTypeBeforeSave(newActive);
 
                 if (validate.IsValid)
                 {
@@ -85,7 +84,7 @@ namespace FIT_AISAMA.Controllers
                     TypeCode = editActiveType.TypeCode,
                     TypeName = editActiveType.TypeName
                 };
-                var validate = catalogsValidator.ValidateBeforeSave(saveActiveType);
+                var validate = catalogsValidator.ValidateActiveTypeBeforeSave(saveActiveType);
 
                 if (validate.IsValid)
                 {

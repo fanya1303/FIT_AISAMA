@@ -13,6 +13,7 @@ namespace FIT_AISTAMA.Validation.Validators
     {
         IActiveSpecificationTypeService activeSpecificationTypeService = new ActiveSpecificationTypeService();
         IActiveTypesService activeTypesService = new ActiveTypeService();
+        IPersonService personService = new PersonService();
 
 
         /// <summary>
@@ -30,14 +31,31 @@ namespace FIT_AISTAMA.Validation.Validators
 
             return ValidationInfo.isValid();
         }
-        
-        public ValidationInfo ValidateBeforeSave(ActiveType checkItem)
+
+        /// <summary>
+        /// Валидация типа МЦ перед сохранением
+        /// </summary>
+        public ValidationInfo ValidateActiveTypeBeforeSave(ActiveType checkItem)
         {
             var curActiveType = activeTypesService.GetAllActiveType().FirstOrDefault(o => o.TypeCode == checkItem.TypeCode);
 
             if (curActiveType != null)
                 return ValidationInfo.addError("Тип с таким кодом уже существует в системе. Измените или удалите существующий тип.");
 
+            return ValidationInfo.isValid();
+        }
+
+        /// <summary>
+        /// Валидация сотрудника перед удалением
+        /// </summary>
+        public ValidationInfo ValidatePersonBeforeDelet(Person checkItem)
+        {
+            if (checkItem.ResponsiblePerson.HasValue && checkItem.ResponsiblePerson.Value)
+                return ValidationInfo.addError("Удаление запрещено.\nСотрудник назначен материально ответственным.");
+            
+            if (checkItem.MaterialActives != null && checkItem.MaterialActives.Any())
+                return  ValidationInfo.addError("Удаление запрещено. \nЗа сотрудником числятся материальный ценности.");
+            
             return ValidationInfo.isValid();
         }
     }

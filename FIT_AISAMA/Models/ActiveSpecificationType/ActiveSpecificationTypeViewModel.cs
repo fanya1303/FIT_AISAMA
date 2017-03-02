@@ -3,26 +3,28 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace FIT_AISAMA.Models.ActiveSpecificationType
 {
     public class ActiveSpecificationTypeViewModel
     {
-        public ActiveSpecificationTypeViewModel(){}
-
-        public int Id { get; set; }
-        
-        [Display(Name = "Тип МЦ")]
-        public string ActiveTypeCode { get; set; }
-
-        [Display(Name = "Характеристика")]
-        public string TypeName { get; set; }
-
-        public ActiveSpecificationTypeViewModel(Data.Entities.ActiveSpecificationType source)
+        public ActiveSpecificationTypeViewModel()
         {
-            Id = source.Id;
-            ActiveTypeCode = source.ActiveType.TypeCode;
-            TypeName = source.TypeName;
+            ActiveSpecificationTypeList = new List<ActiveSpecificationTypeModel>();
+            ActiveTypeList = new List<SelectListItem>();
         }
+
+        /// <summary>
+        /// Список характеристик
+        /// </summary>
+        public List<ActiveSpecificationTypeModel> ActiveSpecificationTypeList { get; set; }
+
+        /// <summary>
+        /// Список типов МЦ
+        /// </summary>
+        public List<SelectListItem> ActiveTypeList { get; set; }
+
+        
     }
 }

@@ -1,96 +1,90 @@
-﻿@model IEnumerable<FIT_AISAMA.Models.Person.PersonViewModel>
-
-@{
+﻿@{
     ViewBag.Title = "Сотрудники";
 }
+@if (!string.IsNullOrEmpty(ViewBag.WarningMessage))
+{
+    <div class="alert alert-danger">@ViewBag.WarningMessage</div>
+}
 <div class="col-sm-12">
-    <h2>Список сотрудников </h2> 
+    <h2>Список сотрудников <span id="showOrHideDeleted" class="glyphicon glyphicon-eye-close show-hide-deleted-icon" title="Показать/Скрыть удаленных сотрудников"></span></h2> 
 </div>
 <div class="row col-sm-6" style="margin-bottom: 10px;">
-    @using (Html.BeginForm("SearchPerson", "Person", FormMethod.Post, new { @class = "form-inline", role="form", id = "searchForm"}))
-    {
+    <div id="SearchBlock">
         <div class="form-group col-sm-12" style="padding: 0;">
             <div class="col-sm-9">
-                <input class="form-control" style="width: 100%" type="text" value="@ViewBag.SearchString" name="searchPerson" id="searchPerson" placeholder="Введите ФИО или Должность"/>
+                <input type="hidden" value="false" id="searchWithDeleted"/>
+                <input class="form-control" style="width: 100%" type="text" value="@ViewBag.SearchString" name="searchPersonText" id="searchPersonText" placeholder="Введите ФИО или Должность"/>
             </div>
             <div class="col-sm-3" style="padding: 0;">
-               <input class="btn btn-info" type="submit" value="Найти"/>
+               <input id="searchButton" class="btn btn-info" type="button" value="Поиск"/>
                <input id="cancelSearch" class="btn btn-warning" type="button" value="Отмена"/>
             </div>
         </div>
-    }
+    </div>
 </div>
 
-<div class="col-sm-10">
-    <table class="table table-striped table-bordered">
-        <tr>
-            <th style="width: 300px;">
-                @Html.DisplayNameFor(model => model.FullName)
-            </th>
-            <th style="width: 400px;">
-                @Html.DisplayNameFor(model => model.Position)
-            </th>
-            <th style="width: 150px;"></th>
-        </tr>
-        
-        
-        <tr>
-            <td>
-                <a href="/Person/CreatePerson" title="Добавить нового сотрудника">
-                <div style="height: 21px; width: 100%;">
-                    <span  class="glyphicon glyphicon-plus create-icon"></span>
-                </div>
-                </a>
-            </td>
-            <td>
-                <a href="/Person/CreatePerson" title="Добавить нового сотрудника">
-                    <div style="height: 21px;"></div>
-                </a>
-            </td>
-            <td>
-                <a href="/Person/CreatePerson" title="Добавить нового сотрудника" style="display: block; height: 100%; width: 100%;">
-                    <div style="height: 21px;"></div>
-                </a>
-            </td>
-        </tr>
-        
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FullName)
-                    @if (item.ResponsiblePerson.HasValue && item.ResponsiblePerson.Value)
-                    {
-                        <span title="Сотрудник назначен материально ответственным" class="glyphicon glyphicon-list-alt responsible-person"></span>
-                    }
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Position)
-                </td>
-                <td class="text-center">
-                    <div class="col-sm-6" style="padding-left: 0;">
-                        @Html.ActionLink("Детали", "PersonDetails", new { id = item.Id })
-                    </div>
-                    <div class="col-sm-6" style="padding-left: 0;">
-                        @using (Html.BeginForm("DeletePerson", "Person", FormMethod.Post))
-                        {
-                            <input type="hidden" name="Id" value="@item.Id"/>
-                            <input class="btn btn-danger btn-xs" type="submit" value="Удалить"/>
-                        }
-                    </div>
-                </td>
-            </tr>
-        }
-    </table>
+<div class="col-sm-10" id="personTableBlock">
+    
 </div>
+
 <script type="text/javascript">
     $(document).ready(function() {
         $("#cancelSearch").click(function() {
-            $("#searchPerson").val("");
-            $("#searchForm").submit();
+            $("#searchPersonText").val("");
+            searchPerson();
         });
+
+        $("#searchButton").click(function() {
+            searchPerson();
+        });
+
+        $("#showOrHideDeleted").click(function () {
+            if ($("#searchWithDeleted").attr('disabled'))
+                return;
+
+            var eyeElem = $("#showOrHideDeleted");
+            //текущее состояние (отображаются сейчас удаленные или нет)
+            var showDeleted = $("#searchWithDeleted").val() === "true";
+            //сменить значение в инпуте
+            $("#searchWithDeleted").val(!showDeleted);
+
+            if (showDeleted) {
+                eyeElem.removeClass("glyphicon-eye-open").addClass("glyphicon-eye-close");
+            } else {
+                eyeElem.removeClass("glyphicon-eye-close").addClass("glyphicon-eye-open");
+            }
+
+            searchPerson();
+        });
+
+        //подгружаем данные после загрузки страницы
+        searchPerson();
     });
+
+    function searchPerson() {
+        setSearchFormState(true);
+        var data = {
+            SearchPersonText: $("#searchPersonText").val(),
+            ShowDeletedPerson: $("#searchWithDeleted").val()
+        }
+
+        $("#personTableBlock").load('@Url.Action("SearchPerson", "Person")', data, function() {
+            setSearchFormState(false);
+        });
+    }
+
+    function setSearchFormState(disabled) {
+        if (disabled == undefined)
+            disabled = false;
+
+        if(disabled === true)
+        $("#personTableBlock").html('<div class="col-xs-12 text-center"><h3>Загрузка сотрудников ...</h3></div>');
+
+        $("#SearchBlock input").each(function (i, elem) {
+            $(elem).attr("disabled", disabled);
+        });
+    }
+    
 </script>
 
         

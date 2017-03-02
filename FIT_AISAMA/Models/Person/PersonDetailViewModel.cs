@@ -9,6 +9,8 @@ namespace FIT_AISAMA.Models.Person
 {
     public class PersonDetailViewModel
     {
+        public PersonDetailViewModel(){}
+
         public int Id { get; set; }
 
         [Display(Name = "ФИО сотрудника")]
@@ -21,6 +23,16 @@ namespace FIT_AISAMA.Models.Person
         public List<MaterialActive> MaterialActives { get; set; }
 
         public bool? ResponsiblePerson { get; set; }
+
+        /// <summary>
+        /// Признак возможности удаления
+        /// </summary>
+        public bool CanDeletePerson { get; set; }
+
+        /// <summary>
+        /// Информация о причине запрета на удаление
+        /// </summary>
+        public string DeleteMessage { get; set; }
 
         public PersonDetailViewModel(Data.Entities.Person source)
         {

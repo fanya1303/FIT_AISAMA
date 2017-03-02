@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FIT_AISAMA.Models.ActiveSpecificationType.ActiveSpecificationTypeViewModel>
+﻿@model FIT_AISAMA.Models.ActiveSpecificationType.ActiveSpecificationTypeViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -7,21 +7,32 @@
 <div class="col-sm-12">
     <h2>Список типов характеристик МЦ</h2>
 </div>
-<div class="col-sm-6">
+<div class="col-sm-12" style="padding-bottom: 5px;">
+    @using (Html.BeginForm("Index", "ActiveSpecificationType", FormMethod.Post, new {id ="searchByActiveTypeForm", role="form", @class="form-inline"}))
+    {
+        <select name="activeTypeId" id="activeTypeSelect" class="selectpicker" title="Сортировать по типу">
+            @foreach (var item in Model.ActiveTypeList)
+            {
+                <option value="@item.Value" selected="@item.Selected">@item.Text</option>
+            }
+        </select>
+    }
+</div>
+<div class="col-sm-7">
 <table class="table table-bordered table-striped">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ActiveTypeCode)
+            Код типа МЦ
         </th>
-        <th style="width: 400px;">
-            @Html.DisplayNameFor(model => model.TypeName)
+        <th >
+            Характеристика
         </th>
-        <th></th>
+        <th style="width: 180px;"></th>
     </tr>
     
     <tr>
             <td>
-                <a href="ActiveSpecificationType/CreateActiveSpecificationType" title="Добавить новую характеристику">
+                <a href="/ActiveSpecificationType/CreateActiveSpecificationType" title="Добавить новую характеристику">
                 <div style="height: 21px; width: 100%;">
                     <span  class="glyphicon glyphicon-plus create-icon"></span>
                 </div>
@@ -39,7 +50,7 @@
             </td>
         </tr>
 
-    @foreach (var item in Model) {
+    @foreach (var item in Model.ActiveSpecificationTypeList) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.ActiveTypeCode)
@@ -48,11 +59,15 @@
                 @Html.DisplayFor(modelItem => item.TypeName)
             </td>
             <td class="text-center">
-                    <div class="col-sm-6" style="padding-left: 0;">
-                        @Html.ActionLink("Детали", "SpecificationTypeDetail", new {id = item.Id})
+                    <div class="col-sm-6" style="padding: 0;">
+                        @using (Html.BeginForm("EditSpecificationType", "ActiveSpecificationType", FormMethod.Post))
+                        {
+                          <input type="hidden" name="Id" value="@item.Id"/>
+                          <input type="submit" value="Изменить" class="btn btn-xs btn-warning"/>
+                        }
                     </div>
-                    <div class="col-sm-6" style="padding-left: 0;">
-                        @using (Html.BeginForm("DeletSpecificationType", "ActiveSpecificationType" , FormMethod.Post))
+                    <div class="col-sm-6" style="padding: 0;">
+                        @using (Html.BeginForm("DeletSpecificationType", "ActiveSpecificationType", FormMethod.Post))
                         {
                             <input type="hidden" name="Id" value="@item.Id"/>
                             <input class="btn btn-danger btn-xs" type="submit" value="Удалить"/>
@@ -64,3 +79,11 @@
 
 </table>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#activeTypeSelect").change(function () {
+            $("#searchByActiveTypeForm").submit();
+        });
+    });
+</script>

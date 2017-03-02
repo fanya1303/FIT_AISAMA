@@ -17,7 +17,7 @@ namespace FIT_AISAMA.Models.IncomeSource
 
         [Display(Name = "Источник")]
         [Required]
-        [MinLength(5)]
+        [MinLength(5, ErrorMessage = "Наименование источника поступления должно содержать не менее 5 символов")]
         public string Source { get; set; }
 
         public IncomeSourceModel(Data.Entities.IncomeSource source)
