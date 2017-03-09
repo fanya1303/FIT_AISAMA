@@ -138,6 +138,7 @@
     <Compile Include="Models\ActiveSpecificationType\ActiveSpecificationTypeEditModel.cs" />
     <Compile Include="Models\ActiveSpecificationType\ActiveSpecificationTypeCreateModel.cs" />
     <Compile Include="Models\ActiveSpecificationType\ActiveSpecificationTypeViewModel.cs" />
+    <Compile Include="Models\ActiveType\ActiveTypeDetailsViewModel.cs" />
     <Compile Include="Models\ActiveType\ActiveTypeModel.cs" />
     <Compile Include="Models\IncomeSource\IncomeSourceModel.cs" />
     <Compile Include="Models\LocationPlace\LocationPlaceModel.cs" />
@@ -313,20 +314,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FIT_AISAMA.BusinessLogic\FIT_AISAMA.BusinessLogic.csproj">
-      <Project>{0D3F2AAB-FE7C-40FB-AC25-024CC2F48BD7}</Project>
-      <Name>FIT_AISAMA.BusinessLogic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FIT_AISAMA.Data\FIT_AISAMA.Data.csproj">
-      <Project>{223D363C-5D42-4716-9609-90DD9E0492B2}</Project>
-      <Name>FIT_AISAMA.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FIT_AISTAMA.Validation\FIT_AISTAMA.Validation.csproj">
-      <Project>{5D9EBF7F-FEC5-485D-95A8-4F66ED58CFEE}</Project>
-      <Name>FIT_AISTAMA.Validation</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Person\CreatePerson.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -362,6 +349,21 @@
     <Content Include="Views\LocationPlace\Index.cshtml" />
     <Content Include="Views\LocationPlace\EditLocationPlace.cshtml" />
     <Content Include="Views\Person\PersonTableView.cshtml" />
+    <Content Include="Views\ActiveSpecificationType\Partial\SpecificationTypeTable.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FIT_AISAMA.BusinessLogic\FIT_AISAMA.BusinessLogic.csproj">
+      <Project>{0D3F2AAB-FE7C-40FB-AC25-024CC2F48BD7}</Project>
+      <Name>FIT_AISAMA.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FIT_AISAMA.Data\FIT_AISAMA.Data.csproj">
+      <Project>{223D363C-5D42-4716-9609-90DD9E0492B2}</Project>
+      <Name>FIT_AISAMA.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FIT_AISTAMA.Validation\FIT_AISTAMA.Validation.csproj">
+      <Project>{5D9EBF7F-FEC5-485D-95A8-4F66ED58CFEE}</Project>
+      <Name>FIT_AISTAMA.Validation</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

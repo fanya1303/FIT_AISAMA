@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using FIT_AISAMA.BusinessLogic.Services.Interfaces;
 using FIT_AISAMA.Data.Entities;
-using FIT_AISAMA.Data.Services.Interfaces;
 
-namespace FIT_AISAMA.Data.Services
+namespace FIT_AISAMA.BusinessLogic.Services
 {
     public class ActiveSpecificationService: BaseService, IActiveSpecificationService
     {
@@ -42,10 +42,15 @@ namespace FIT_AISAMA.Data.Services
             dbContext.SaveChanges();
         }
 
-        public void DeleteActiveSpecification(ActiveSpecification delActiveSpecification)
+        public void DeleteActiveSpecification(int delId)
         {
-            dbContext.ActiveSpecifications.Remove(delActiveSpecification);
-            dbContext.SaveChanges();
+            var delItem = dbContext.ActiveSpecifications.FirstOrDefault(o => o.Id == delId);
+            if (delItem != null)
+            {
+                delItem.IsDeleted = true;
+                dbContext.SaveChanges();
+            }
+            
         }
 
     }

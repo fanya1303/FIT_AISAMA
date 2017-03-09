@@ -12,6 +12,7 @@ namespace FIT_AISAMA.Data.Entities
         public int SpecificationTypeId { get; set; }
         public int MaterialActiveId { get; set; }
         public string SpecificationValue { get; set; }
+        public bool IsDeleted { get; set; }
 
         [ForeignKey("SpecificationTypeId")]
         public virtual ActiveSpecificationType SpecificationType { get; set; }

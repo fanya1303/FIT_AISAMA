@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using FIT_AISAMA.BusinessLogic.Services.Interfaces;
 using FIT_AISAMA.Data.Entities;
-using FIT_AISAMA.Data.Services.Interfaces;
 
 
-namespace FIT_AISAMA.Data.Services
+namespace FIT_AISAMA.BusinessLogic.Services
 {
     public class ActiveTypeService : BaseService, IActiveTypesService
     {

@@ -11,8 +11,13 @@
 @using (Html.BeginForm("SaveEditSpecificationType", "ActiveSpecificationType", FormMethod.Post, new { role = "form", @class = "form-group" }))
 {
     @Html.ValidationSummary(true)
-
+        
         @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            <label style="font-weight: normal;">@Html.CheckBoxFor(model => model.IsDeleted) Неактивная запись</label>
+        </div>
+    
         <div class="form-group">
             @Html.LabelFor(model => model.ActiveTypeId)
             <div>
@@ -31,6 +36,10 @@
             @Html.TextBoxFor(model => model.TypeName, new { @class = "form-control", placeholder = "Наименование" })
             @Html.ValidationMessageFor(model => model.TypeName)
         </div>
+        if (!string.IsNullOrEmpty(ViewBag.WarningMessage))
+         {
+            <div class="alert alert-danger">@ViewBag.WarningMessage</div> 
+         }
     <p>
         <input type="submit" class="btn btn-success" value="Сохранить"  />
     </p>

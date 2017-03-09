@@ -2,18 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using FIT_AISAMA.BusinessLogic.Services.Interfaces;
 using FIT_AISAMA.Data.Entities;
-using FIT_AISAMA.Data.Services.Interfaces;
 
-namespace FIT_AISAMA.Data.Services
+namespace FIT_AISAMA.BusinessLogic.Services
 {
     public class ActiveSpecificationTypeService: BaseService, IActiveSpecificationTypeService
     {
             
 
-        public List<ActiveSpecificationType> GetAllActiveSpecificationType()
+        public List<ActiveSpecificationType> GetAllActiveSpecificationType(bool withDeleted = false)
         {
-            return dbContext.ActiveSpecificationTypes.ToList();
+            var result = dbContext.ActiveSpecificationTypes.ToList();
+            if (!withDeleted)
+            {
+                result = result.Where(o => o.IsDeleted == false).ToList();
+            }
+            return result;
         }
 
         public List<ActiveSpecificationType> GetSpecificationsByActiveType(int activeId)
@@ -38,14 +43,20 @@ namespace FIT_AISAMA.Data.Services
                 var curActiveSpecificationType = dbContext.ActiveSpecificationTypes.Single(o => o.Id == newActiveSpecificationType.Id);
                 curActiveSpecificationType.ActiveTypeId = newActiveSpecificationType.ActiveTypeId;
                 curActiveSpecificationType.TypeName = newActiveSpecificationType.TypeName;
+                curActiveSpecificationType.IsDeleted = newActiveSpecificationType.IsDeleted;
             }
             dbContext.SaveChanges();
         }
 
-        public void DeleteActiveSpecificationType(ActiveSpecificationType delActiveSpecificationType)
+        public void DeleteActiveSpecificationType(int delId)
         {
-            dbContext.ActiveSpecificationTypes.Remove(delActiveSpecificationType);
-            dbContext.SaveChanges();
+            var delItem = dbContext.ActiveSpecificationTypes.FirstOrDefault(o => o.Id == delId);
+            if (delItem != null)
+            {
+                delItem.IsDeleted = true;
+                dbContext.SaveChanges();
+            }
+            
         }
 
     }

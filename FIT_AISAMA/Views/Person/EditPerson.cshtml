@@ -12,15 +12,34 @@
     @Html.ValidationSummary(true)
 
         @Html.HiddenFor(model => model.Id)
-        <div class="form-group">
+
+    if (!Model.CanDelete && !Model.IsDeleted)
+    {
+        <div class="alert alert-warning">@Model.CanDeleteMessage</div>
+    }
+    else
+    {
+          <div class="checkbox">
+                <label style="font-weight: normal;">
+                    @Html.CheckBoxFor(moedel => Model.IsDeleted)
+                    Неактивная запись
+                </label>
+            </div>
+    }
+    
+    
+    
+
+
+    <div class="form-group">
             @Html.LabelFor(model => model.FullName)
-            @Html.TextBoxFor(model => model.FullName, new { @class = "form-control", placeholder="ФИО"})
+            @Html.TextBoxFor(model => model.FullName, new { @class = "form-control", placeholder = "ФИО" })
             @Html.ValidationMessageFor(model => model.FullName)
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Position)
-            @Html.TextBoxFor(model => model.Position, new { @class = "form-control", placeholder="Должность" })
+            @Html.TextBoxFor(model => model.Position, new { @class = "form-control", placeholder = "Должность" })
             @Html.ValidationMessageFor(model => model.Position)
         </div>
     <p>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using FIT_AISAMA.Data.Entities;
 
-namespace FIT_AISAMA.Data.Services.Interfaces
+namespace FIT_AISAMA.BusinessLogic.Services.Interfaces
 {
     public interface IIncomeSourceService
     {

@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using FIT_AISAMA.Data.Iterfases;
 
 namespace FIT_AISAMA.Models.ActiveSpecificationType
 {

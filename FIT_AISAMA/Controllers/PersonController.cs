@@ -15,7 +15,6 @@ namespace FIT_AISAMA.Controllers
 
         public ActionResult Index()
         {
-
             //var model = new PersonViewModel();
             
             return View();
@@ -67,7 +66,11 @@ namespace FIT_AISAMA.Controllers
             var person = personService.GetPersonById(id);
             if (person != null)
             {
+                var validation = catalogsValidator.ValidatePersonBeforeDelet(person);
                 var model = new EditPersonModel(person);
+                model.CanDelete = validation.IsValid;
+                model.CanDeleteMessage = validation.ValidationMessage;
+
                 return View(model);
             }
             return RedirectToAction("Index");
@@ -78,16 +81,28 @@ namespace FIT_AISAMA.Controllers
         {
             if (ModelState.IsValid)
             {
+                
                 var savePerson = new Person
                 {
                     Id = editPerson.Id,
                     FullName = editPerson.FullName,
                     Position = editPerson.Position,
-                    ResponsiblePerson = editPerson.ResponsiblePerson
+                    ResponsiblePerson = editPerson.ResponsiblePerson,
+                    IsDeleted = editPerson.IsDeleted
                 };
-                personService.SavePerson(savePerson);
-                //var editedPerson = personService.GetPersonById(editPerson.Id);
-                return RedirectToAction("PersonDetails", new { id = savePerson.Id});
+                var validation = catalogsValidator.ValidatePersonBeforeDelet(savePerson);
+
+                if (savePerson.IsDeleted && !validation.IsValid)
+                {
+                    editPerson.CanDelete = validation.IsValid;
+                    editPerson.CanDeleteMessage = validation.ValidationMessage;
+                }
+                else
+                {
+                    personService.SavePerson(savePerson);
+                    //var editedPerson = personService.GetPersonById(editPerson.Id);
+                    return RedirectToAction("PersonDetails", new {id = savePerson.Id});
+                }
             }
             return View(editPerson);
         }

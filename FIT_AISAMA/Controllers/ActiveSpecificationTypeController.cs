@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using FIT_AISAMA.BusinessLogic.Models;
+using FIT_AISAMA.BusinessLogic.Searchers;
 using FIT_AISAMA.Data.Entities;
 using FIT_AISAMA.Models.ActiveSpecificationType;
 using FIT_AISTAMA.Validation.Validators;
@@ -12,44 +14,30 @@ namespace FIT_AISAMA.Controllers
     public class ActiveSpecificationTypeController : BaseController
     {
 
-        public ActionResult Index(int? activeTypeId)
+        public ActionResult Index()
         {
             var model = new ActiveSpecificationTypeViewModel();
-            if (activeTypeId.HasValue && activeTypeId.Value != 0)
-            {
-                model.ActiveSpecificationTypeList =
-                    activeSpecificationTypeService.GetSpecificationsByActiveType(activeTypeId.Value)
-                        .Select(o => new ActiveSpecificationTypeModel(o))
-                        .ToList();
-            }
-            else
-            {
-                model.ActiveSpecificationTypeList =
-                    activeSpecificationTypeService.GetAllActiveSpecificationType()
-                        .Select(o => new ActiveSpecificationTypeModel(o))
-                        .ToList();
-            }
 
             var activeTypeList = activeTypesService.GetAllActiveType();
             
-            model.ActiveTypeList.Add(new SelectListItem
-            {
-                Selected = !activeTypeId.HasValue || activeTypeId.Value == 0,
-                Value = "0",
-                Text = "Показать все"
-
-            });
             foreach (var item in activeTypeList)
             {
                 model.ActiveTypeList.Add(new SelectListItem
                 {
-                    Selected = activeTypeId.HasValue && item.Id == activeTypeId.Value,
                     Text = item.TypeCode + " (" + item.TypeName + ")",
                     Value = item.Id.ToString()
                 });
             }
             
             return View(model);
+        }
+
+        public ActionResult ActiveSpecificationTable(SpecificationTypeSearchModel searchModel)
+        {
+            var result =
+                SpecificationTypeSearch.SearchSpecificationType(searchModel)
+                    .Select(o => new ActiveSpecificationTypeModel(o)).OrderBy(o => o.ActiveTypeCode).ToList();
+            return PartialView("Partial/SpecificationTypeTable", result);
         }
 
         [HttpGet]
@@ -128,20 +116,21 @@ namespace FIT_AISAMA.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditSpecificationType(int id)
+        public ActionResult EditSpecificationType(int editId)
         {
-            var specificationType = activeSpecificationTypeService.GetActiveSpecificationTypesById(id);
+            var specificationType = activeSpecificationTypeService.GetActiveSpecificationTypesById(editId);
             if (specificationType != null)
             {
                 var model = new ActiveSpecificationTypeEditModel(specificationType);
                 
                 //Вытаскиваем недостающие типы. Тип самого продукта добавляется при создании модели
-                var activeTypes = activeTypesService.GetAllActiveType().Where(o => o.Id != specificationType.ActiveTypeId);
+                var activeTypes = activeTypesService.GetAllActiveType();
 
                 foreach (var item in activeTypes)
                 {
                     model.ActiveTypeItems.Add(new SelectListItem
                     {
+                        Selected = item.Id == editId,
                         Text = item.TypeCode + " ("+item.TypeName+")",
                         Value = item.Id.ToString()
                     });
@@ -160,35 +149,45 @@ namespace FIT_AISAMA.Controllers
                 {
                     Id = editSpecificationType.Id,
                     ActiveTypeId = editSpecificationType.ActiveTypeId,
-                    TypeName = editSpecificationType.TypeName
+                    TypeName = editSpecificationType.TypeName,
+                    IsDeleted = editSpecificationType.IsDeleted
                 };
 
-                //При редактировании, если пользователь сменил объект на такой, который уже существует
-                //то не сохраняем его изменения, а удаляем старый объект
                 var validation = catalogsValidator.NeedSaveSpecificationType(saveSpecificationType);
                 if (validation.IsValid)
                 {
                     activeSpecificationTypeService.SaveActiveSpecificationType(saveSpecificationType);
+                    return RedirectToAction("Index");
                 }
                 else
                 {
-                    var delSpecificationType =
-                        activeSpecificationTypeService.GetActiveSpecificationTypesById(saveSpecificationType.Id);
-                    activeSpecificationTypeService.DeleteActiveSpecificationType(delSpecificationType);
+                    ViewBag.WarningMessage = validation.ValidationMessage;
                 }
 
-                return RedirectToAction("Index");
+                
+            }
+            var activeTypes = activeTypesService.GetAllActiveType();
+            foreach (var item in activeTypes)
+            {
+                editSpecificationType.ActiveTypeItems.Add(new SelectListItem
+                {
+                    Selected = item.Id == editSpecificationType.ActiveTypeId,
+                    Text = item.TypeCode + " (" + item.TypeName + ") ",
+                    Value = item.Id.ToString()
+
+                });
             }
             return View("EditSpecificationType",editSpecificationType);
         }
 
+        //Сейчас не используется, потому что удаления как такового нет, можно только пометить как неактивную запись
         [HttpPost]
         public ActionResult DeletSpecificationType(int id)
         {
             var delSpecificationType = activeSpecificationTypeService.GetActiveSpecificationTypesById(id);
             if (delSpecificationType != null)
             {
-                activeSpecificationTypeService.DeleteActiveSpecificationType(delSpecificationType);
+                activeSpecificationTypeService.DeleteActiveSpecificationType(delSpecificationType.Id);
             }
             return RedirectToAction("Index");
         }

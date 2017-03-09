@@ -23,12 +23,18 @@ namespace FIT_AISAMA.Models.Person
         /// </summary>
         public bool? ResponsiblePerson { get; set; }
 
+        public bool CanDelete { get; set; }
+        public string CanDeleteMessage { get; set; }
+
+        public bool IsDeleted { get; set; }
+
         public EditPersonModel(Data.Entities.Person source)
         {
             Id = source.Id;
             FullName = source.FullName;
             Position = source.Position;
             ResponsiblePerson = source.ResponsiblePerson;
+            IsDeleted = source.IsDeleted;
         }
     }
 }

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<FIT_AISAMA.Models.ActiveSpecificationType.ActiveSpecificationTypeModel>
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>
+            Тип МЦ
+        </th>
+        <th >
+            Характеристика
+        </th>
+        <th style="width: 90px;"></th>
+    </tr>
+    
+    <tr>
+            <td>
+                <a href="/ActiveSpecificationType/CreateActiveSpecificationType" title="Добавить новую характеристику">
+                <div style="height: 21px; width: 100%;">
+                    <span  class="glyphicon glyphicon-plus create-icon"></span>
+                </div>
+                </a>
+            </td>
+            <td>
+                <a href="/ActiveSpecificationType/CreateActiveSpecificationType" title="Добавить новую характеристику">
+                    <div style="height: 21px;"></div>
+                </a>
+            </td>
+            <td>
+                <a href="/ActiveSpecificationType/CreateActiveSpecificationType" title="Добавить новую характеристику">
+                    <div style="height: 21px;"></div>
+                </a>
+            </td>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr class="@(item.IsDeleted ? "deleted-item": "")">
+            <td>
+                @Html.DisplayFor(modelItem => item.ActiveTypeCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeName)
+            </td>
+            <td class="text-center">
+                    <div class="col-sm-12" style="padding: 0;">
+                        @using (Html.BeginForm("EditSpecificationType", "ActiveSpecificationType", FormMethod.Post))
+                        {
+                            <input type="hidden" name="editId" value="@item.Id"/>
+                            <button type="submit" value="" class="btn btn-xs btn-warning" title="Редактировать"> <i class="glyphicon glyphicon-pencil"></i></button>
+                        }
+                    </div>
+                    
+                </td>
+        </tr>
+    }
+
+</table>

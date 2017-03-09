@@ -31,7 +31,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,9 +47,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataContext.cs" />
     <Compile Include="Models\PersonSearchModel.cs" />
+    <Compile Include="Models\SpecificationTypeSearchModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Searchers\PersonSearcher.cs" />
+    <Compile Include="Searchers\SpecificationTypeSearch.cs" />
+    <Compile Include="Services\ActiveSpecificationService.cs" />
+    <Compile Include="Services\ActiveSpecificationTypeService.cs" />
+    <Compile Include="Services\ActiveTypeService.cs" />
+    <Compile Include="Services\BaseService.cs" />
+    <Compile Include="Services\IncomeSourceService.cs" />
+    <Compile Include="Services\Interfaces\IActiveSpecificationService.cs" />
+    <Compile Include="Services\Interfaces\IActiveSpecificationTypeService.cs" />
+    <Compile Include="Services\Interfaces\IActiveTypesService.cs" />
+    <Compile Include="Services\Interfaces\IIncomeSourceService.cs" />
+    <Compile Include="Services\Interfaces\ILocationPlaceService.cs" />
+    <Compile Include="Services\Interfaces\IMaterialActiveService.cs" />
+    <Compile Include="Services\Interfaces\IPersonService.cs" />
+    <Compile Include="Services\LocationPlaceService.cs" />
+    <Compile Include="Services\MaterialActiveService.cs" />
+    <Compile Include="Services\PersonService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FIT_AISAMA.Data\FIT_AISAMA.Data.csproj">
@@ -50,7 +75,10 @@
       <Name>FIT_AISAMA.Data</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

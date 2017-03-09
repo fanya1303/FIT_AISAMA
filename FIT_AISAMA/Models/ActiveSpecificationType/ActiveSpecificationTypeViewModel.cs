@@ -11,19 +11,15 @@ namespace FIT_AISAMA.Models.ActiveSpecificationType
     {
         public ActiveSpecificationTypeViewModel()
         {
-            ActiveSpecificationTypeList = new List<ActiveSpecificationTypeModel>();
             ActiveTypeList = new List<SelectListItem>();
         }
-
-        /// <summary>
-        /// Список характеристик
-        /// </summary>
-        public List<ActiveSpecificationTypeModel> ActiveSpecificationTypeList { get; set; }
 
         /// <summary>
         /// Список типов МЦ
         /// </summary>
         public List<SelectListItem> ActiveTypeList { get; set; }
+
+        public bool ShowDeleted { get; set; }
 
         
     }

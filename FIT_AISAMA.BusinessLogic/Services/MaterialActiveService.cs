@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using FIT_AISAMA.Data.Services.Interfaces;
+using FIT_AISAMA.BusinessLogic.Services.Interfaces;
 using FIT_AISAMA.Data.Entities;
 
-namespace FIT_AISAMA.Data.Services
+namespace FIT_AISAMA.BusinessLogic.Services
 {
-  public class MaterialActiveService: BaseService
+  public class MaterialActiveService: BaseService, IMaterialActiveService
     {
        
             public List<MaterialActive> GetAllMaterialActive()

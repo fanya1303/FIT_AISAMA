@@ -10,5 +10,8 @@ namespace FIT_AISAMA.Data.Entities
         public int Id { get; set; }
         public string TypeCode { get; set; }
         public string TypeName { get; set; }
+        public bool IsDeleted { get; set; }
+
+        public virtual ICollection<ActiveSpecificationType> ActiveSpecifications { get; set; }
     }
 }

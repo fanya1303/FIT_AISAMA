@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using FIT_AISAMA.BusinessLogic.Services;
+using FIT_AISAMA.BusinessLogic.Services.Interfaces;
 using FIT_AISAMA.Data.Entities;
-using FIT_AISAMA.Data.Services;
-using FIT_AISAMA.Data.Services.Interfaces;
+
 using FIT_AISTAMA.Validation.Validators;
+
 
 namespace FIT_AISAMA.Controllers
 {

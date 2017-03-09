@@ -51,17 +51,6 @@ namespace FIT_AISAMA.Controllers
             return View(newActiveType);
         }
 
-        public ActionResult ActiveTypeDetails(int id)
-        {
-            var activeType = activeTypesService.GetActiveTypeById(id);
-            if (activeType != null)
-            {
-                var model = new ActiveTypeModel(activeType);
-                return View(model);
-            }
-            return RedirectToAction("Index");
-        }
-
         public ActionResult EditActiveType(int id)
         {
             var activeType = activeTypesService.GetActiveTypeById(id);
@@ -106,6 +95,17 @@ namespace FIT_AISAMA.Controllers
             {
                 activeTypesService.DelActiveType(delActiveType);
                 
+            }
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult ActiveTypeDetails(int id)
+        {
+            var activeType = activeTypesService.GetActiveTypeById(id);
+            if (activeType != null)
+            {
+                var model = new ActiveTypeDetailsViewModel(activeType);
+                return View("ActiveTypeDetails",model);
             }
             return RedirectToAction("Index");
         }

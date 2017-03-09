@@ -17,7 +17,7 @@
         <th>
             @Html.DisplayNameFor(model => model.TypeName)
         </th>
-        <th style="width: 150px;"></th>
+        <th style="width: 100px;"></th>
     </tr>
     
     <tr>
@@ -50,15 +50,8 @@
                 @Html.DisplayFor(modelItem => item.TypeName)
             </td>
             <td class="text-center">
-                <div class="col-sm-6" style="padding-left: 0;">
+                <div class="col-sm-12" >
                 @Html.ActionLink("Детали", "ActiveTypeDetails", new {id = item.Id})
-                </div>
-                <div class="col-sm-6" style="padding-left: 0;">
-                    @using (Html.BeginForm("DeleteActiveType", "ActiveType", FormMethod.Post))
-                    {
-                        <input type="hidden" name="Id" value="@item.Id"/>
-                        <input class="btn btn-danger btn-xs" type="submit" value="Удалить"/>
-                    }
                 </div>
             </td>
         </tr>

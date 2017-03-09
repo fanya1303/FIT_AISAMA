@@ -36,6 +36,8 @@ namespace FIT_AISAMA.Data.Entities
 
         public int Price { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         [ForeignKey("LocationPlaceId")]
         public virtual LocationPlace LocationPlace { get; set; }
 

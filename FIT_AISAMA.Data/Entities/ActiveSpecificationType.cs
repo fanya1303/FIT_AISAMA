@@ -11,6 +11,7 @@ namespace FIT_AISAMA.Data.Entities
         public int Id { get; set; }
         public int ActiveTypeId { get; set; }
         public string TypeName { get; set; }
+        public bool IsDeleted { get; set; }
 
         [ForeignKey("ActiveTypeId")]
         public virtual ActiveType ActiveType { get; set; }

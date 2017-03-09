@@ -18,11 +18,14 @@ namespace FIT_AISAMA.Models.ActiveSpecificationType
         [Display(Name = "Характеристика")]
         public string TypeName { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         public ActiveSpecificationTypeModel(Data.Entities.ActiveSpecificationType source)
         {
             Id = source.Id;
             ActiveTypeCode = source.ActiveType.TypeCode;
             TypeName = source.TypeName;
+            IsDeleted = source.IsDeleted;
         }
     }
 }

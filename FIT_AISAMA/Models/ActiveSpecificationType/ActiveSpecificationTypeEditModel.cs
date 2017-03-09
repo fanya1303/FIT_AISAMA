@@ -22,6 +22,8 @@ namespace FIT_AISAMA.Models.ActiveSpecificationType
         [Display(Name = "Наименвоание характеристики")]
         public string TypeName { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         public List<SelectListItem> ActiveTypeItems { get; set; }
 
         public ActiveSpecificationTypeEditModel(Data.Entities.ActiveSpecificationType source)
@@ -29,17 +31,10 @@ namespace FIT_AISAMA.Models.ActiveSpecificationType
             Id = source.Id;
             ActiveTypeId = ActiveTypeId;
             TypeName = source.TypeName;
+            IsDeleted = source.IsDeleted;
             ActiveTypeItems = new List<SelectListItem>();
 
-            if (source.ActiveType != null)
-            {
-                ActiveTypeItems.Add(new SelectListItem
-                {
-                    Selected = true,
-                    Text = source.ActiveType.TypeCode + " (" + source.ActiveType.TypeName + ")",
-                    Value = source.ActiveTypeId.ToString()
-                });
-            }
+            
         }
     }
 }

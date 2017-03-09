@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace FIT_AISAMA.Data.Services
+namespace FIT_AISAMA.BusinessLogic.Services
 {
     public class BaseService
     {

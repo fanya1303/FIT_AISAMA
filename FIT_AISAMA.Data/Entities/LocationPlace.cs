@@ -9,5 +9,6 @@ namespace FIT_AISAMA.Data.Entities
     {
         public int Id { get; set; }
         public string LocationName { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

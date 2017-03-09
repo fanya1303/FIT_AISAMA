@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using FIT_AISAMA.Data.Entities;
 
-namespace FIT_AISAMA.Data.Services.Interfaces
+namespace FIT_AISAMA.BusinessLogic.Services.Interfaces
 {
     public interface IActiveSpecificationTypeService
     {
         /// <summary>
         /// Взять все характеристики
         /// </summary>
-        List<ActiveSpecificationType> GetAllActiveSpecificationType();
+        List<ActiveSpecificationType> GetAllActiveSpecificationType(bool withDeleted = false);
 
         /// <summary>
         /// Взять характеристику по Id
@@ -26,7 +26,7 @@ namespace FIT_AISAMA.Data.Services.Interfaces
         /// <summary>
         /// Удалить характеристику
         /// </summary>
-        void DeleteActiveSpecificationType(ActiveSpecificationType delActiveSpecificationType);
+        void DeleteActiveSpecificationType(int delId);
 
         /// <summary>
         /// Взять характеристики по определенному типу МЦ

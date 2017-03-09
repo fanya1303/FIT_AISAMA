@@ -5,85 +5,73 @@
 }
 
 <div class="col-sm-12">
-    <h2>Список типов характеристик МЦ</h2>
+    <h2>Список типов характеристик МЦ<span id="showOrHideDeleted" class="glyphicon glyphicon-eye-close show-hide-deleted-icon" title="Показать/Скрыть удаленных сотрудников"></span></h2>
 </div>
 <div class="col-sm-12" style="padding-bottom: 5px;">
-    @using (Html.BeginForm("Index", "ActiveSpecificationType", FormMethod.Post, new {id ="searchByActiveTypeForm", role="form", @class="form-inline"}))
-    {
-        <select name="activeTypeId" id="activeTypeSelect" class="selectpicker" title="Сортировать по типу">
+    <div id="searchBlock">
+        <input type="hidden" value="@Model.ShowDeleted" id="withDeleted"/>
+        <select name="activeTypeId[]" multiple id="activeTypeSelect" class="selectpicker" title="Сортировать по типу">
             @foreach (var item in Model.ActiveTypeList)
             {
                 <option value="@item.Value" selected="@item.Selected">@item.Text</option>
             }
         </select>
-    }
+    </div>
 </div>
-<div class="col-sm-7">
-<table class="table table-bordered table-striped">
-    <tr>
-        <th>
-            Код типа МЦ
-        </th>
-        <th >
-            Характеристика
-        </th>
-        <th style="width: 180px;"></th>
-    </tr>
-    
-    <tr>
-            <td>
-                <a href="/ActiveSpecificationType/CreateActiveSpecificationType" title="Добавить новую характеристику">
-                <div style="height: 21px; width: 100%;">
-                    <span  class="glyphicon glyphicon-plus create-icon"></span>
-                </div>
-                </a>
-            </td>
-            <td>
-                <a href="/ActiveSpecificationType/CreateActiveSpecificationType" title="Добавить новую характеристику">
-                    <div style="height: 21px;"></div>
-                </a>
-            </td>
-            <td>
-                <a href="/ActiveSpecificationType/CreateActiveSpecificationType" title="Добавить новую характеристику">
-                    <div style="height: 21px;"></div>
-                </a>
-            </td>
-        </tr>
+<div id="specificationTypesBlock" class="col-sm-7">
 
-    @foreach (var item in Model.ActiveSpecificationTypeList) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ActiveTypeCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TypeName)
-            </td>
-            <td class="text-center">
-                    <div class="col-sm-6" style="padding: 0;">
-                        @using (Html.BeginForm("EditSpecificationType", "ActiveSpecificationType", FormMethod.Post))
-                        {
-                          <input type="hidden" name="Id" value="@item.Id"/>
-                          <input type="submit" value="Изменить" class="btn btn-xs btn-warning"/>
-                        }
-                    </div>
-                    <div class="col-sm-6" style="padding: 0;">
-                        @using (Html.BeginForm("DeletSpecificationType", "ActiveSpecificationType", FormMethod.Post))
-                        {
-                            <input type="hidden" name="Id" value="@item.Id"/>
-                            <input class="btn btn-danger btn-xs" type="submit" value="Удалить"/>
-                        }
-                    </div>
-                </td>
-        </tr>
-    }
-
-</table>
 </div>
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $("#activeTypeSelect").change(function () {
-            $("#searchByActiveTypeForm").submit();
-        });
+           
+           $("#searchBlock input, select").change(function() {
+                    searchSpecificationTypes();
+                });
+
+            $("#showOrHideDeleted").click(function() {
+
+                    var eyeElem = $("#showOrHideDeleted");
+
+                    var currentState = $("#withDeleted").val() === "true";
+
+                    if (currentState) {
+                        eyeElem.removeClass("glyphicon-eye-open").addClass("glyphicon-eye-close");
+                    } else {
+                        eyeElem.removeClass("glyphicon-eye-close").addClass("glyphicon-eye-open");
+                    }
+
+                    $("#withDeleted").val(!currentState).trigger('change');
+                });
+
+        setTimeout(searchSpecificationTypes, 1);
     });
+
+    function searchSpecificationTypes() {
+        setSearchFormState(true);
+        var typeId = $("#activeTypeSelect").val();
+
+        var withDeleted = $("#withDeleted").val() === "true";
+        var data = {
+            ActiveTypes: typeId,
+            WithDeleted: withDeleted
+        };
+        jQuery.ajaxSettings.traditional = true;
+        $("#specificationTypesBlock").load('@Url.Action("ActiveSpecificationTable", "ActiveSpecificationType")', data,
+                function() {
+                    setSearchFormState(false);
+                });
+    }
+
+    function setSearchFormState(disabled) {
+        if (disabled == undefined)
+            disabled = false;
+
+        if (disabled === true)
+            $("#specificationTypesBlock").html('<div class="col-xs-12 text-center"><h3>Загрузка типов характеристик ...</h3></div>');
+
+        $("#searchBlock input, select").each(function (i, elem) {
+            $(elem).attr("disabled", disabled);
+        });
+    }
 </script>

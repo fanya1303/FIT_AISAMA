@@ -46,6 +46,10 @@
     <Compile Include="Validators\Interfaces\ICatalogsValidator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FIT_AISAMA.BusinessLogic\FIT_AISAMA.BusinessLogic.csproj">
+      <Project>{0D3F2AAB-FE7C-40FB-AC25-024CC2F48BD7}</Project>
+      <Name>FIT_AISAMA.BusinessLogic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FIT_AISAMA.Data\FIT_AISAMA.Data.csproj">
       <Project>{223D363C-5D42-4716-9609-90DD9E0492B2}</Project>
       <Name>FIT_AISAMA.Data</Name>

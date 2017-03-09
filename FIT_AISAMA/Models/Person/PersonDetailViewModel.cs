@@ -24,6 +24,8 @@ namespace FIT_AISAMA.Models.Person
 
         public bool? ResponsiblePerson { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         /// <summary>
         /// Признак возможности удаления
         /// </summary>
@@ -40,6 +42,7 @@ namespace FIT_AISAMA.Models.Person
             FullName = source.FullName;
             Position = source.Position;
             ResponsiblePerson = source.ResponsiblePerson;
+            IsDeleted = source.IsDeleted;
             MaterialActives = source.MaterialActives != null
                 ? source.MaterialActives.ToList()
                 : new List<MaterialActive>();

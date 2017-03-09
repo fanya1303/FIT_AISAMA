@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FIT_AISAMA.Data.Entities;
-using FIT_AISAMA.Data.Services;
 using FIT_AISAMA.Models.LocationPlace;
 
 namespace FIT_AISAMA.Controllers

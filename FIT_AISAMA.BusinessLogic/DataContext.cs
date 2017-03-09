@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using FIT_AISAMA.Data.Entities;
 
-namespace FIT_AISAMA.Data
+namespace FIT_AISAMA.BusinessLogic
 {
     public class DataContext : DbContext
     {
