@@ -20,7 +20,7 @@ namespace FIT_AISAMA.Models.Person
         public string Position { get; set; }
 
         [Display(Name = "Список материальных активов сотрудника")]
-        public List<MaterialActive> MaterialActives { get; set; }
+        public List<Data.Entities.MaterialActive> MaterialActives { get; set; }
 
         public bool? ResponsiblePerson { get; set; }
 
@@ -45,7 +45,7 @@ namespace FIT_AISAMA.Models.Person
             IsDeleted = source.IsDeleted;
             MaterialActives = source.MaterialActives != null
                 ? source.MaterialActives.ToList()
-                : new List<MaterialActive>();
+                : new List<Data.Entities.MaterialActive>();
         }
     }
 }

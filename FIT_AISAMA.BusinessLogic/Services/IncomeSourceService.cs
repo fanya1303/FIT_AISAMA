@@ -7,13 +7,17 @@ using FIT_AISAMA.Data.Entities;
 
 namespace FIT_AISAMA.BusinessLogic.Services
 {
-   public class IncomeSourceService : BaseService, IIncomeSourceService
+   public class IncomeSourceService : IIncomeSourceService
     {
+       static DataContext dbContext = new DataContext();
 
-        public List<IncomeSource> GetAllIncomeSource()
+        public List<IncomeSource> GetAllIncomeSource(bool withDeleted = false)
         {
-            return dbContext.IncomeSources.ToList();
-            
+            var result = dbContext.IncomeSources.ToList();
+            if (!withDeleted)
+                result = result.Where(o => o.IsDeleted == false).ToList();
+            return result;
+
         }
 
         public IncomeSource GetSourceById(int id)

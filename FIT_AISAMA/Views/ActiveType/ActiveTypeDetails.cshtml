@@ -9,7 +9,7 @@
 </div>
 <div class="col-sm-8">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-5">
             <div class="form-group">
                 @Html.LabelFor(model => model.TypeCode, new {@class = "control-label"})
                 <p class="form-control-static">@Html.DisplayFor(model => model.TypeCode)</p>
@@ -18,6 +18,18 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.TypeName, new {@class = "control-label"})
                 <p class="form-control-static">@Html.DisplayFor(model => model.TypeName)</p>
+            </div>
+            
+            <div class="form-group">
+                @if (Model.BaseAmmortizationMounth.HasValue)
+                {
+                    @Html.LabelFor(model => model.BaseAmmortizationMounth, new {@class = "control-label"})
+                    <p class="form-control-static">@Html.DisplayFor(model => model.BaseAmmortizationMounth)</p>
+                }
+                else
+                {
+                    <p class="text-warning">Для типа не назначен срок амортизации</p>
+                }
             </div>
             @if (Model.ActiveSpecifications != null && Model.ActiveSpecifications.Any())
             {
@@ -28,7 +40,7 @@
                             <ul>
                                 @foreach (var item in Model.ActiveSpecifications)
                                 {
-                                    <li>@item.TypeName</li>
+                                    <li @(item.IsDeleted? Html.Raw("class='text-danger' title='Харатеристика неактивна'"): Html.Raw(""))>@item.TypeName</li>
                                 }
                             </ul>
                         </div>

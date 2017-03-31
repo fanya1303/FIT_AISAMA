@@ -8,14 +8,17 @@
     <h2>Список типов МЦ </h2>
 </div>
 
-<div class="col-sm-6">
+<div class="col-sm-7">
 <table class="table table-bordered table-striped">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.TypeCode)
         </th>
-        <th>
+        <th style="width: 280px;">
             @Html.DisplayNameFor(model => model.TypeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model=> model.BaseAmmortizationMounth)
         </th>
         <th style="width: 100px;"></th>
     </tr>
@@ -33,7 +36,12 @@
                 <div style="height: 21px;"></div>
             </a>
         </td>
-         <td>
+        <td>
+            <a href="/ActiveType/CreateActiveType" title="Добавить новый тип">
+                <div style="height: 21px;"></div>
+            </a>
+        </td>
+        <td>
             <a href="/ActiveType/CreateActiveType" title="Добавить новый тип">
                 <div style="height: 21px;"></div>
             </a>
@@ -48,6 +56,16 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TypeName)
+            </td>
+            <td>
+                @if (item.BaseAmmortizationMounth.HasValue)
+                {
+                    @Html.DisplayFor(modelItem => item.BaseAmmortizationMounth.Value)
+                }
+                else
+                {
+                    <span style="color:gray">не указан</span>
+                }
             </td>
             <td class="text-center">
                 <div class="col-sm-12" >

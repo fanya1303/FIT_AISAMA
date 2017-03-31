@@ -15,7 +15,7 @@ namespace FIT_AISAMA.Controllers
 
         public ActionResult Index()
         {
-            var items = activeTypesService.GetAllActiveType().Select(o => new ActiveTypeModel(o));
+            var items = activeTypesService.GetAllActiveTypes().Select(o => new ActiveTypeModel(o));
             return View(items);
         }
 
@@ -28,12 +28,16 @@ namespace FIT_AISAMA.Controllers
         [HttpPost]
         public ActionResult CreateActiveType(ActiveTypeModel newActiveType)
         {
+            if (newActiveType.BaseAmmortizationMounth.HasValue && newActiveType.BaseAmmortizationMounth.Value < 0)
+                ModelState.AddModelError("BaseAmmortizationMounth", "Неверно указан срок амортизации");
+
             if (ModelState.IsValid)
             {
                 var newActive = new Data.Entities.ActiveType
                 {
                     TypeCode = newActiveType.TypeCode,
-                    TypeName = newActiveType.TypeName
+                    TypeName = newActiveType.TypeName,
+                    BaseAmmortizationMounth = newActiveType.BaseAmmortizationMounth
                 };
                 var validate = catalogsValidator.ValidateActiveTypeBeforeSave(newActive);
 
@@ -71,7 +75,8 @@ namespace FIT_AISAMA.Controllers
                 {
                     Id = editActiveType.Id,
                     TypeCode = editActiveType.TypeCode,
-                    TypeName = editActiveType.TypeName
+                    TypeName = editActiveType.TypeName,
+                    BaseAmmortizationMounth = editActiveType.BaseAmmortizationMounth
                 };
                 var validate = catalogsValidator.ValidateActiveTypeBeforeSave(saveActiveType);
 

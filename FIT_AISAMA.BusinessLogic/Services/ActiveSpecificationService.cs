@@ -7,12 +7,9 @@ using FIT_AISAMA.Data.Entities;
 
 namespace FIT_AISAMA.BusinessLogic.Services
 {
-    public class ActiveSpecificationService: BaseService, IActiveSpecificationService
+    public class ActiveSpecificationService:  IActiveSpecificationService
     {
-        public ActiveSpecificationService():base()
-        {
-            
-        }
+        static DataContext dbContext = new DataContext();
 
         public List<ActiveSpecification> GetAllActiveSpecification()
         {

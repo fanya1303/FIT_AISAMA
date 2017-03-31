@@ -18,7 +18,7 @@ namespace FIT_AISAMA.Controllers
         {
             var model = new ActiveSpecificationTypeViewModel();
 
-            var activeTypeList = activeTypesService.GetAllActiveType();
+            var activeTypeList = activeTypesService.GetAllActiveTypes();
             
             foreach (var item in activeTypeList)
             {
@@ -44,7 +44,7 @@ namespace FIT_AISAMA.Controllers
         public ActionResult CreateActiveSpecificationType()
         {
             var model = new ActiveSpecificationTypeCreateModel();
-            var activeTypes = activeTypesService.GetAllActiveType();
+            var activeTypes = activeTypesService.GetAllActiveTypes();
             
             foreach (var item in activeTypes)
             {
@@ -62,7 +62,7 @@ namespace FIT_AISAMA.Controllers
         [HttpPost]
         public ActionResult CreateActiveSpecificationType(ActiveSpecificationTypeCreateModel newSpecification)
         {
-            var activeTypes = activeTypesService.GetAllActiveType();
+            var activeTypes = activeTypesService.GetAllActiveTypes();
 
             foreach (var item in activeTypes)
             {
@@ -104,7 +104,7 @@ namespace FIT_AISAMA.Controllers
 
         public ActionResult SpecificationTypeDetail(int id)
         {
-            var specificationType = activeSpecificationTypeService.GetActiveSpecificationTypesById(id);
+            var specificationType = activeSpecificationTypeService.GetActiveSpecificationTypeById(id);
             if (specificationType != null)
             {
                 var model = new ActiveSpecificationTypeModel(specificationType);
@@ -118,19 +118,19 @@ namespace FIT_AISAMA.Controllers
         [HttpPost]
         public ActionResult EditSpecificationType(int editId)
         {
-            var specificationType = activeSpecificationTypeService.GetActiveSpecificationTypesById(editId);
+            var specificationType = activeSpecificationTypeService.GetActiveSpecificationTypeById(editId);
             if (specificationType != null)
             {
                 var model = new ActiveSpecificationTypeEditModel(specificationType);
                 
                 //Вытаскиваем недостающие типы. Тип самого продукта добавляется при создании модели
-                var activeTypes = activeTypesService.GetAllActiveType();
+                var activeTypes = activeTypesService.GetAllActiveTypes();
 
                 foreach (var item in activeTypes)
                 {
                     model.ActiveTypeItems.Add(new SelectListItem
                     {
-                        Selected = item.Id == editId,
+                        Selected = item.Id == specificationType.ActiveTypeId,
                         Text = item.TypeCode + " ("+item.TypeName+")",
                         Value = item.Id.ToString()
                     });
@@ -166,7 +166,7 @@ namespace FIT_AISAMA.Controllers
 
                 
             }
-            var activeTypes = activeTypesService.GetAllActiveType();
+            var activeTypes = activeTypesService.GetAllActiveTypes();
             foreach (var item in activeTypes)
             {
                 editSpecificationType.ActiveTypeItems.Add(new SelectListItem
@@ -184,12 +184,21 @@ namespace FIT_AISAMA.Controllers
         [HttpPost]
         public ActionResult DeletSpecificationType(int id)
         {
-            var delSpecificationType = activeSpecificationTypeService.GetActiveSpecificationTypesById(id);
+            var delSpecificationType = activeSpecificationTypeService.GetActiveSpecificationTypeById(id);
             if (delSpecificationType != null)
             {
                 activeSpecificationTypeService.DeleteActiveSpecificationType(delSpecificationType.Id);
             }
             return RedirectToAction("Index");
+        }
+
+        public ActionResult GetSpecificationsByActiveType(int activeTypeId)
+        {
+            var model =
+                activeSpecificationTypeService.GetSpecificationsByActiveType(activeTypeId)
+                    .Select(o => new ActiveSpecificationTypeModel(o))
+                    .ToList();
+            return PartialView("Partial/GetSpecificationsByActiveType",model);
         }
 
     }

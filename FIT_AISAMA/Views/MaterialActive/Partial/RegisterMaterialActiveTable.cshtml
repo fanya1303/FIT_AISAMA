@@ -1,0 +1,50 @@
+﻿@model IEnumerable<FIT_AISAMA.Models.MaterialActive.MaterialActiveViewModel>
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>@Html.DisplayNameFor(model=> model.Code)</th>
+        <th>@Html.DisplayNameFor(model=> model.Name)</th>
+        <th>@Html.DisplayNameFor(model=> model.Manufacturer)</th>
+        <th>@Html.DisplayNameFor(model=> model.IncomeSource)</th>
+        <th>@Html.DisplayNameFor(model=> model.IncomeDate)</th>
+        <th>@Html.DisplayNameFor(model=> model.AmmortizateDate)</th>
+        <th>@Html.DisplayNameFor(model=> model.ResponsiblePerson)</th>
+        <th>@Html.DisplayNameFor(model=> model.Price)</th>
+        <th>@Html.DisplayNameFor(model=> model.Status)</th>
+        <th width="75"></th>
+    </tr>
+    <tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td title="@item.ActiveType.TypeName">@item.FullCode</td>
+                <td>@item.Name</td>
+                <td>@item.Manufacturer</td>
+                <td>@item.IncomeSource.Source</td>
+                <td>@item.IncomeDate</td>
+                <td>@item.AmmortizateDate</td>
+                <td>
+                    <span title="Должность: @(!string.IsNullOrEmpty(item.ResponsiblePerson.Position) ? item.ResponsiblePerson.Position : "не назначена")">
+                        @item.ResponsiblePerson.FullName
+                    </span>
+                </td>
+                <td>@item.Price</td>
+                <td>@item.StatusString</td>
+                <td>
+                    <div style="float: left;">
+                        @Html.ActionLink(" ", "MaterialActiveDetail", new {id = item.Id}, new {@class = "glyphicon glyphicon-info-sign", title = "Подробная информация", style = "font-size:19px;"})
+                    </div>
+
+                    <div class="inline">
+                        @using (Html.BeginForm("DistributeMaterialActive", "MaterialActive", FormMethod.Get, new {style = "display: inline-block; margin-left: 10px;"}))
+                        {
+                            <input type="hidden" name="materialId" value="@item.Id"/>
+                            <button type="submit" value="" class="btn btn-xs btn-warning" title="Распределить"> <i class="glyphicon glyphicon-paste"></i></button>
+                        }
+                    </div>
+                </td>
+            </tr>
+        }
+    </tr>
+</table>
+

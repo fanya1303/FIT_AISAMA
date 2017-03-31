@@ -1,0 +1,138 @@
+﻿@model FIT_AISAMA.Models.MaterialActive.MaterialActiveDestributionModel
+@{
+    ViewBag.Title = "Распределение МЦ";
+    var tabIndex = 1;
+}
+
+
+<div class="col-sm-5" style="padding-bottom: 10px;">
+    <!--Скрытые поля -->
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model=> model.Status)
+    
+    <!--Код -->
+    <div class="row">
+        
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="control-label">@Html.DisplayNameFor(model => model.FullCode)</label>
+                <p class="form-control-static">@Model.FullCode</p>
+            </div>
+        </div>
+    </div>
+    
+    <!--Имя -->
+    <div class="row">
+        
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label class="control-label">@Html.DisplayNameFor(model => model.Name)</label>
+                <p class="form-control-static">@Model.Name</p>
+            </div>
+        </div>
+    </div>
+    
+    <!--Владелец -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label>@Html.DisplayNameFor(model=> model.OwnerPersonId)</label>
+                <select id="ownerPersonId" class="selectpicker form-control" title="Выберите ответственного" tabindex="@(tabIndex++)">
+                    @foreach (var item in Model.PersonItems)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+    
+    <!--Место расположения -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label>@Html.DisplayNameFor(model=> model.LocationPlaceId)</label>
+                <select id="locationPlaceId" class="selectpicker form-control" title="Выберите место" tabindex="@(tabIndex++)">
+                    @foreach (var item in Model.LocationPlaceItems)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+    
+    <!--Дата начала использования -->
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>@Html.DisplayNameFor(model => model.StartUseDate)</label>
+
+                <div class="input-group date" id="startUseDate">
+                    <input type="text" class="form-control" tabindex="@(tabIndex++)"/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="errorMessageBlock" class="col-sm-10 alert alert-danger" style="display: none;"></div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <input type="button" id="saveMaterialActive" value="Распределить" class="btn btn-success form-control"/>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("[id *= Date]").datetimepicker({
+            locale: 'ru'
+        });
+
+        $("#saveMaterialActive").click(function() {
+            distributeMaterialActive();
+        });
+    });
+
+    function distributeMaterialActive() {
+        var data = {
+            Id: $("#Id").val(),
+            StartUseDate: $("#startUseDate").data("date"),
+            OwnerPersonId: $("#ownerPersonId").val(),
+            LocationPlaceId: $("#locationPlaceId").val()
+        };
+
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            dataType: "json",
+            data: JSON.stringify(data),
+            url: '@Url.Action("DistributeMaterialActive")',
+            success: function(data) {
+                if (data.Status === "OK") {
+                    if (data.Action){
+                        redirectToDestribution(data.Action);
+                    }
+                } else if (data.Message) {
+                    showErrorMessageBlock(data.Message);
+                }
+            }
+        });
+    }
+
+    function redirectToDestribution(action) {
+        window.location = action;
+    }
+
+    function showErrorMessageBlock(message) {
+        $("#errorMessageBlock").html(message).fadeIn();
+    }
+
+    function hideErrorMessageBlock() {
+        $("#errorMessageBlock").html("").fadeOut();
+    }
+</script>

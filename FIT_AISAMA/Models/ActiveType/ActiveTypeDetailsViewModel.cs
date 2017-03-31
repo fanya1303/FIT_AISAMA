@@ -19,6 +19,9 @@ namespace FIT_AISAMA.Models.ActiveType
         [Display(Name = "Наименование типа")]
         public string TypeName { get; set; }
 
+        [Display(Name = "Базовый срок амортизации (мес.)")]
+        public int? BaseAmmortizationMounth { get; set; }
+
         public List<ActiveSpecificationTypeModel> ActiveSpecifications { get; set; }
 
         public ActiveTypeDetailsViewModel(Data.Entities.ActiveType source)
@@ -26,6 +29,7 @@ namespace FIT_AISAMA.Models.ActiveType
             Id = source.Id;
             TypeCode = source.TypeCode;
             TypeName = source.TypeName;
+            BaseAmmortizationMounth = source.BaseAmmortizationMounth;
 
             ActiveSpecifications = new List<ActiveSpecificationTypeModel>();
             if (source.ActiveSpecifications != null)

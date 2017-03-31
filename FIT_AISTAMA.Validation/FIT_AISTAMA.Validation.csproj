@@ -44,6 +44,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validators\CatalogsValidator.cs" />
     <Compile Include="Validators\Interfaces\ICatalogsValidator.cs" />
+    <Compile Include="Validators\Interfaces\IMaterialActiveValidator.cs" />
+    <Compile Include="Validators\MaterialActiveValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FIT_AISAMA.BusinessLogic\FIT_AISAMA.BusinessLogic.csproj">

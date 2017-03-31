@@ -7,8 +7,10 @@ using FIT_AISAMA.Data.Entities;
 
 namespace FIT_AISAMA.BusinessLogic.Services
 {
-    public class PersonService : BaseService, IPersonService
+    public class PersonService : IPersonService
     {
+        static DataContext dbContext = new DataContext();
+
         public List<Person> GetAllPersons(bool withDeleted = false)
         {
             var result = dbContext.Persons.ToList();

@@ -12,7 +12,7 @@ namespace FIT_AISAMA.BusinessLogic.Services.Interfaces
         /// <summary>
         /// Взять все типы
         /// </summary>
-        List<ActiveType> GetAllActiveType();
+        List<ActiveType> GetAllActiveTypes(bool withDeleted = false);
         /// <summary>
         /// Выбрать запись по id
         /// </summary>

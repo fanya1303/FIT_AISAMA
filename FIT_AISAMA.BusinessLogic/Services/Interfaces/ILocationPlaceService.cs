@@ -12,7 +12,7 @@ namespace FIT_AISAMA.BusinessLogic.Services.Interfaces
         /// <summary>
         /// Вернуть все места
         /// </summary>
-        List<LocationPlace> GetAllLocationPlaces();
+        List<LocationPlace> GetAllLocationPlaces(bool withDeleted = false);
         /// <summary>
         /// Взять места по Id
         /// </summary>

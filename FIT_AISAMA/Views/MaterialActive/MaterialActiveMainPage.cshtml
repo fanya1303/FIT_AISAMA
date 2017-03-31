@@ -1,0 +1,91 @@
+﻿@{
+    ViewBag.Title = "Список МЦ";
+    var tabIndex = 1;
+}
+
+<div class="col-sm-12">
+    <h2>Список всех МЦ</h2>
+</div>
+
+<div class=" col-sm-11">
+    
+
+    <div class="row col-sm-8 form-group">
+        <div class="row col-sm-2">
+            <button type="button" class="btn btn-info form-control">Поиск</button>
+        </div>
+        <div class="col-sm-3">
+            <input type="button" class="btn btn-warning" value="Отмена"/>
+        </div>
+    </div>
+
+    <div class="row col-sm-8 form-group">
+        <div class="row col-sm-6">
+            <label>Наименование или производитель</label>
+            <input type="text" class="form-control" placeholder="Введите наименование или производителя"/>
+        </div>
+    </div>
+    
+    <div class="row col-sm-12">
+        <p id="toggleExtendSearch" class="text-info pointer">Расширенный поиск
+            <i class="glyphicon glyphicon-chevron-down"></i></p>
+    </div>
+    
+    <div id="extendSearch" class="row col-sm-12" style="display: none;">
+        <!--Дата поступления -->
+        <div class="col-sm-7">
+            <div class="row">
+                <div class="col-sm-12">
+                    <label>Дата поступления</label>
+                </div>
+            </div>
+            <!--Дата С -->
+            <div class="col-sm-1" style="line-height: 30px; padding-right: 0; width: 30px;">
+                <label>C</label>
+            </div>
+            <div class="row col-sm-4" style="padding-right: 40px;">
+
+                <div class="input-group date" id="incomeDate">
+                    <input type="text" class="form-control" tabindex="@(tabIndex++)"/>
+                    <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+                </div>
+            </div>
+
+            <!--Дата По -->
+            <div class="col-sm-1" style="line-height: 30px; padding-right: 0; width: 40px;">
+                <label>По</label>
+            </div>
+            <div class="row col-sm-4">
+
+                <div class="input-group date" id="incomeDate">
+                    <input type="text" class="form-control" tabindex="@(tabIndex++)"/>
+                    <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var extendSearch = false;
+    $(document).ready(function() {
+        $("[id *= Date]").datetimepicker({
+            locale: 'ru'
+        });
+
+        $("#toggleExtendSearch").click(function () {
+            extendSearch = !extendSearch;
+            var icon = $(this).find("i");
+            if (extendSearch) {
+                $(icon).removeClass("glyphicon-chevron-down").addClass("glyphicon-chevron-up");
+            } else {
+                $(icon).removeClass("glyphicon-chevron-up").addClass("glyphicon-chevron-down");
+            }
+            $("#extendSearch").toggle();
+        });
+    });
+</script>

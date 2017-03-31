@@ -1,0 +1,375 @@
+﻿@model FIT_AISAMA.Models.MaterialActive.MaterialActiveRegisterModel
+@{
+    ViewBag.Title = "Прием МЦ";
+    var tabIndex = 1;
+}
+<div class="col-sm-5" style="padding-bottom: 10px;">
+    <h2>Прием МЦ</h2>
+    
+    <div id="successMessageBlock" class="col-sm-10 alert alert-success" style="display: none;"></div>
+    
+    
+    <!--Выбор типа МЦ -->
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Тип МЦ</label>
+                <select id="materialTypeId" class="selectpicker" title="Выберите тип МЦ" tabindex="@(tabIndex++)">
+                    @foreach (var item in Model.MaterialActiveTypeItems)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!--Блок с общими параметрами -->
+    <div id="mainBlock" style="display: none;">
+        
+        <!--Код мц -->
+        <div class="row">
+            <div class="col-sm-7">
+                <div class="form-group">
+                    <label>Код</label>
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <input id="materialActiveCode" type="text" class="form-control" readonly tabindex="@(tabIndex++)"/>
+                        </div>
+                        <span id="generateNewCode" style="cursor: pointer;" title="Сгенерировать Код заново" class="glyphicon glyphicon-refresh"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Производитель</label>
+                    <input id="materialActiveManufacturer" type="text" class="form-control" tabindex="@(tabIndex++)"/>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Наименование</label>
+                    <input id="materialActiveName" type="text" class="form-control" tabindex="@(tabIndex++)"/>
+                </div>
+            </div>
+        </div>
+        
+        <!--Характеристики -->
+        <div class="row">
+            <div id="activeSpecificationsBlock" class="col-sm-12" style="display: none;"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                <label>Источник поступления</label>
+                    <select id="incomeSourceId" class="selectpicker" title="Выберите источник" tabindex="@(tabIndex++)">
+                        @foreach (var item in Model.IncomeSourceItems)
+                        {
+                            <option value="@item.Value">@item.Text</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <!--Дата поступления и начала использования -->
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Дата поступления</label>
+
+                    <div class="input-group date" id="incomeDate" >
+                        <input type="text" class="form-control" tabindex="@(tabIndex++)"/>
+                        <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Дата амортизации</label>
+
+                    <div class="input-group date" id="ammortizateDate">
+                        <input type="text" class="form-control" tabindex="@(tabIndex++)"/>
+                        <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            
+            @* <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Дата начала использования</label>
+
+                    <div class="input-group date" id="startUseDate">
+                        <input type="text" class="form-control" tabindex="@(tabIndex++)"/>
+                        <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+
+                </div>
+            </div> *@
+        </div>
+        
+         <div class="row">
+            
+            
+            @*<div class="col-sm-6">
+                <div class="form-group">
+                    <label>Выход из использования</label>
+
+                    <div class="input-group date" id="stopUseDate">
+                        <input type="text" class="form-control" tabindex="@(tabIndex++)"/>
+                        <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+
+                </div>
+            </div>*@
+        </div> 
+        
+        <div class="row">
+            <div class="col-sm-10">
+                <div class="form-group">
+                <label>Материально отсветственный</label>
+                    <input type="text" class="form-control disabled" readonly value="@Model.ResponsiblePerson.FullName"/>
+                    <input id="responsiblePersonId" type="hidden" class="form-control disabled"  value="@Model.ResponsiblePerson.Id"/>
+                </div>
+            </div>
+        </div>
+        
+        @* <div class="row">
+            <div class="col-sm-10">
+                <div class="form-group">
+                    <label>Владелец МЦ</label>
+                    <select id="ownerPersonId" class="selectpicker form-control" title="Укажите ответственного" tabindex="@(tabIndex++)">
+                        @foreach (var item in Model.PersonItems)
+                        {
+                            <option value="@item.Value">@item.Text</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div> *@
+        
+        @*<div class="row">
+            <div class="col-sm-10">
+                <div class="form-group">
+                    <label>Место использования</label>
+                    <select id="locationPlaceId" class="selectpicker form-control" title="Укажите место использования" tabindex="@(tabIndex++)">
+                        @foreach (var item in Model.LocationItems)
+                        {
+                            <option value="@item.Value">@item.Text</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>*@
+    
+        <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Стоимость</label>
+                <div>
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <input id="materialActivePrice" type="number" min="0" class="form-control col-sm-10" tabindex="@(tabIndex++)"/>
+                        </div>
+                        <div class="col-sm-2 text-left" style="padding: 4px 0 0; line-height: 30px;">
+                            <span class="glyphicon glyphicon-rub" style="font-size: 20px;" title="Рубли"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        
+            
+    </div>
+    <div id="errorMessageBlock" class="col-sm-10 alert alert-danger" style="display: none;"></div>
+    <div class="row">
+        <div class="col-sm-6">
+            <input id="saveMaterialActive" class="btn btn-success form-control" type="button" value="Зарегистрировать" />
+        </div>
+    </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    var baseAmmortizationMounth = 0;
+    $(function () {
+        $("#materialTypeId").change(function () {
+            
+            if (this.value > 0) {
+                $("#mainBlock").fadeIn();
+                hideMessageBlock();
+
+                setNewMaterialActiveBaseValues();
+                getSpecificationsbyActiveType(this.value);
+            } else {
+                $("#mainBlock").fadeOut();
+            }
+        });
+
+        $("#generateNewCode").click(function() {
+            setNewMaterialActiveBaseValues();
+        });
+
+        $("[id *= Date]").datetimepicker({
+            locale: 'ru'
+        });
+
+        $("#materialActivePrice").change(function() {
+            var minValue = parseInt($("#materialActivePrice").attr("min"));
+            var curValue = parseInt($("#materialActivePrice").val());
+
+            if (curValue < minValue) {
+                $(this).val(minValue);
+            }
+        });
+
+        $("#incomeDate").on("dp.change", function () {
+            var incomeDate = $("#incomeDate").data("DateTimePicker").date();
+            var ammortDate = new Date(incomeDate.year(), incomeDate.month()+baseAmmortizationMounth, incomeDate.date());
+            $("#ammortizateDate").data("DateTimePicker").date(ammortDate);
+        });
+
+        $("#saveMaterialActive").on("click", saveMaterialActive);
+    });
+
+    function saveMaterialActive() {
+        var MAType = $("#materialTypeId").val();
+        var MACode = $("#materialActiveCode").val();
+        var MAManufacturer = $("#materialActiveManufacturer").val();
+        var MAName = $("#materialActiveName").val();
+        var MAIncomeSource = $("#incomeSourceId").val();
+        var MAIncomeDate = $("#incomeDate").data("date");
+        //var MAStartUseDate = $("#startUseDate").data("date");
+        var MAAmmortizateDate = $("#ammortizateDate").data("date");
+        //var MAStopUseDate = $("#stopUseDate").data("date");
+        var MAResponsiblePersonId = $("#responsiblePersonId").val();
+        //var MAOwnerPersonId = $("#ownerPersonId").val();
+        //var MALocationPlaceId = $("#locationPlaceId").val();
+        var MAPrice = $("#materialActivePrice").val();
+        
+        
+
+        var MASpecificationList = [];
+        var specificationBlocks = $("#activeSpecificationsBlock .specificationBlock");
+        specificationBlocks.each(function(i, elem) {
+            var specificationType = $(elem).first().children("[name*=specificationType]").val();
+            var specificationValue = $(elem).first().children("[name*=specificationValue]").val();
+
+            var specification = {
+                SpecificationTypeId: specificationType,
+                SpecificationValue: specificationValue
+            }
+            MASpecificationList.push(specification);
+        });
+
+        var data = {
+            Code: MACode,
+            ActiveTypeId: parseInt(MAType),
+            Name: MAName,
+            Manufacturer:  MAManufacturer,
+            IncomeSourceId: parseInt(MAIncomeSource),
+            IncomeDate: MAIncomeDate,
+            //StartUseDate:  MAStartUseDate,
+            AmmortizateDate: MAAmmortizateDate,
+            //StopUseDate: MAStopUseDate,
+            ResponsiblePersonId: parseInt(MAResponsiblePersonId),
+            //OwnerPersonId: parseInt(MAOwnerPersonId),
+            //LocationPlaceId: parseInt(MALocationPlaceId),
+            Price: parseInt(MAPrice),
+            Specifications: MASpecificationList
+        };
+
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            dataType: "json",
+            data: JSON.stringify(data),
+            url: '@Url.Action("RegistrateMaterialActive")',
+            success: function (data) {
+                if (data.Status === "OK") {
+                    clearForm();
+                    showMessageBlock("OK", data.HtmlMessage || data.Message);
+                }
+                else if (data.Message) {
+                    showMessageBlock("ERROR", data.HtmlMessage || data.Message);
+                } else {
+                    alert("Произошла ошибка при регистрации");
+                }
+                
+            }
+        });
+
+    }
+
+    function getSpecificationsbyActiveType(id) {
+        //$("#activeSpecificationsBlock").html("<h4>Загрузка характеристик...</h4>");
+        var data = { activeTypeId: id };
+        $("#activeSpecificationsBlock")
+            .load('@Url.Action("GetSpecificationsByActiveType", "ActiveSpecificationType")', data, function() {
+                $("#activeSpecificationsBlock").fadeIn();
+            });
+
+    }
+
+    function setNewMaterialActiveBaseValues() {
+        var typeId = $("#materialTypeId").val();
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            data: {typeId: typeId},
+            url: '@Url.Action("SetNewMaterialActiveBaseValues")',
+            success: function(data) {
+                $("#materialActiveCode").val(data.Code);
+                baseAmmortizationMounth = data.BaseAmmortizationMounth;
+            }
+        });
+    }
+
+    function clearForm() {
+        $("#materialTypeId").selectpicker('deselectAll').trigger("change");
+        $("#materialActiveCode").val('');
+        $("#materialActiveManufacturer").val('');
+        $("#materialActiveName").val('');
+        $("#incomeSourceId").selectpicker('deselectAll');
+        $("#incomeDate").find("input").val('').removeData();
+        $("#ammortizateDate").find("input").val('').removeData();
+        $("#responsiblePersonId").val();
+        $("#materialActivePrice").val('');
+
+        hideMessageBlock();
+    }
+
+    function showMessageBlock(status, message) {
+        hideMessageBlock();
+        if (status) {
+            if (status === "OK") {
+                $("#successMessageBlock").html(message).fadeIn();
+            }
+            else if (status === "ERROR") {
+                $("#errorMessageBlock").html(message).fadeIn();
+            }
+        }
+    }
+
+    function hideMessageBlock() {
+        $("#successMessageBlock").html("").fadeOut();
+        $("#errorMessageBlock").html("").fadeOut();
+    }
+</script>

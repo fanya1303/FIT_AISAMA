@@ -8,7 +8,7 @@ namespace FIT_AISAMA.BusinessLogic.Services.Interfaces
 {
     public interface IIncomeSourceService
     {
-        List<IncomeSource> GetAllIncomeSource();
+        List<IncomeSource> GetAllIncomeSource(bool withDeleted = false);
         IncomeSource GetSourceById(int id);
         void SaveIncomeSource(IncomeSource newIncomeSource);
         void DeleteIncomeSource(IncomeSource delIncomeSource);

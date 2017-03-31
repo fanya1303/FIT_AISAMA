@@ -16,7 +16,7 @@ namespace FIT_AISAMA.BusinessLogic.Services.Interfaces
         /// <summary>
         /// Взять характеристику по Id
         /// </summary>
-        ActiveSpecificationType GetActiveSpecificationTypesById(int id);
+        ActiveSpecificationType GetActiveSpecificationTypeById(int id);
 
         /// <summary>
         /// Сохранить характеристику

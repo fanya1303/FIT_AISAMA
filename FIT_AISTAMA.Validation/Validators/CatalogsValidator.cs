@@ -40,9 +40,10 @@ namespace FIT_AISTAMA.Validation.Validators
         /// </summary>
         public ValidationInfo ValidateActiveTypeBeforeSave(ActiveType checkItem)
         {
-            var curActiveType = activeTypesService.GetAllActiveType().FirstOrDefault(o => o.TypeCode == checkItem.TypeCode);
+            
+            var curActiveType = activeTypesService.GetAllActiveTypes().FirstOrDefault(o => o.TypeCode == checkItem.TypeCode);
 
-            if (curActiveType != null)
+            if (curActiveType != null && checkItem.Id == 0)
                 return ValidationInfo.addError("Тип с таким кодом уже существует в системе. Измените или удалите существующий тип.");
 
             return ValidationInfo.isValid();

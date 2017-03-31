@@ -1,0 +1,197 @@
+﻿@using FIT_AISAMA.Data.Enums
+@model FIT_AISAMA.Models.MaterialActive.MaterialActiveViewModel
+@{
+    ViewBag.Title = "Подробная информация по МЦ";
+}
+<!--Скрытые поля -->
+    @Html.HiddenFor(model => model.Id)
+
+<div class="col-sm-5" style="padding-bottom: 10px;">
+    <div class="col-sm-6">
+        <!--Код -->
+        <div class="row">
+
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">@Html.DisplayNameFor(model => model.FullCode)</label>
+                    <p class="form-control-static">@Model.FullCode</p>
+                </div>
+            </div>
+        </div>
+
+        <!--Тип -->
+        <div class="row">
+
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="control-label">@Html.DisplayNameFor(model => model.ActiveType)</label>
+                    <p class="form-control-static">@Model.FullActiveTypeName</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-sm-6">
+        <!--Наименование -->
+        <div class="row">
+
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="control-label">@Html.DisplayNameFor(model => model.Name)</label>
+                    <p class="form-control-static">@Model.Name</p>
+                </div>
+            </div>
+        </div>
+
+        <!--Производитель -->
+        <div class="row">
+
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">@Html.DisplayNameFor(model => model.Manufacturer)</label>
+                    <p class="form-control-static">@Model.Manufacturer</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-sm-offset-1 col-sm-5"> 
+    <!--Характеристики -->
+    <div class="row">
+        <div class="col-sm-12" style="padding-bottom: 15px;">
+
+            <h4>@Html.DisplayNameFor(model => model.Specifications)</h4>
+            
+            @foreach (var item in Model.Specifications)
+            {
+
+
+                <p style="font-size: 14px;">
+                    <span class="bold">@item.SpecificationType.TypeName:</span>
+                    @item.SpecificationValue
+                </p>
+
+            }
+            
+
+        </div>
+    </div>
+</div>   
+
+<div class="col-sm-12">
+    <!--Источник поступления -->
+    
+
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="control-label">@Html.DisplayNameFor(model => model.IncomeSource)</label>
+                <p class="form-control-static">@Model.IncomeSource.Source</p>
+            </div>
+        </div>
+    
+</div>
+<div class="col-sm-12">
+        <!--Дата поступления -->
+    
+
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label class="control-label">@Html.DisplayNameFor(model => model.IncomeDate)</label>
+                <p class="form-control-static">@(Model.IncomeDate.HasValue ? Model.IncomeDate.Value.ToString() : "Дата не указана")</p>
+            </div>
+        </div>
+    
+
+        <!--Дата амортизации -->
+    
+
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label class="control-label">@Html.DisplayNameFor(model => model.AmmortizateDate)</label>
+                <p class="form-control-static">@(Model.AmmortizateDate.HasValue ? Model.AmmortizateDate.Value.ToString() : "Дата не указана")</p>
+            </div>
+        </div>
+        
+        @if (Model.Status != StatusState.Warehouse)
+        {
+            <!--Дата начала использования -->
+            
+
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label class="control-label">@Html.DisplayNameFor(model => model.StartUseDate)</label>
+                        <p class="form-control-static">@(Model.StartUseDate.HasValue ? Model.StartUseDate.Value.ToString() : "Дата не указана")</p>
+                    </div>
+                </div>
+           
+        }
+        
+        @if (Model.Status == StatusState.IsUsed)
+        {
+            <!--Дата окончания использования -->
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label class="control-label">@Html.DisplayNameFor(model => model.StopUseDate)</label>
+                    <p class="form-control-static">@(Model.StopUseDate.HasValue ? Model.StopUseDate.Value.ToString() : "Дата не указана")</p>
+                </div>
+            </div>
+            
+        }
+    
+</div>
+
+<div class="col-sm-12">
+    @if (Model.Status != StatusState.Warehouse)
+    {
+        <!--Владелец -->
+        
+
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">@Html.DisplayNameFor(model => model.OwnerPerson)</label>
+                    <p class="form-control-static">@Model.FullOwnerPerosnName</p>
+                </div>
+            </div>
+        
+    }
+
+    <!--Материально ответственный -->
+    
+
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="control-label">@Html.DisplayNameFor(model => model.ResponsiblePerson)</label>
+                <p class="form-control-static">@Model.FullResponsiblePersonName</p>
+            </div>
+        </div>
+    
+
+    @if (Model.Status != StatusState.Warehouse)
+    {
+        <!--Место использования -->
+        
+
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">@Html.DisplayNameFor(model => model.LocationPlace)</label>
+                    <p class="form-control-static">@Model.LocationPlace.LocationName</p>
+                </div>
+            </div>
+        
+    }
+
+        <!--Цена -->
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label class="control-label">@Html.DisplayNameFor(model => model.Price)</label>
+                <p class="form-control-static">@Model.Price <span class="glyphicon glyphicon-rub" style="font-size: 13px;" title="Рубли"></span></p>
+            </div>
+        </div>
+    
+
+    
+        <div class="col-sm-12">
+            @Html.ActionLink("Вернуться к списку", "Distribution")
+        </div>
+   
+</div>

@@ -24,7 +24,7 @@
                 <select class="selectpicker" name="ActiveTypeId" id="ActiveTypeId">
                     @foreach (var item in Model.ActiveTypeItems)
                     {
-                        <option value="@item.Value">@item.Text</option>
+                        <option selected="@item.Selected" value="@item.Value">@item.Text</option>
                     }
                 </select>
             </div>

@@ -3,15 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using FIT_AISAMA.Data.Entities;
+using FIT_AISAMA.Data.Enums;
 
 namespace FIT_AISAMA.BusinessLogic.Services.Interfaces
 {
-    interface IMaterialActiveService
+    public interface IMaterialActiveService
     {
-        List<MaterialActive> GetAllMaterialActive();
+        /// <summary>
+        /// Взять все МЦ
+        /// </summary>
+        List<MaterialActive> GetAllMaterialActive(bool withDeleted = false);
+
+        /// <summary>
+        /// Взять все МЦ по статусу
+        /// </summary>
+        List<MaterialActive> GetMaterialsByState(StatusState status);
         MaterialActive GetMaterialActiveById(int id);
-        void CreateMaterialActive(MaterialActive newMaterialActive);
+        void RegistrateMaterialActive(MaterialActive newMaterialActive);
         void SaveMaterialActive(MaterialActive newMaterialActive);
         void DeleteMaterialActve(MaterialActive delMaterialActive);
+        string GetNewMaterialActiveCode();
+
+        /// <summary>
+        /// Распределить МЦ
+        /// </summary>
+        void DistributeMaterialActive(MaterialActive distMaterialActive);
     }
 }

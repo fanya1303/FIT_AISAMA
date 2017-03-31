@@ -15,12 +15,15 @@ namespace FIT_AISAMA.Models.ActiveType
         public string TypeCode { get; set; }
         [Display(Name = "Наименование типа")]
         public string TypeName { get; set; }
+        [Display(Name = "Базовый срок амортизации (мес.)")]
+        public int? BaseAmmortizationMounth { get; set; }
 
         public ActiveTypeModel(Data.Entities.ActiveType source)
         {
             Id = source.Id;
             TypeCode = source.TypeCode;
             TypeName = source.TypeName;
+            BaseAmmortizationMounth = source.BaseAmmortizationMounth;
         }
         
     }

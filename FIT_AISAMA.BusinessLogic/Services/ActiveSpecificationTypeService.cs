@@ -7,9 +7,9 @@ using FIT_AISAMA.Data.Entities;
 
 namespace FIT_AISAMA.BusinessLogic.Services
 {
-    public class ActiveSpecificationTypeService: BaseService, IActiveSpecificationTypeService
+    public class ActiveSpecificationTypeService: IActiveSpecificationTypeService
     {
-            
+        static DataContext dbContext = new DataContext();     
 
         public List<ActiveSpecificationType> GetAllActiveSpecificationType(bool withDeleted = false)
         {
@@ -26,7 +26,7 @@ namespace FIT_AISAMA.BusinessLogic.Services
             return dbContext.ActiveSpecificationTypes.Where(o => o.ActiveTypeId == activeId).ToList();
         }
 
-        public ActiveSpecificationType GetActiveSpecificationTypesById(int id)
+        public ActiveSpecificationType GetActiveSpecificationTypeById(int id)
         {
             return dbContext.ActiveSpecificationTypes.FirstOrDefault(o => o.Id == id);
 

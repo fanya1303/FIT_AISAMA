@@ -8,6 +8,7 @@ using FIT_AISAMA.BusinessLogic.Services.Interfaces;
 using FIT_AISAMA.Data.Entities;
 
 using FIT_AISTAMA.Validation.Validators;
+using FIT_AISTAMA.Validation.Validators.Interfaces;
 
 
 namespace FIT_AISAMA.Controllers
@@ -31,12 +32,25 @@ namespace FIT_AISAMA.Controllers
             if (locationPlaceService == null)
                 locationPlaceService = new LocationPlaceService();
 
-            if(catalogsValidator == null)
+            if (catalogsValidator == null)
                 catalogsValidator = new CatalogsValidator();
+
+            if (materialActiveService == null)
+                materialActiveService= new MaterialActiveService();
+
+            if (materialActiveValidator == null)
+                materialActiveValidator = new MaterialActiveValidator();
             
         }
-
+        /// <summary>
+        /// Валидатор справочников
+        /// </summary>
         public static ICatalogsValidator catalogsValidator;
+
+        /// <summary>
+        /// Валидатор для МЦ
+        /// </summary>
+        public static IMaterialActiveValidator materialActiveValidator;
 
         /// <summary>
         /// Сервис по рабте с сотрудниками
@@ -63,6 +77,8 @@ namespace FIT_AISAMA.Controllers
         /// Сервис по работе c местом расположения материала
         /// </summary>
         public static ILocationPlaceService locationPlaceService;
+
+        public static IMaterialActiveService materialActiveService;
 
         public ActionResult MainPage()
         {

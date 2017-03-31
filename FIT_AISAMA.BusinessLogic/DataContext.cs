@@ -23,15 +23,16 @@ namespace FIT_AISAMA.BusinessLogic
         {
 
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            this.Configuration.LazyLoadingEnabled = true;
 
-           /* modelBuilder.Entity<MaterialActive>().HasRequired(f => f.OwnerPerson)
-               .WithRequiredDependent()
-               .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<MaterialActive>()
-               .HasRequired(f => f.ResponsiblePerson)
-               .WithRequiredDependent()
-               .WillCascadeOnDelete(false);*/
+            /* modelBuilder.Entity<MaterialActive>().HasRequired(f => f.OwnerPerson)
+                .WithRequiredDependent()
+                .WillCascadeOnDelete(false);
+ 
+             modelBuilder.Entity<MaterialActive>()
+                .HasRequired(f => f.ResponsiblePerson)
+                .WithRequiredDependent()
+                .WillCascadeOnDelete(false);*/
 
         }
     }

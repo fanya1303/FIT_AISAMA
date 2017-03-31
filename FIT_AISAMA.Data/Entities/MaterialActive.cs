@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using FIT_AISAMA.Data.Enums;
 
 namespace FIT_AISAMA.Data.Entities
 {
@@ -20,21 +21,23 @@ namespace FIT_AISAMA.Data.Entities
 
         public int IncomeSourceId { get; set; }
 
-        public DateTime IncomeDate { get; set; }
+        public DateTime? IncomeDate { get; set; }
 
-        public DateTime StartUseDate { get; set; }
+        public DateTime? StartUseDate { get; set; }
 
-        public DateTime AmmortizateDate { get; set; }
+        public DateTime? AmmortizateDate { get; set; }
 
-        public DateTime StopUseDate { get; set; }
+        public DateTime? StopUseDate { get; set; }
 
         public int ResponsiblePersonId { get; set; }
 
-        public int OwnerPersonId { get; set; }
+        public int? OwnerPersonId { get; set; }
 
-        public int LocationPlaceId { get; set; }
+        public int? LocationPlaceId { get; set; }
 
         public int Price { get; set; }
+
+        public StatusState Status { get; set; }
 
         public bool IsDeleted { get; set; }
 

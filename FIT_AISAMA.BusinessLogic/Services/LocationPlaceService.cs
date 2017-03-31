@@ -7,11 +7,17 @@ using FIT_AISAMA.Data.Entities;
 
 namespace FIT_AISAMA.BusinessLogic.Services 
 {
-   public class LocationPlaceService: BaseService, ILocationPlaceService
+   public class LocationPlaceService: ILocationPlaceService
     {
-        public List<LocationPlace> GetAllLocationPlaces()
+        static DataContext dbContext = new DataContext();
+
+        public List<LocationPlace> GetAllLocationPlaces(bool withDeleted = false)
         {
-            return dbContext.LocationPlaces.ToList();
+            var result = dbContext.LocationPlaces.ToList();
+
+            if (!withDeleted)
+                result = result.Where(o => o.IsDeleted == false).ToList();
+            return result;
         }
         public LocationPlace GetLocationPlaceById(int id)
         {
