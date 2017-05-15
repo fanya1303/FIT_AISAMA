@@ -13,11 +13,11 @@ namespace FIT_AISAMA.BusinessLogic.Services
 
         public List<ActiveSpecification> GetAllActiveSpecification()
         {
-            return dbContext.ActiveSpecifications.ToList();
+            return dbContext.ActiveSpecifications.AsNoTracking().ToList();
         }
         public ActiveSpecification GetActiveSpecificationById(int id)
         {
-            return dbContext.ActiveSpecifications.FirstOrDefault(o => o.Id == id);
+            return dbContext.ActiveSpecifications.AsNoTracking().FirstOrDefault(o => o.Id == id);
 
         }
         public void SaveActiveSpecification(ActiveSpecification newActiveSpecification)

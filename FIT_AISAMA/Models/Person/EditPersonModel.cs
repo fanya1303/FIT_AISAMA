@@ -13,6 +13,8 @@ namespace FIT_AISAMA.Models.Person
         public int Id { get; set; }
 
         [Display(Name = "ФИО сотрудника")]
+        [Required(ErrorMessage = "Необходимо указать ФИО")]
+        [MinLength(5, ErrorMessage = "Длина фио должна быть больше 5")]
         public string FullName { get; set; }
 
         [Display(Name = "Должность")]

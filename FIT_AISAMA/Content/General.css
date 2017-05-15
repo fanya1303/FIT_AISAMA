@@ -1,5 +1,5 @@
 ﻿body {
-    background-color: rgba(238, 238, 238, 0.41);
+    background-color: rgba(238, 238, 238, 0.09);
 }
 
 .bold {
@@ -40,4 +40,14 @@
 
 .pointer {
     cursor: pointer;
+}
+.table-bot-center th {
+    vertical-align: bottom;
+    text-align: center;
+}
+.input-validation-error.form-control {
+    border: 1px solid #f00;
+}
+.capitalizeText {
+    text-transform: capitalize;
 }

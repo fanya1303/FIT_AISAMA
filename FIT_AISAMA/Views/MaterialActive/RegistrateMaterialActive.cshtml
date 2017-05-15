@@ -227,9 +227,7 @@
             setNewMaterialActiveBaseValues();
         });
 
-        $("[id *= Date]").datetimepicker({
-            locale: 'ru'
-        });
+        InitHelper.defaultDatePicker();
 
         $("#materialActivePrice").change(function() {
             var minValue = parseInt($("#materialActivePrice").attr("min"));

@@ -41,8 +41,12 @@ namespace FIT_AISAMA.BusinessLogic.Services
         }
         public void DeleteIncomeSource(IncomeSource delIncomeSource)
         {
-            dbContext.IncomeSources.Remove(delIncomeSource);
-            dbContext.SaveChanges();
+            var curIncomeSource =  dbContext.IncomeSources.FirstOrDefault(o=> o.Id == delIncomeSource.Id);
+            if (curIncomeSource != null)
+            {
+                curIncomeSource.IsDeleted = true;
+                dbContext.SaveChanges();
+            }
         }
     }
 }

@@ -33,7 +33,7 @@
 
     <div class="form-group">
             @Html.LabelFor(model => model.FullName)
-            @Html.TextBoxFor(model => model.FullName, new { @class = "form-control", placeholder = "ФИО" })
+            @Html.TextBoxFor(model => model.FullName, new { @class = "form-control capitalizeText", placeholder = "ФИО" })
             @Html.ValidationMessageFor(model => model.FullName)
         </div>
 
@@ -52,4 +52,13 @@
 <div class="col-sm-12">
     @Html.ActionLink("Вернуться к списку", "Index")
 </div>
+<script type="text/javascript">
+    $(document)
+        .ready(function () {
+            $(".capitalizeText")
+                .keyup(function () {
+                    $(this).val(commonFunctionHelper.capitalizeText($(this).val()));
+                });
+        });
+</script>
 

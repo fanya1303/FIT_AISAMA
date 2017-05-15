@@ -17,10 +17,16 @@ namespace FIT_AISAMA.Models.ActiveSpecificationType
         public int Id { get; set; }
 
         [Display(Name = "Тип МЦ")]
+        [Required(ErrorMessage = "Необходимо указать типы, которым принадлежит характеристика")]
         public int[] ActiveTypeId { get; set; }
 
         [Display(Name = "Наименование характеристики")]
+        [Required(ErrorMessage = "Необходимо указать наименование характеристики")]
+        [MinLength(3, ErrorMessage = "Длина наименования характеристики должна быть не меньше 3")]
         public string TypeName { get; set; }
+
+        [Display(Name = "Единицы измерения")]
+        public string MeasureType { get; set; }
 
         public List<SelectListItem> ActiveTypeItems { get; set; }
 

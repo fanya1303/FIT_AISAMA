@@ -28,5 +28,15 @@ namespace FIT_AISAMA.BusinessLogic.Services.Interfaces
         /// Распределить МЦ
         /// </summary>
         void DistributeMaterialActive(MaterialActive distMaterialActive);
+
+        /// <summary>
+        /// Возвращает последний зарегистрированный МЦ
+        /// </summary>
+        MaterialActive GetLastMaterialActive();
+
+        /// <summary>
+        /// Списание МЦ
+        /// </summary>
+        void WriteOffMaterialActive(MaterialActive writeOffMaterialActive);
     }
 }

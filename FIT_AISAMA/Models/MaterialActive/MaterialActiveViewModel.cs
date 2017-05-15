@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using FIT_AISAMA.Controllers.Helpers;
 using FIT_AISAMA.Data.Entities;
 using FIT_AISAMA.Data.Enums;
+using Newtonsoft.Json.Converters;
 
 namespace FIT_AISAMA.Models.MaterialActive
 {
@@ -28,16 +30,16 @@ namespace FIT_AISAMA.Models.MaterialActive
         public Data.Entities.IncomeSource IncomeSource { get; set; }
 
         [Display(Name = "Дата поступления")]
-        public DateTime? IncomeDate { get; set; }
+        public string IncomeDate { get; set; }
 
         [Display(Name = "Дата начала использования")]
-        public DateTime? StartUseDate { get; set; }
+        public string StartUseDate { get; set; }
 
         [Display(Name = "Дата амортизации")]
-        public DateTime? AmmortizateDate { get; set; }
+        public string AmmortizateDate { get; set; }
 
         [Display(Name = "Дата окончания использования")]
-        public DateTime? StopUseDate { get; set; }
+        public string StopUseDate { get; set; }
 
         [Display(Name = "Материально ответственный")]
         public Data.Entities.Person ResponsiblePerson { get; set; }
@@ -56,24 +58,7 @@ namespace FIT_AISAMA.Models.MaterialActive
 
         public string StatusString
         {
-            get
-            {
-                switch (Status)
-                {
-                        case StatusState.Active:
-                        return "Активный";
-
-                        case StatusState.Warehouse:
-                        return "На складе";
-
-                        case StatusState.Repair:
-                        return "В ремонте";
-
-                        case StatusState.IsUsed:
-                        return "Списано";
-                }
-                return "";
-            }
+            get { return CollectionHelper.GetEnumDescription(Status); }
         }
 
         public bool IsDeleted { get; set; }
@@ -134,10 +119,10 @@ namespace FIT_AISAMA.Models.MaterialActive
             Name = source.Name;
             Manufacturer = source.Manufacturer;
             IncomeSource = source.IncomeSource;
-            IncomeDate = source.IncomeDate;
-            StartUseDate = source.StartUseDate;
-            AmmortizateDate = source.AmmortizateDate;
-            StopUseDate = source.StopUseDate;
+            IncomeDate = source.IncomeDate.HasValue? source.IncomeDate.Value.ToString("dd.MM.yyyy"): "";
+            StartUseDate = source.StartUseDate.HasValue ? source.StartUseDate.Value.ToString("dd.MM.yyyy") : "";
+            AmmortizateDate = source.AmmortizateDate.HasValue ? source.AmmortizateDate.Value.ToString("dd.MM.yyyy") : "";
+            StopUseDate = source.StopUseDate.HasValue ? source.StopUseDate.Value.ToString("dd.MM.yyyy") : ""; 
             ResponsiblePerson = source.ResponsiblePerson;
             OwnerPerson = source.OwnerPerson;
             Price = source.Price;

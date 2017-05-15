@@ -7,6 +7,9 @@
         <th >
             Характеристика
         </th>
+        <th style="width: 170px;">
+            Единицы измерения
+        </th>
         <th style="width: 90px;"></th>
     </tr>
     
@@ -28,6 +31,11 @@
                     <div style="height: 21px;"></div>
                 </a>
             </td>
+            <td>
+                <a href="/ActiveSpecificationType/CreateActiveSpecificationType" title="Добавить новую характеристику">
+                    <div style="height: 21px;"></div>
+                </a>
+            </td>
         </tr>
 
     @foreach (var item in Model) {
@@ -37,6 +45,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TypeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeasureType)
             </td>
             <td class="text-center">
                     <div class="col-sm-12" style="padding: 0;">

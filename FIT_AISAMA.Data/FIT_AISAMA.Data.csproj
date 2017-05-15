@@ -53,6 +53,7 @@
     <Compile Include="Entities\IncomeSource.cs" />
     <Compile Include="Entities\LocationPlace.cs" />
     <Compile Include="Entities\MaterialActive.cs" />
+    <Compile Include="Entities\MaterialActiveStatusHistory.cs" />
     <Compile Include="Entities\Person.cs" />
     <Compile Include="Enums\StatusState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,0 +1,130 @@
+﻿@model FIT_AISAMA.Models.MaterialActive.WriteOffMaterialActiveModel
+
+<div class="col-sm-11">
+    <div class="row">
+        <div class="col-sm-3" style="padding: 20px 15px;">
+            <div class="form-group">
+                <label>Код МЦ</label>
+                <select id="materialActiveId" class="selectpicker" data-live-search="true" title="Выберите код МЦ">
+                    @foreach (var item in Model.MaterialActives)
+                    {
+                        <option data-tokens="@(item.FullCode + item.Name + item.Manufacturer)" value="@item.Id">@item.FullCode</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div id="shortMaterialInformation" class="col-sm-12"></div>
+    </div>
+    <div id="secondFormBlock" style="display: none;">
+        <div class="row form-group">
+            <div class="col-sm-3 ">
+                <label>Дата списания</label>
+                <div class="input-group date" id="stopUseDate">
+                    <input type="text" class="form-control"/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <label>Причина списания</label>
+                <input id="writeOffReason" type="text" class="form-control" placeholder="Причина"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="successMessageBlock" class="col-sm-4 alert alert-success" style="display: none;"></div>
+                <div id="errorMessageBlock" class="col-sm-4 alert alert-danger" style="display: none;"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2 form-group">
+                <input id="writeOffButton" type="button" class="btn btn-success form-control" value="Списать"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+            $("#materialActiveId").on("changed.bs.select",
+                function() {
+                    var materialId = $(this).val();
+
+                    if (materialId)
+                        loadShortMaterialIntormation(materialId);
+                });
+
+                $("#writeOffButton").click(writeOffMaterial);
+             InitHelper.defaultDatePicker();
+    });
+
+    function loadShortMaterialIntormation(materialId) {
+        if (materialId) {
+            var data = { materialId: materialId };
+            $("#shortMaterialInformation").load('@Url.Action("ShortMaterialActiveInformation")', data, showSecondFormBlock);
+        }
+    }
+
+    function showSecondFormBlock() {
+        if (materialActiveInformation) {
+            if (materialActiveInformation.StartUseDate)
+                $("#stopUseDate").datetimepicker("minDate", materialActiveInformation.StartUseDate);
+
+            $("#secondFormBlock").fadeIn();
+        }
+    }
+
+    function writeOffMaterial() {
+        var data = {
+            Id: $("#materialActiveId").val(),
+            StopUseDate: $("#stopUseDate").data("date"),
+            WriteOffReason: $("#writeOffReason").val()
+        };
+
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            dataType: "json",
+            data: JSON.stringify(data),
+            url: '@Url.Action("WriteOffMaterialActive")',
+            success: function(data) {
+                if (data.Status === "OK") {
+                    writeOffSuccess(data.Message);
+                }
+                else if (data.Status === "ERROR") {
+                    writeOffError(data.Message || "Ошибка при сохранении");
+                }
+            }
+        });
+    }
+
+    function writeOffSuccess(message) {
+        errorMessageBlock(false);
+        successMessageBlock(true, message);
+        setTimeout(function(){location.reload()}, 1500);
+    }
+
+    function writeOffError(message) {
+        successMessageBlock(false);
+        errorMessageBlock(true, message);
+    }
+
+    function successMessageBlock(show, message) {
+        if (show === true && message) {
+            $("#successMessageBlock").html(message).show();
+        } else {
+            $("#successMessageBlock").html("").hide();
+        }
+    }
+
+    function errorMessageBlock(show, message) {
+        if (show === true && message) {
+            $("#errorMessageBlock").html(message).show();
+        } else {
+            $("#errorMessageBlock").html("").hide();
+        }
+    }
+</script>

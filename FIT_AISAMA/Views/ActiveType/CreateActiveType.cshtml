@@ -20,18 +20,18 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.TypeName)
-            @Html.TextBoxFor(model => model.TypeName, new{@class="form-control", placeholder="Наименование"})
+            @Html.TextBoxFor(model => model.TypeName, new { @class = "form-control", placeholder = "Наименование" })
             @Html.ValidationMessageFor(model => model.TypeName)
         </div>
-    
+       
         <div class="form-group">
-            @Html.LabelFor(model=> model.BaseAmmortizationMounth)
+            @Html.LabelFor(model => model.BaseAmmortizationMounth)
             <input name="BaseAmmortizationMounth" id="baseAmmortizationMounth" type="number" min="0" max="200" class="form-control" placeholder="Срок амортизации в месяцах"/>
         </div>
-        if (!string.IsNullOrEmpty(ViewBag.WarningMessage))
-        {
+    if (!string.IsNullOrEmpty(ViewBag.WarningMessage))
+    {
             <div class="alert alert-danger">@ViewBag.WarningMessage</div>
-        }
+    }
         <p>
             <input class="btn btn-success" type="submit" value="Создать" />
         </p>

@@ -15,7 +15,7 @@ namespace FIT_AISAMA.BusinessLogic.Services
 
         public List<ActiveType> GetAllActiveTypes(bool withDeleted = false)
         {
-            var result = dbContext.ActiveTypes.ToList();
+            var result = dbContext.ActiveTypes.AsNoTracking().ToList();
             if (!withDeleted)
                 result = result.Where(o => o.IsDeleted == false).ToList();
             return result;
@@ -23,7 +23,7 @@ namespace FIT_AISAMA.BusinessLogic.Services
 
         public ActiveType GetActiveTypeById(int id)
         {
-            var result = dbContext.ActiveTypes.Include(o => o.ActiveSpecifications).FirstOrDefault(o => o.Id == id);
+            var result = dbContext.ActiveTypes.Include(o => o.ActiveSpecifications).AsNoTracking().FirstOrDefault(o => o.Id == id);
             return result;
         }
 

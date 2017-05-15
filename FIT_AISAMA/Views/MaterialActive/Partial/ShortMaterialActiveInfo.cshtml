@@ -1,0 +1,34 @@
+﻿@model FIT_AISAMA.Models.MaterialActive.MaterialActiveViewModel
+
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr class="table-bot-center">
+        <th>@Html.DisplayNameFor(model => model.Code)</th>
+        <th>@Html.DisplayNameFor(model => model.Name)</th>
+        <th>@Html.DisplayNameFor(model => model.LocationPlace)</th>
+        <th>@Html.DisplayNameFor(model => model.OwnerPerson)</th>
+        <th width="150">@Html.DisplayNameFor(model => model.StartUseDate)</th>
+        <th width="150">@Html.DisplayNameFor(model => model.AmmortizateDate)</th>
+        <th>@Html.DisplayNameFor(model => model.Price)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>@Html.ActionLink(Model.FullCode, "MaterialActiveDetail", new {id=Model.Id}, new {title="Подробная информация", target="_blank"})</td>
+        <td>@Html.DisplayFor(model => model.Name)</td>
+        <td>@Html.DisplayFor(model => model.LocationPlace.LocationName)</td>
+        <td>@Html.DisplayFor(model => model.OwnerPerson.FullName)</td>
+        <td>@Html.DisplayFor(model => model.StartUseDate)</td>
+        <td>@Html.DisplayFor(model => model.AmmortizateDate)</td>
+        <td>@Html.DisplayFor(model => model.Price)</td>
+    </tr>
+    </tbody>
+</table>
+<script type="text/javascript">
+    var materialActiveInformation = {
+        Id: '@Model.Id',
+        Code: '@Model.Code',
+        AmmortizateDate: '@Model.AmmortizateDate',
+        StartUseDate: '@Model.StartUseDate'
+    }
+</script>

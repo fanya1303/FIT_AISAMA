@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using FIT_AISAMA.BusinessLogic.Services.Interfaces;
@@ -14,7 +15,7 @@ namespace FIT_AISAMA.BusinessLogic.Services
 
         public List<MaterialActive> GetAllMaterialActive(bool withDeleted = false)
         {
-            var result = dbContext.MaterialActives.ToList();
+            var result = dbContext.MaterialActives.AsNoTracking().ToList();
 
             if (!withDeleted)
                 result = result.Where(o => o.IsDeleted == false).ToList();
@@ -25,13 +26,13 @@ namespace FIT_AISAMA.BusinessLogic.Services
 
         public List<MaterialActive> GetMaterialsByState(StatusState status)
         {
-            var result = dbContext.MaterialActives.Where(o => o.Status == status && o.IsDeleted == false).ToList();
+            var result = dbContext.MaterialActives.Where(o => o.Status == status && o.IsDeleted == false).AsNoTracking().ToList();
             return result;
         }
 
         public MaterialActive GetMaterialActiveById(int id)
         {
-            return dbContext.MaterialActives.FirstOrDefault(o => o.Id == id);
+            return dbContext.MaterialActives.Where(o => o.Id == id && !o.IsDeleted).AsNoTracking().FirstOrDefault();
         }
 
         public void RegistrateMaterialActive(MaterialActive newMaterialActive)
@@ -39,6 +40,7 @@ namespace FIT_AISAMA.BusinessLogic.Services
             newMaterialActive.Status = StatusState.Warehouse;
             dbContext.MaterialActives.Add(newMaterialActive);
             dbContext.SaveChanges();
+
         }
         public void SaveMaterialActive(MaterialActive newMaterialActive)
         {
@@ -74,6 +76,25 @@ namespace FIT_AISAMA.BusinessLogic.Services
                 curMaterialActive.Status = StatusState.Active;
                 dbContext.SaveChanges();
             }
+        }
+
+        public void WriteOffMaterialActive(MaterialActive writeOffMaterialActive)
+        {
+            var curMaterialActive = dbContext.MaterialActives.FirstOrDefault(o => o.Id == writeOffMaterialActive.Id);
+
+            if (curMaterialActive != null)
+            {
+                curMaterialActive.StopUseDate = writeOffMaterialActive.StopUseDate;
+                curMaterialActive.Status = StatusState.IsUsed;
+                dbContext.SaveChanges();
+            }
+        }
+
+        public MaterialActive GetLastMaterialActive()
+        {
+            var maxId = dbContext.MaterialActives.Max(o => o.Id);
+            var lastMaterial = dbContext.MaterialActives.FirstOrDefault(o => o.Id == maxId);
+            return lastMaterial;
         }
         
     }

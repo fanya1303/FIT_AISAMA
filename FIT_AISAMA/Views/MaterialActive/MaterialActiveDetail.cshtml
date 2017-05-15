@@ -62,15 +62,22 @@
 
             <h4>@Html.DisplayNameFor(model => model.Specifications)</h4>
             
-            @foreach (var item in Model.Specifications)
+            @if (Model.Specifications.Any())
             {
-
-
-                <p style="font-size: 14px;">
-                    <span class="bold">@item.SpecificationType.TypeName:</span>
-                    @item.SpecificationValue
-                </p>
-
+                <table class="table table-striped table-bordered">
+                    @foreach (var item in Model.Specifications)
+                    {
+                        <tr>
+                            <td>@item.SpecificationType.TypeName </td>
+                            <td>@item.SpecificationValue </td>
+                            <td>@item.SpecificationType.MeasureType</td>
+                        </tr>
+                    }
+                </table>
+            }
+            else
+            {
+                <h5>Нет характеристик</h5>
             }
             
 
@@ -97,7 +104,7 @@
         <div class="col-sm-2">
             <div class="form-group">
                 <label class="control-label">@Html.DisplayNameFor(model => model.IncomeDate)</label>
-                <p class="form-control-static">@(Model.IncomeDate.HasValue ? Model.IncomeDate.Value.ToString() : "Дата не указана")</p>
+                <p class="form-control-static">@(!string.IsNullOrEmpty(Model.IncomeDate) ? Model.IncomeDate : "Дата не указана")</p>
             </div>
         </div>
     
@@ -108,7 +115,7 @@
         <div class="col-sm-2">
             <div class="form-group">
                 <label class="control-label">@Html.DisplayNameFor(model => model.AmmortizateDate)</label>
-                <p class="form-control-static">@(Model.AmmortizateDate.HasValue ? Model.AmmortizateDate.Value.ToString() : "Дата не указана")</p>
+                <p class="form-control-static">@(!string.IsNullOrEmpty(Model.AmmortizateDate) ? Model.AmmortizateDate : "Дата не указана")</p>
             </div>
         </div>
         
@@ -120,7 +127,7 @@
                 <div class="col-sm-2">
                     <div class="form-group">
                         <label class="control-label">@Html.DisplayNameFor(model => model.StartUseDate)</label>
-                        <p class="form-control-static">@(Model.StartUseDate.HasValue ? Model.StartUseDate.Value.ToString() : "Дата не указана")</p>
+                        <p class="form-control-static">@(!string.IsNullOrEmpty(Model.StartUseDate) ? Model.StartUseDate : "Дата не указана")</p>
                     </div>
                 </div>
            
@@ -132,7 +139,7 @@
             <div class="col-sm-2">
                 <div class="form-group">
                     <label class="control-label">@Html.DisplayNameFor(model => model.StopUseDate)</label>
-                    <p class="form-control-static">@(Model.StopUseDate.HasValue ? Model.StopUseDate.Value.ToString() : "Дата не указана")</p>
+                    <p class="form-control-static">@(!string.IsNullOrEmpty(Model.StopUseDate) ? Model.StopUseDate : "Дата не указана")</p>
                 </div>
             </div>
             
@@ -149,7 +156,16 @@
             <div class="col-sm-6">
                 <div class="form-group">
                     <label class="control-label">@Html.DisplayNameFor(model => model.OwnerPerson)</label>
-                    <p class="form-control-static">@Model.FullOwnerPerosnName</p>
+                    <p class="form-control-static">
+                        @if (Model.OwnerPerson != null)
+                        {
+                            @Html.ActionLink(Model.FullOwnerPerosnName, "PersonDetails", "Person", new {id = Model.OwnerPerson.Id}, null)
+                        }
+                        else
+                        {
+                            @Model.FullOwnerPerosnName
+                        }
+                    </p>
                 </div>
             </div>
         
@@ -161,7 +177,16 @@
         <div class="col-sm-6">
             <div class="form-group">
                 <label class="control-label">@Html.DisplayNameFor(model => model.ResponsiblePerson)</label>
-                <p class="form-control-static">@Model.FullResponsiblePersonName</p>
+                <p class="form-control-static">
+                    @if (Model.ResponsiblePerson != null)
+                        {
+                            @Html.ActionLink(Model.FullResponsiblePersonName, "PersonDetails", "Person", new {id = Model.ResponsiblePerson.Id}, null)
+                        }
+                        else
+                        {
+                            @Model.FullResponsiblePersonName
+                        }
+                </p>
             </div>
         </div>
     

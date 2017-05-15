@@ -89,9 +89,7 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $("[id *= Date]").datetimepicker({
-            locale: 'ru'
-        });
+        InitHelper.defaultDatePicker();
 
         $("#saveMaterialActive").click(function() {
             distributeMaterialActive();

@@ -81,7 +81,8 @@ namespace FIT_AISAMA.Controllers
                     var createSpecification = new ActiveSpecificationType
                     {
                         ActiveTypeId = itemType,
-                        TypeName = newSpecification.TypeName
+                        TypeName = newSpecification.TypeName,
+                        MeasureType = newSpecification.MeasureType
                     };
                     var validation = catalogsValidator.NeedSaveSpecificationType(createSpecification);
                     //проверка на существование повторяющейся записи. сохранение только в случае, если такой записи нет
@@ -150,6 +151,7 @@ namespace FIT_AISAMA.Controllers
                     Id = editSpecificationType.Id,
                     ActiveTypeId = editSpecificationType.ActiveTypeId,
                     TypeName = editSpecificationType.TypeName,
+                    MeasureType = editSpecificationType.MeasureType,
                     IsDeleted = editSpecificationType.IsDeleted
                 };
 

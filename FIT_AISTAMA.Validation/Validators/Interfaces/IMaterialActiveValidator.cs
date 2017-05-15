@@ -18,5 +18,10 @@ namespace FIT_AISTAMA.Validation.Validators.Interfaces
         /// Валидация перед распределением
         /// </summary>
         ValidationInfo BeforeDistributionValidation(MaterialActive checkItem);
+
+        /// <summary>
+        /// Валидация перед списанием
+        /// </summary>
+        ValidationInfo DeforeWriteOffValidation(MaterialActive chekItem);
     }
 }

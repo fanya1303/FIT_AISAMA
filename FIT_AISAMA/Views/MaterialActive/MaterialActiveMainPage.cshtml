@@ -1,4 +1,5 @@
-﻿@{
+﻿@model FIT_AISAMA.Models.MaterialActive.MainMaterialActiveSearchModel
+@{
     ViewBag.Title = "Список МЦ";
     var tabIndex = 1;
 }
@@ -12,19 +13,38 @@
 
     <div class="row col-sm-8 form-group">
         <div class="row col-sm-2">
-            <button type="button" class="btn btn-info form-control">Поиск</button>
+            <button id="searchButton" type="button" class="btn btn-info form-control">Поиск</button>
         </div>
         <div class="col-sm-3">
-            <input type="button" class="btn btn-warning" value="Отмена"/>
+            <input id="cancelSearch" type="button" class="btn btn-warning" value="Отмена"/>
         </div>
     </div>
-
-    <div class="row col-sm-8 form-group">
-        <div class="row col-sm-6">
+    
+    <div class="row col-sm-12 form-group">
+        <div class="row col-sm-4">
             <label>Наименование или производитель</label>
-            <input type="text" class="form-control" placeholder="Введите наименование или производителя"/>
+            <input id="NameOrManufacturer" type="text" class="form-control" placeholder="Введите наименование или производителя"/>
+        </div>
+        <div class="col-sm-3">
+            <label>Тип МЦ</label>
+            <select id="ActiveTypeIds" multiple class="selectpicker form-control" title="Выберите тип МЦ">
+                @foreach (var item in Model.MaterialActiveTypeItems)
+                {
+                    <option value="@item.Value">@item.Text</option>
+                }
+            </select>
+        </div>
+        <div class="col-sm-3">
+            <label>Статус</label>
+            <select id="Statuses" multiple class="selectpicker form-control" title="Выберите статус">
+                @foreach (var item in Model.StatusItems)
+                {
+                    <option value="@item.Value">@item.Text</option>
+                }
+            </select>
         </div>
     </div>
+    
     
     <div class="row col-sm-12">
         <p id="toggleExtendSearch" class="text-info pointer">Расширенный поиск
@@ -45,7 +65,7 @@
             </div>
             <div class="row col-sm-4" style="padding-right: 40px;">
 
-                <div class="input-group date" id="incomeDate">
+                <div class="input-group date" id="SinceIncomeDate">
                     <input type="text" class="form-control" tabindex="@(tabIndex++)"/>
                     <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
@@ -59,7 +79,7 @@
             </div>
             <div class="row col-sm-4">
 
-                <div class="input-group date" id="incomeDate">
+                <div class="input-group date" id="ToIncomeDate">
                     <input type="text" class="form-control" tabindex="@(tabIndex++)"/>
                     <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
@@ -69,13 +89,15 @@
         </div>
     </div>
 </div>
+<div id="materialActiveMainPage" class="col-sm-11"></div>
 
 <script type="text/javascript">
     var extendSearch = false;
     $(document).ready(function() {
-        $("[id *= Date]").datetimepicker({
-            locale: 'ru'
-        });
+        InitHelper.defaultDatePicker();
+
+        $("#searchButton").click(searchMainMaterilas);
+        $("#cancelSearch").click(cancelSearchMaterials);
 
         $("#toggleExtendSearch").click(function () {
             extendSearch = !extendSearch;
@@ -87,5 +109,32 @@
             }
             $("#extendSearch").toggle();
         });
+
+        searchMainMaterilas();
     });
+
+    function searchMainMaterilas() {
+        var data = {
+            NameOrManufacturer: $("#NameOrManufacturer").val(),
+            ActiveTypeIds: $("#ActiveTypeIds").val(),
+            Statuses: $("#Statuses").val()
+        };
+        //Применение расширенного поиска
+        if (extendSearch) {
+            data.SinceIncomeDate = $("#SinceIncomeDate").data("date");
+            data.ToIncomeDate = $("#ToIncomeDate").data("date");
+        }
+        
+        $("#materialActiveMainPage").load('@Url.Action("MainMaterialActiveTable")', data);
+    }
+
+    function cancelSearchMaterials() {
+        $("#NameOrManufacturer").val("");
+        $("#ActiveTypeIds").selectpicker('deselectAll');
+        $("#Statuses").selectpicker('deselectAll');
+        $("#SinceIncomeDate").data("DateTimePicker").clear();
+        $("#ToIncomeDate").data("DateTimePicker").clear();
+
+        searchMainMaterilas();
+    }
 </script>

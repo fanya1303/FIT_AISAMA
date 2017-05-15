@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<FIT_AISAMA.Models.MaterialActive.MaterialActiveViewModel>
 
-<table class="table table-bordered table-striped">
+<table id="registerMaterialTable" class="table table-bordered table-striped" cellspacing="0" width="100%">
+    <thead>
     <tr>
         <th>@Html.DisplayNameFor(model=> model.Code)</th>
         <th>@Html.DisplayNameFor(model=> model.Name)</th>
@@ -11,40 +12,56 @@
         <th>@Html.DisplayNameFor(model=> model.ResponsiblePerson)</th>
         <th>@Html.DisplayNameFor(model=> model.Price)</th>
         <th>@Html.DisplayNameFor(model=> model.Status)</th>
-        <th width="75"></th>
+        <th><div style="width: 40px;"></div></th>
     </tr>
-    <tr>
+    </thead>
+        <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td title="@item.ActiveType.TypeName">@item.FullCode</td>
-                <td>@item.Name</td>
-                <td>@item.Manufacturer</td>
-                <td>@item.IncomeSource.Source</td>
-                <td>@item.IncomeDate</td>
-                <td>@item.AmmortizateDate</td>
-                <td>
-                    <span title="Должность: @(!string.IsNullOrEmpty(item.ResponsiblePerson.Position) ? item.ResponsiblePerson.Position : "не назначена")">
+        <tr>
+            <td title="@item.ActiveType.TypeName">@item.FullCode</td>
+            <td>@item.Name</td>
+            <td>@item.Manufacturer</td>
+            <td>@item.IncomeSource.Source</td>
+            <td>@item.IncomeDate</td>
+            <td>@item.AmmortizateDate</td>
+            <td>
+                <span title="Должность: @(!string.IsNullOrEmpty(item.ResponsiblePerson.Position) ? item.ResponsiblePerson.Position : "не назначена")">
                         @item.ResponsiblePerson.FullName
                     </span>
-                </td>
-                <td>@item.Price</td>
-                <td>@item.StatusString</td>
-                <td>
-                    <div style="float: left;">
-                        @Html.ActionLink(" ", "MaterialActiveDetail", new {id = item.Id}, new {@class = "glyphicon glyphicon-info-sign", title = "Подробная информация", style = "font-size:19px;"})
-                    </div>
+            </td>
+            <td>@item.Price</td>
+            <td>@item.StatusString</td>
+            <td width="75">
+                <div style="float: left;">
+                    @Html.ActionLink(" ", "MaterialActiveDetail", new {id = item.Id}, new {@class = "glyphicon glyphicon-info-sign", title = "Подробная информация", style = "font-size:19px;", target = "_blank"})
+                </div>
 
-                    <div class="inline">
-                        @using (Html.BeginForm("DistributeMaterialActive", "MaterialActive", FormMethod.Get, new {style = "display: inline-block; margin-left: 10px;"}))
-                        {
-                            <input type="hidden" name="materialId" value="@item.Id"/>
-                            <button type="submit" value="" class="btn btn-xs btn-warning" title="Распределить"> <i class="glyphicon glyphicon-paste"></i></button>
-                        }
-                    </div>
-                </td>
-            </tr>
+                <div class="inline">
+                    @using (Html.BeginForm("DistributeMaterialActive", "MaterialActive", FormMethod.Get, new {style = "display: inline-block; margin-left: 10px;"}))
+                    {
+                        <input type="hidden" name="materialId" value="@item.Id"/>
+                        <button type="submit" value="" class="btn btn-xs btn-warning" title="Распределить"> <i class="glyphicon glyphicon-paste"></i></button>
+                    }
+                </div>
+            </td>
+        </tr>
         }
-    </tr>
+        </tbody>
 </table>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            $.fn.dataTable.tables({ visible: true, api: true }).columns.adjust();
+        });
+
+        $("#registerMaterialTable").DataTable({
+            scrollY:        700,
+            scrollCollapse: true,
+            "scrollX": true,
+            paging: false,
+            "bFilter": false
+        });
+    });
+</script>
 

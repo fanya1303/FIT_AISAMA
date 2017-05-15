@@ -18,6 +18,7 @@ namespace FIT_AISAMA.BusinessLogic
         public DbSet<ActiveSpecificationType> ActiveSpecificationTypes { get; set; }
         public DbSet<ActiveSpecification> ActiveSpecifications { get; set; }
         public DbSet<MaterialActive> MaterialActives { get; set; }
+        public DbSet<MaterialActiveStatusHistory> MaterialActiveStatusHistories { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

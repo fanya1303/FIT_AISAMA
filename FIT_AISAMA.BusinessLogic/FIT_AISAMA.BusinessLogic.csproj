@@ -65,9 +65,11 @@
     <Compile Include="Services\Interfaces\IIncomeSourceService.cs" />
     <Compile Include="Services\Interfaces\ILocationPlaceService.cs" />
     <Compile Include="Services\Interfaces\IMaterialActiveService.cs" />
+    <Compile Include="Services\Interfaces\IMaterialActiveStatusHistoryService.cs" />
     <Compile Include="Services\Interfaces\IPersonService.cs" />
     <Compile Include="Services\LocationPlaceService.cs" />
     <Compile Include="Services\MaterialActiveService.cs" />
+    <Compile Include="Services\MaterialActiveStatusHistoryService.cs" />
     <Compile Include="Services\PersonService.cs" />
   </ItemGroup>
   <ItemGroup>

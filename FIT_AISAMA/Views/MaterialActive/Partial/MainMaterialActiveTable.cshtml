@@ -1,0 +1,56 @@
+﻿@model IEnumerable<FIT_AISAMA.Models.MaterialActive.MaterialActiveViewModel>
+
+<table id="mainMaterialActiveTable" class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Code)</th>
+        <th>@Html.DisplayNameFor(model => model.Name)</th>
+        <th>@Html.DisplayNameFor(model => model.Manufacturer)</th>
+        <th>@Html.DisplayNameFor(model => model.IncomeSource)</th>
+        <th>@Html.DisplayNameFor(model => model.IncomeDate)</th>
+        <th>@Html.DisplayNameFor(model => model.StartUseDate)</th>
+        <th>@Html.DisplayNameFor(model => model.AmmortizateDate)</th>
+        <th>@Html.DisplayNameFor(model => model.StopUseDate)</th>
+        <th>@Html.DisplayNameFor(model => model.ResponsiblePerson)</th>
+        <th>@Html.DisplayNameFor(model => model.OwnerPerson)</th>
+        <th>@Html.DisplayNameFor(model => model.Price)</th>
+        <th>@Html.DisplayNameFor(model => model.Status)</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.ActionLink(item.FullCode, "MaterialActiveDetail", new {id = item.Id}, new {title = "Подробная информация", target="_blank"})</td>
+            <td>@item.Name</td>
+            <td>@item.Manufacturer</td>
+            <td>@item.IncomeSource.Source</td>
+            <td>@item.IncomeDate</td>
+            <td>@item.StartUseDate</td>
+            <td>@item.AmmortizateDate</td>
+            <td>@item.StopUseDate</td>
+            <td>@item.ResponsiblePerson.FullName</td>
+            <td>@(item.OwnerPerson != null ? item.OwnerPerson.FullName : "")</td>
+            <td>@item.Price</td>
+            <td>@item.StatusString</td>
+            
+        </tr>
+    }
+    </tbody>
+</table>
+<script type="text/javascript">
+    $("#mainMaterialActiveTable")
+        .DataTable({
+            scrollY: 500,
+            scrollCollapse: true,
+            "scrollX": true,
+            paging: false,
+            "bFilter": false,
+            "columnDefs": [
+            { "width": "80px", "targets": 0 },
+            { "width": "100px", "targets": 4 },
+            { "width": "100px", "targets": 5 }
+            ]
+        });
+</script>
+

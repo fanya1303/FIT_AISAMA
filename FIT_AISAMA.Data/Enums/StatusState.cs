@@ -9,7 +9,6 @@ namespace FIT_AISAMA.Data.Enums
 {
     public enum StatusState
     {
-        [Display(Name = "На складе")]
         [Description("На складе")]
         Warehouse = 1,
 

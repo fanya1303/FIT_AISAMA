@@ -22,6 +22,9 @@ namespace FIT_AISAMA.Models.ActiveSpecificationType
         [Display(Name = "Наименвоание характеристики")]
         public string TypeName { get; set; }
 
+        [Display(Name = "Единицы измерения")]
+        public string MeasureType { get; set; }
+
         public bool IsDeleted { get; set; }
 
         public List<SelectListItem> ActiveTypeItems { get; set; }
@@ -31,6 +34,7 @@ namespace FIT_AISAMA.Models.ActiveSpecificationType
             Id = source.Id;
             ActiveTypeId = ActiveTypeId;
             TypeName = source.TypeName;
+            MeasureType = source.MeasureType;
             IsDeleted = source.IsDeleted;
             ActiveTypeItems = new List<SelectListItem>();
 

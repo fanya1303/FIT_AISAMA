@@ -41,6 +41,9 @@ namespace FIT_AISAMA.Controllers
             if (materialActiveValidator == null)
                 materialActiveValidator = new MaterialActiveValidator();
             
+            if (materialActiveStatusHistoryService == null)
+                materialActiveStatusHistoryService = new MaterialActiveStatusHistoryService();
+            
         }
         /// <summary>
         /// Валидатор справочников
@@ -78,7 +81,15 @@ namespace FIT_AISAMA.Controllers
         /// </summary>
         public static ILocationPlaceService locationPlaceService;
 
+        /// <summary>
+        /// Сервис по работе с МЦ
+        /// </summary>
         public static IMaterialActiveService materialActiveService;
+
+        /// <summary>
+        /// Сервис по работе с историями изменений МЦ
+        /// </summary>
+        public static IMaterialActiveStatusHistoryService materialActiveStatusHistoryService;
 
         public ActionResult MainPage()
         {

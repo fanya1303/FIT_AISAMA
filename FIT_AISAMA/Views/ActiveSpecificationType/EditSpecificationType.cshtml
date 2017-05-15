@@ -36,13 +36,25 @@
             @Html.TextBoxFor(model => model.TypeName, new { @class = "form-control", placeholder = "Наименование" })
             @Html.ValidationMessageFor(model => model.TypeName)
         </div>
+    
+        <div class="row">
+            <div class="form-group col-sm-8">
+                <div class="row col-sm-9">
+                    @Html.LabelFor(model => model.MeasureType)
+                    @Html.TextBoxFor(model => model.MeasureType, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.MeasureType)
+                </div>
+                <div id="shortMeasureType" style="padding-top: 30px; display: none;" title="Как будет отображаться единица измерения" class="col-sm-3 bold"></div>
+            </div>
+        </div>
+                    
         if (!string.IsNullOrEmpty(ViewBag.WarningMessage))
-         {
+        {
             <div class="alert alert-danger">@ViewBag.WarningMessage</div> 
-         }
-    <p>
-        <input type="submit" class="btn btn-success" value="Сохранить"  />
-    </p>
+        }   
+        <p>
+            <input type="submit" class="btn btn-success" value="Сохранить"  />
+        </p>
     
 
 }
@@ -50,3 +62,24 @@
 <div class="col-sm-12">
     @Html.ActionLink("Вернуться к списку", "Index")
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#MeasureType").keyup(function () {
+            var measure = this.value;
+            setShortMeasureType(measure);
+        });
+        setShortMeasureType($("#MeasureType").val());
+    });
+    function setShortMeasureType(measure) {
+        var result = measure;
+        if (measure.length > 4)
+            result = measure.substring(0, 3) + ".";
+
+        if (result.length)
+            $("#shortMeasureType").show();
+        else
+            $("#shortMeasureType").hide();
+
+        $("#shortMeasureType").text(result);
+    }
+</script>

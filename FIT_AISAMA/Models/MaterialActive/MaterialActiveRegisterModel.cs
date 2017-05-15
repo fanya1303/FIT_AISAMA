@@ -35,13 +35,14 @@ namespace FIT_AISAMA.Models.MaterialActive
         public int IncomeSourceId { get; set; }
 
         [Display(Name = "Дата поступления")]
+        [Required(ErrorMessage = "Необходимо указать дату поступления")]
         public DateTime IncomeDate { get; set; }
 
         [Display(Name = "Дата начала использования")]
-        public DateTime StartUseDate { get; set; }
+        public DateTime? StartUseDate { get; set; }
 
         [Display(Name = "Дата амортизации")]
-        public DateTime AmmortizateDate { get; set; }
+        public DateTime? AmmortizateDate { get; set; }
 
         [Display(Name = "Дата окончания использования")]
         public DateTime StopUseDate { get; set; }

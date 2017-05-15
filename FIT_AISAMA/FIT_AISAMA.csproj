@@ -128,6 +128,7 @@
     <Compile Include="Controllers\ActiveSpecificationTypeController.cs" />
     <Compile Include="Controllers\ActiveTypeController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\Helpers\CollectionHelper.cs" />
     <Compile Include="Controllers\IncomeSourceController.cs" />
     <Compile Include="Controllers\LocationPlaceController.cs" />
     <Compile Include="Controllers\MaterialActiveController.cs" />
@@ -144,9 +145,11 @@
     <Compile Include="Models\IncomeSource\IncomeSourceModel.cs" />
     <Compile Include="Models\LocationPlace\LocationPlaceModel.cs" />
     <Compile Include="Models\MaterialActive\DestributionMaterialActiveSearchModel.cs" />
+    <Compile Include="Models\MaterialActive\MainMaterialActiveSearchModel.cs" />
     <Compile Include="Models\MaterialActive\MaterialActiveDestributionModel.cs" />
     <Compile Include="Models\MaterialActive\MaterialActiveRegisterModel.cs" />
     <Compile Include="Models\MaterialActive\MaterialActiveViewModel.cs" />
+    <Compile Include="Models\MaterialActive\WriteOffMaterialActiveModel.cs" />
     <Compile Include="Models\Person\EditPersonModel.cs" />
     <Compile Include="Models\Person\PersonDetailViewModel.cs" />
     <Compile Include="Models\Person\PersonTableViewModel.cs" />
@@ -166,6 +169,7 @@
     <Content Include="Content\bootstrap\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap\bootstrap.css" />
     <Content Include="Content\bootstrap\bootstrap.min.css" />
+    <Content Include="Content\dataTables.bootstrap.min.css" />
     <Content Include="Content\General.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -229,6 +233,8 @@
     <Content Include="Scripts\bootstrap-select.min.js" />
     <Content Include="Scripts\bootstrap\bootstrap.js" />
     <Content Include="Scripts\bootstrap\bootstrap.min.js" />
+    <Content Include="Scripts\CommonFunctions.js" />
+    <Content Include="Scripts\dataTables.bootstrap.min.js" />
     <Content Include="Scripts\i18n\defaults-ar_AR.js" />
     <Content Include="Scripts\i18n\defaults-ar_AR.min.js" />
     <Content Include="Scripts\i18n\defaults-bg_BG.js" />
@@ -293,6 +299,7 @@
     <Content Include="Scripts\i18n\defaults-zh_CN.min.js" />
     <Content Include="Scripts\i18n\defaults-zh_TW.js" />
     <Content Include="Scripts\i18n\defaults-zh_TW.min.js" />
+    <Content Include="Scripts\Initializator.js" />
     <Content Include="Scripts\jquery-3.1.1-vsdoc.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -300,6 +307,7 @@
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
+    <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
@@ -459,6 +467,9 @@
     <Content Include="Views\MaterialActive\DistributeMaterialActive.cshtml" />
     <Content Include="Views\MaterialActive\MaterialActiveDetail.cshtml" />
     <Content Include="Views\MaterialActive\MaterialActiveMainPage.cshtml" />
+    <Content Include="Views\MaterialActive\Partial\MainMaterialActiveTable.cshtml" />
+    <Content Include="Views\MaterialActive\WriteOffMaterialActive.cshtml" />
+    <Content Include="Views\MaterialActive\Partial\ShortMaterialActiveInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FIT_AISAMA.BusinessLogic\FIT_AISAMA.BusinessLogic.csproj">

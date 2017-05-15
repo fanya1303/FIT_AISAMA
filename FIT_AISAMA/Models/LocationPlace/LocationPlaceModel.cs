@@ -15,6 +15,7 @@ namespace FIT_AISAMA.Models.LocationPlace
         }
         public int Id { get; set; }
         [Display (Name = "Место")]
+        [Required(ErrorMessage = "Необходимо указать название места")]
         [MinLength(5, ErrorMessage = "Место расположения должно содержать не меньше 5 символов")]
         public string LocationName{ get; set; }
 
